@@ -1,59 +1,70 @@
+import Link from "next/link";
+import { ArrowRight, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { NetworkCanvas } from "@/components/network-canvas";
-
-const STATS = [
-  { value: "2 horas", label: "Tiempo de respuesta en horario hábil" },
-  { value: "120+", label: "Equipos gestionados hoy en Santiago" },
-  { value: "9 años", label: "Trabajando solo con pymes chilenas" },
-];
+import { Counter } from "@/components/counter";
+import { Reveal } from "@/components/reveal";
+import { stats } from "@/lib/site-config";
 
 export function Hero() {
   return (
-    <section
-      id="inicio"
-      aria-label="Presentación"
-      className="relative overflow-hidden pt-40 pb-24 lg:pt-56 lg:pb-32"
-    >
-      <NetworkCanvas />
+    <section id="inicio" className="relative overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-28">
+      {/* Fondo: rejilla técnica desvanecida + halo del acento */}
+      <div
+        aria-hidden
+        className="bg-grid absolute inset-0 -z-10 opacity-60 [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,black,transparent)]"
+      />
+      <div
+        aria-hidden
+        className="absolute left-1/2 top-[-10rem] -z-10 size-[38rem] -translate-x-1/2 rounded-full bg-primary/10 blur-[120px]"
+      />
 
-      <div className="relative mx-auto max-w-[1400px] px-6 lg:px-12">
-        <p className="mb-6 text-[13px] font-medium uppercase tracking-[0.18em] text-accent">
-          Soporte TI para pymes en Santiago
-        </p>
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <Reveal className="mx-auto max-w-3xl text-center">
+          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground">
+            <ShieldCheck className="size-3.5 text-primary" />
+            Soporte TI para pymes en Santiago
+          </span>
 
-        <h1 className="max-w-5xl font-display text-hero font-normal leading-tight95 tracking-tight text-graphite text-balance">
-          Tu empresa no se detiene porque se cayó un computador.
-        </h1>
+          <h1 className="mt-6 text-4xl font-semibold tracking-tight text-balance sm:text-5xl md:text-6xl">
+            Tu empresa no se detiene porque{" "}
+            <span className="text-primary">se cayó un computador.</span>
+          </h1>
 
-        <p className="mt-8 max-w-xl text-lg text-graphite/70 lg:text-xl">
-          Soporte técnico, desarrollo web y redes para pymes de Santiago. Un
-          solo número al que llamar cuando algo falla, y gente que ya conoce
-          tu empresa cuando contesta.
-        </p>
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-pretty text-muted-foreground">
+            Soporte técnico, desarrollo web y redes para pymes de Santiago. Un solo número al
+            que llamar cuando algo falla, y gente que ya conoce tu empresa cuando contesta.
+          </p>
 
-        <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
-          <Button asChild size="lg">
-            <a href="#contacto">Agendar diagnóstico gratuito</a>
-          </Button>
-          <Button asChild variant="secondary" size="lg">
-            <a href="#planes">Ver planes</a>
-          </Button>
-        </div>
-      </div>
+          <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Button asChild size="lg" className="group w-full sm:w-auto">
+              <Link href="#contacto">
+                Agendar diagnóstico gratuito
+                <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+              </Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="w-full sm:w-auto">
+              <Link href="#planes">Ver planes</Link>
+            </Button>
+          </div>
+        </Reveal>
 
-      <div className="relative mt-24 border-y border-graphite/10 bg-bone lg:mt-32">
-        <div className="mx-auto grid max-w-[1400px] grid-cols-1 divide-y divide-graphite/10 px-6 sm:grid-cols-3 sm:divide-x sm:divide-y-0 lg:px-12">
-          {STATS.map((stat) => (
-            <div key={stat.label} className="py-8 sm:px-8 sm:first:pl-0 lg:py-10">
-              <p className="font-display text-4xl text-graphite lg:text-5xl">
-                {stat.value}
-              </p>
-              <p className="mt-2 max-w-[22ch] text-sm text-graphite/60">
-                {stat.label}
-              </p>
-            </div>
-          ))}
-        </div>
+        <Reveal delay={150} className="mt-16 sm:mt-20">
+          <dl className="grid grid-cols-1 divide-y divide-border overflow-hidden rounded-xl border border-border bg-card/50 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+            {stats.map((stat) => (
+              <div key={stat.label} className="px-6 py-7 text-center">
+                <dt className="sr-only">{stat.label}</dt>
+                <dd>
+                  <span className="block text-3xl font-semibold tracking-tight sm:text-4xl">
+                    <Counter to={stat.value} suffix={stat.suffix} />
+                  </span>
+                  <span className="mt-2 block text-sm text-muted-foreground">
+                    {stat.label}
+                  </span>
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </Reveal>
       </div>
     </section>
   );

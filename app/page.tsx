@@ -1,31 +1,33 @@
-import { Header } from "@/components/header";
+import { SiteHeader } from "@/components/site-header";
 import { Hero } from "@/components/hero";
-import { Problem } from "@/components/problem";
+import { PainPoints } from "@/components/pain-points";
 import { Services } from "@/components/services";
-import { HowWeWork } from "@/components/how-we-work";
+import { Process } from "@/components/process";
 import { Pricing } from "@/components/pricing";
 import { Testimonials } from "@/components/testimonials";
 import { Faq } from "@/components/faq";
-import { FinalCta } from "@/components/final-cta";
-import { Contact } from "@/components/contact";
-import { Footer } from "@/components/footer";
+import { CtaBand } from "@/components/cta-band";
+import { ContactSection } from "@/components/contact-section";
+import { SiteFooter } from "@/components/site-footer";
+import { WhatsappFab } from "@/components/whatsapp-fab";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <>
-      <Header />
+      <SiteHeader />
       <main>
         <Hero />
-        <Problem />
+        <PainPoints />
         <Services />
-        <HowWeWork />
+        <Process />
         <Pricing />
         <Testimonials />
         <Faq />
-        <FinalCta />
-        <Contact />
+        <CtaBand />
+        <ContactSection />
       </main>
-      <Footer />
+      <SiteFooter />
+      <WhatsappFab />
     </>
   );
 }

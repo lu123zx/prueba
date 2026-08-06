@@ -1,64 +1,54 @@
-type Testimonial = {
-  quote: string;
-  name: string;
-  role: string;
-  initials: string;
-};
-
-const TESTIMONIALS: Testimonial[] = [
-  {
-    quote:
-      "Dejamos de perder medio día cada vez que se caía el sistema de boletas. Ahora nos llaman ellos antes de que nosotros nos demos cuenta.",
-    name: "Marcela Reyes",
-    role: "Gerenta General, Distribuidora de Repuestos Industriales (Recoleta)",
-    initials: "MR",
-  },
-  {
-    quote:
-      "Nos armaron la tienda online en un mes y sigue siendo nuestra: el dominio, las fotos, todo. Si algún día nos cambiamos de proveedor, no perdemos nada.",
-    name: "Francisco Aránguiz",
-    role: "Socio Fundador, Muebles Aránguiz (San Joaquín)",
-    initials: "FA",
-  },
-];
+import { Star } from "lucide-react";
+import { Reveal } from "@/components/reveal";
+import { SectionHeading } from "@/components/section-heading";
+import { testimonials } from "@/lib/site-config";
 
 export function Testimonials() {
   return (
     <section
-      aria-labelledby="testimonios-titulo"
-      className="border-y border-graphite/10 py-24 lg:py-32"
+      aria-labelledby="clientes-titulo"
+      className="border-y border-border bg-muted/40 py-20 sm:py-28"
     >
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
-        <h2
-          id="testimonios-titulo"
-          className="mb-16 text-[13px] font-medium uppercase tracking-[0.18em] text-accent lg:mb-20"
-        >
-          Clientes
-        </h2>
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <Reveal>
+          <SectionHeading
+            eyebrow="Clientes"
+            title={<span id="clientes-titulo">Lo dicen ellos, no nosotros.</span>}
+          />
+        </Reveal>
 
-        <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-12">
-          {TESTIMONIALS.map((testimonial) => (
-            <figure key={testimonial.name} className="flex flex-col">
-              <blockquote className="font-display text-2xl leading-snug text-graphite sm:text-3xl">
-                &ldquo;{testimonial.quote}&rdquo;
-              </blockquote>
-              <figcaption className="mt-8 flex items-center gap-4">
-                <span
-                  aria-hidden="true"
-                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-accent text-sm font-medium text-accent"
-                >
-                  {testimonial.initials}
-                </span>
-                <span className="text-sm">
-                  <span className="block font-medium text-graphite">
-                    {testimonial.name}
+        <div className="mt-14 grid gap-6 md:grid-cols-2">
+          {testimonials.map((t, i) => (
+            <Reveal key={t.name} delay={i * 100}>
+              <figure className="flex h-full flex-col rounded-xl border border-border bg-card p-7">
+                <div aria-label="5 de 5 estrellas" className="flex gap-0.5">
+                  {Array.from({ length: 5 }).map((_, idx) => (
+                    <Star
+                      key={idx}
+                      aria-hidden
+                      className="size-4 fill-primary text-primary"
+                    />
+                  ))}
+                </div>
+
+                <blockquote className="mt-5 flex-1 text-lg text-pretty text-foreground/90">
+                  “{t.quote}”
+                </blockquote>
+
+                <figcaption className="mt-6 flex items-center gap-3 border-t border-border pt-6">
+                  <span
+                    aria-hidden
+                    className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary"
+                  >
+                    {t.initials}
                   </span>
-                  <span className="block text-graphite/65">
-                    {testimonial.role}
+                  <span className="text-sm">
+                    <span className="block font-medium text-foreground">{t.name}</span>
+                    <span className="block text-muted-foreground">{t.role}</span>
                   </span>
-                </span>
-              </figcaption>
-            </figure>
+                </figcaption>
+              </figure>
+            </Reveal>
           ))}
         </div>
       </div>

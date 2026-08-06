@@ -14,7 +14,8 @@ const AccordionItem = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <AccordionPrimitive.Item
     ref={ref}
-    className={cn("border-b border-graphite/12", className)}
+    data-slot="accordion-item"
+    className={cn("border-b border-border last:border-b-0", className)}
     {...props}
   />
 ));
@@ -27,14 +28,15 @@ const AccordionTrigger = React.forwardRef<
   <AccordionPrimitive.Header className="flex">
     <AccordionPrimitive.Trigger
       ref={ref}
+      data-slot="accordion-trigger"
       className={cn(
-        "group flex flex-1 items-center justify-between gap-4 py-7 text-left font-sans text-lg font-medium transition-colors duration-200 hover:text-accent [&[data-state=open]>svg]:rotate-45",
-        className
+        "flex flex-1 items-start justify-between gap-4 rounded-md py-5 text-left text-sm font-medium outline-none transition-all hover:text-primary focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:rotate-45",
+        className,
       )}
       {...props}
     >
       {children}
-      <Plus className="h-5 w-5 shrink-0 transition-transform duration-200 text-accent" />
+      <Plus className="mt-0.5 size-4 shrink-0 text-primary transition-transform duration-200" />
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>
 ));
@@ -46,12 +48,11 @@ const AccordionContent = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <AccordionPrimitive.Content
     ref={ref}
-    className="overflow-hidden text-base data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+    data-slot="accordion-content"
+    className="overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
     {...props}
   >
-    <div className={cn("pb-7 pr-10 text-graphite/70 leading-relaxed", className)}>
-      {children}
-    </div>
+    <div className={cn("pb-5", className)}>{children}</div>
   </AccordionPrimitive.Content>
 ));
 AccordionContent.displayName = AccordionPrimitive.Content.displayName;
