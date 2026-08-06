@@ -1,54 +1,171 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #fafaf8;
-  --foreground: #111312;
+  --radius: 1rem;
+
+  /* Blanco cálido + azul de marca, look corporativo elegante */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.17 0.03 262);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.17 0.03 262);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.17 0.03 262);
+
+  --primary: oklch(0.546 0.213 262.9);
+  --primary-foreground: oklch(0.99 0.005 260);
+
+  --secondary: oklch(0.969 0.012 261);
+  --secondary-foreground: oklch(0.28 0.04 262);
+
+  --muted: oklch(0.969 0.012 261);
+  --muted-foreground: oklch(0.5 0.03 262);
+
+  --accent: oklch(0.93 0.032 262);
+  --accent-foreground: oklch(0.42 0.18 262);
+
+  --destructive: oklch(0.58 0.21 27);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  --border: oklch(0.91 0.014 261);
+  --input: oklch(0.91 0.014 261);
+  --ring: oklch(0.546 0.213 262.9);
+
+  --brand-glow: oklch(0.546 0.213 262.9 / 0.16);
 }
 
-* {
-  border-color: rgba(17, 19, 18, 0.12);
+.dark {
+  --background: oklch(0.15 0.026 262);
+  --foreground: oklch(0.97 0.006 260);
+
+  --card: oklch(0.19 0.03 262);
+  --card-foreground: oklch(0.97 0.006 260);
+  --popover: oklch(0.19 0.03 262);
+  --popover-foreground: oklch(0.97 0.006 260);
+
+  --primary: oklch(0.65 0.19 262);
+  --primary-foreground: oklch(0.15 0.026 262);
+
+  --secondary: oklch(0.25 0.03 262);
+  --secondary-foreground: oklch(0.97 0.006 260);
+
+  --muted: oklch(0.25 0.03 262);
+  --muted-foreground: oklch(0.68 0.02 262);
+
+  --accent: oklch(0.3 0.06 262);
+  --accent-foreground: oklch(0.82 0.09 262);
+
+  --destructive: oklch(0.65 0.19 27);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.65 0.19 262);
+
+  --brand-glow: oklch(0.65 0.19 262 / 0.2);
 }
 
-html {
-  scroll-behavior: smooth;
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --radius-sm: calc(var(--radius) - 6px);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 6px);
+  --radius-2xl: calc(var(--radius) + 12px);
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+  ::selection {
+    background: var(--brand-glow);
+  }
+}
+
+@layer utilities {
+  /* Reveal al hacer scroll — activado por components/reveal.tsx */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal[data-visible="true"] {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Tarjeta elegante: sombra suave en vez de borde marcado, se eleva al pasar el cursor */
+  .card-soft {
+    box-shadow:
+      0 1px 2px oklch(0.2 0.03 262 / 0.04),
+      0 8px 24px -12px oklch(0.2 0.03 262 / 0.08);
+    transition:
+      box-shadow 0.3s ease,
+      transform 0.3s ease;
+  }
+  .card-soft:hover {
+    box-shadow:
+      0 1px 2px oklch(0.2 0.03 262 / 0.05),
+      0 20px 40px -16px oklch(0.546 0.213 262.9 / 0.18);
+    transform: translateY(-3px);
+  }
+
+  /* Halo radial suave, usado detrás del panel visual del hero */
+  .bg-brand-halo {
+    background-image: radial-gradient(
+      60% 60% at 50% 40%,
+      var(--brand-glow),
+      transparent 70%
+    );
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
-}
-
-@layer base {
-  /* Uses the lighter accent tint (not the deep #0F5132) so the ring stays
-     visible at 3:1+ against both the bone and graphite section backgrounds. */
-  :focus-visible {
-    outline: 2px solid #3d9970;
-    outline-offset: 3px;
-    border-radius: 2px;
-  }
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-  .num-display {
-    font-variant-numeric: tabular-nums;
+  .card-soft:hover {
+    transform: none;
   }
 }

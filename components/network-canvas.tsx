@@ -4,13 +4,15 @@ import { useEffect, useRef } from "react";
 import type P5 from "p5";
 
 // Colores del sistema de diseño, en RGB planos (para dibujar en canvas).
-const GRAPHITE: [number, number, number] = [17, 19, 18];
-const ACCENT: [number, number, number] = [15, 81, 50];
+// LINE: azul-grafito tenue para las aristas en reposo.
+// LIT: azul de marca, para lo que se "enciende" cerca del cursor.
+const LINE: [number, number, number] = [30, 41, 71];
+const LIT: [number, number, number] = [59, 111, 235];
 
-const EDGE_DISTANCE = 165; // px: bajo esta distancia dos nodos se conectan
-const INFLUENCE_RADIUS = 230; // px: radio de "encendido" alrededor del cursor
-const DRIFT_AMPLITUDE = 40; // px: cuánto flota cada nodo
-const MAX_PACKETS = 10;
+const EDGE_DISTANCE = 150; // px: bajo esta distancia dos nodos se conectan
+const INFLUENCE_RADIUS = 220; // px: radio de "encendido" alrededor del cursor
+const DRIFT_AMPLITUDE = 34; // px: cuánto flota cada nodo
+const MAX_PACKETS = 9;
 
 type NodePoint = {
   baseX: number;
@@ -29,9 +31,9 @@ type Packet = {
 };
 
 /**
- * Fondo decorativo del Hero: una red de nodos y conexiones que representa la
+ * Visual del Hero: una red de nodos y conexiones que representa la
  * infraestructura que TechFlow mantiene viva. Flota suavemente y se
- * "enciende" en verde acento alrededor del cursor o el dedo. Puramente
+ * "enciende" en azul de marca alrededor del cursor o el dedo. Puramente
  * decorativo (aria-hidden) y respeta prefers-reduced-motion apagando el
  * movimiento ambiental y los paquetes de datos, dejando solo la iluminación
  * al pasar el cursor.
@@ -70,7 +72,7 @@ export function NetworkCanvas() {
       if (destroyed) return;
 
       const reduceMotionQuery = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
+        "(prefers-reduced-motion: reduce)",
       );
 
       const sketch = (p: P5) => {
@@ -82,9 +84,7 @@ export function NetworkCanvas() {
           const w = container!.clientWidth;
           const h = container!.clientHeight;
           const area = w * h;
-          const count = Math.round(
-            Math.min(110, Math.max(28, area / 15000))
-          );
+          const count = Math.round(Math.min(90, Math.max(24, area / 15000)));
           nodes = Array.from({ length: count }, () => {
             const x = p.random(w);
             const y = p.random(h);
@@ -103,7 +103,7 @@ export function NetworkCanvas() {
         p.setup = () => {
           const canvas = p.createCanvas(
             container!.clientWidth,
-            container!.clientHeight
+            container!.clientHeight,
           );
           canvas.parent(container!);
           canvas.style("display", "block");
@@ -128,7 +128,7 @@ export function NetworkCanvas() {
 
         p.draw = () => {
           p.clear();
-          const t = reduceMotion ? 0 : p.frameCount * 0.0028;
+          const t = reduceMotion ? 0 : p.frameCount * 0.0026;
 
           // 1. Actualiza posiciones (deriva orgánica vía ruido Perlin).
           for (const n of nodes) {
@@ -156,14 +156,14 @@ export function NetworkCanvas() {
 
               const proximity = 1 - d / EDGE_DISTANCE;
               const lit = Math.max(a.lit, b.lit);
-              const baseAlpha = proximity * 26;
+              const baseAlpha = proximity * 34;
               const litAlpha = proximity * 150 * lit;
 
-              const col = lit > 0.02 ? ACCENT : GRAPHITE;
+              const col = lit > 0.02 ? LIT : LINE;
               const alpha = lit > 0.02 ? baseAlpha + litAlpha : baseAlpha;
 
               p.stroke(col[0], col[1], col[2], alpha);
-              p.strokeWeight(lit > 0.3 ? 1.1 : 0.6);
+              p.strokeWeight(lit > 0.3 ? 1.2 : 0.7);
               p.line(a.x, a.y, b.x, b.y);
               p.noStroke();
 
@@ -188,7 +188,7 @@ export function NetworkCanvas() {
             if (!a || !b) continue;
             const x = p.lerp(a.x, b.x, packet.t);
             const y = p.lerp(a.y, b.y, packet.t);
-            p.fill(ACCENT[0], ACCENT[1], ACCENT[2], 210);
+            p.fill(LIT[0], LIT[1], LIT[2], 225);
             p.circle(x, y, 4.5);
             p.noFill();
             packet.t += packet.speed;
@@ -196,9 +196,9 @@ export function NetworkCanvas() {
 
           // 5. Nodos.
           for (const n of nodes) {
-            const size = 2.2 + n.lit * 2.6;
-            const col = n.lit > 0.05 ? ACCENT : GRAPHITE;
-            const alpha = n.lit > 0.05 ? 90 + n.lit * 160 : 70;
+            const size = 2.4 + n.lit * 2.8;
+            const col = n.lit > 0.05 ? LIT : LINE;
+            const alpha = n.lit > 0.05 ? 110 + n.lit * 145 : 95;
             p.fill(col[0], col[1], col[2], alpha);
             p.circle(n.x, n.y, size);
             p.noFill();

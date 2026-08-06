@@ -16,15 +16,16 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#111312",
-          color: "#FAFAF8",
+          background: "#101828",
+          color: "#5b8def",
           fontSize: 20,
-          fontFamily: "serif",
+          fontWeight: 600,
+          fontFamily: "sans-serif",
         }}
       >
         T
       </div>
     ),
-    { ...size }
+    { ...size },
   );
 }
