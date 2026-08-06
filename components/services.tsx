@@ -29,11 +29,11 @@ export function Services() {
             const Icon = icons[service.icon];
             return (
               <Reveal key={service.title} delay={i * 80}>
-                <article className="glow-border h-full rounded-xl bg-card p-6 sm:p-7">
-                  <div className="flex size-11 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <article className="card-soft h-full rounded-2xl bg-card p-6 sm:p-7">
+                  <div className="flex size-11 items-center justify-center rounded-xl bg-accent text-accent-foreground">
                     <Icon aria-hidden className="size-5" />
                   </div>
-                  <h3 className="mt-5 text-xl font-semibold tracking-tight">
+                  <h3 className="mt-5 text-xl font-bold tracking-tight">
                     {service.title}
                   </h3>
                   <ul className="mt-4 space-y-3">

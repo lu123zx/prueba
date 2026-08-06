@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { LogoMark } from "@/components/logo-mark";
 import { navLinks } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
@@ -31,17 +32,18 @@ export function SiteHeader() {
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-300",
         scrolled
-          ? "border-b border-border bg-background/80 backdrop-blur-xl"
-          : "border-b border-transparent bg-transparent",
+          ? "border-b border-border bg-background/85 backdrop-blur-xl"
+          : "border-b border-transparent bg-background/60 backdrop-blur-sm",
       )}
     >
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
+      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link
           href="#inicio"
-          className="text-lg font-semibold tracking-tight"
+          className="flex items-center gap-2 text-lg font-bold tracking-tight"
           onClick={() => setOpen(false)}
         >
-          TechFlow<span className="text-primary">.</span>
+          <LogoMark className="size-6" />
+          TechFlow
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex" aria-label="Principal">
@@ -49,7 +51,7 @@ export function SiteHeader() {
             <Link
               key={link.href}
               href={link.href}
-              className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+              className="rounded-full px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-primary"
             >
               {link.label}
             </Link>

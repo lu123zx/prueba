@@ -7,7 +7,7 @@ export function Testimonials() {
   return (
     <section
       aria-labelledby="clientes-titulo"
-      className="border-y border-border bg-muted/40 py-20 sm:py-28"
+      className="bg-secondary/50 py-20 sm:py-28"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <Reveal>
@@ -20,7 +20,7 @@ export function Testimonials() {
         <div className="mt-14 grid gap-6 md:grid-cols-2">
           {testimonials.map((t, i) => (
             <Reveal key={t.name} delay={i * 100}>
-              <figure className="flex h-full flex-col rounded-xl border border-border bg-card p-7">
+              <figure className="card-soft flex h-full flex-col rounded-2xl bg-card p-7">
                 <div aria-label="5 de 5 estrellas" className="flex gap-0.5">
                   {Array.from({ length: 5 }).map((_, idx) => (
                     <Star
@@ -38,7 +38,7 @@ export function Testimonials() {
                 <figcaption className="mt-6 flex items-center gap-3 border-t border-border pt-6">
                   <span
                     aria-hidden
-                    className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary"
+                    className="flex size-10 shrink-0 items-center justify-center rounded-full bg-accent text-sm font-semibold text-accent-foreground"
                   >
                     {t.initials}
                   </span>

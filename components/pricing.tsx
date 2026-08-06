@@ -23,10 +23,10 @@ export function Pricing() {
             <Reveal key={plan.name} delay={i * 90}>
               <article
                 className={cn(
-                  "relative flex h-full flex-col rounded-2xl border bg-card p-6 sm:p-8",
+                  "card-soft relative flex h-full flex-col rounded-2xl bg-card p-6 sm:p-8",
                   plan.featured
-                    ? "border-primary/40 shadow-lg shadow-primary/5 lg:-mt-4 lg:pb-10"
-                    : "border-border",
+                    ? "ring-2 ring-primary lg:-mt-4 lg:pb-10"
+                    : "",
                 )}
               >
                 {plan.featured && (
@@ -36,7 +36,7 @@ export function Pricing() {
                   </span>
                 )}
 
-                <h3 className="text-xl font-semibold tracking-tight">{plan.name}</h3>
+                <h3 className="text-xl font-bold tracking-tight">{plan.name}</h3>
                 <p className="mt-2 text-sm text-pretty text-muted-foreground">
                   {plan.blurb}
                 </p>

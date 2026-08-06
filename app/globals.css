@@ -4,68 +4,68 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --radius: 0.75rem;
+  --radius: 1rem;
 
-  /* Grafito frío + acento cian eléctrico */
-  --background: oklch(0.99 0.002 250);
-  --foreground: oklch(0.19 0.012 255);
+  /* Blanco cálido + azul de marca, look corporativo elegante */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.17 0.03 262);
 
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.19 0.012 255);
+  --card-foreground: oklch(0.17 0.03 262);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.19 0.012 255);
+  --popover-foreground: oklch(0.17 0.03 262);
 
-  --primary: oklch(0.58 0.15 225);
-  --primary-foreground: oklch(0.99 0.002 250);
+  --primary: oklch(0.546 0.213 262.9);
+  --primary-foreground: oklch(0.99 0.005 260);
 
-  --secondary: oklch(0.96 0.005 250);
-  --secondary-foreground: oklch(0.25 0.012 255);
+  --secondary: oklch(0.969 0.012 261);
+  --secondary-foreground: oklch(0.28 0.04 262);
 
-  --muted: oklch(0.96 0.005 250);
-  --muted-foreground: oklch(0.52 0.012 255);
+  --muted: oklch(0.969 0.012 261);
+  --muted-foreground: oklch(0.5 0.03 262);
 
-  --accent: oklch(0.95 0.02 225);
-  --accent-foreground: oklch(0.35 0.09 225);
+  --accent: oklch(0.93 0.032 262);
+  --accent-foreground: oklch(0.42 0.18 262);
 
   --destructive: oklch(0.58 0.21 27);
   --destructive-foreground: oklch(0.99 0 0);
 
-  --border: oklch(0.92 0.005 250);
-  --input: oklch(0.92 0.005 250);
-  --ring: oklch(0.58 0.15 225);
+  --border: oklch(0.91 0.014 261);
+  --input: oklch(0.91 0.014 261);
+  --ring: oklch(0.546 0.213 262.9);
 
-  --brand-glow: oklch(0.58 0.15 225 / 0.18);
+  --brand-glow: oklch(0.546 0.213 262.9 / 0.16);
 }
 
 .dark {
-  --background: oklch(0.16 0.012 255);
-  --foreground: oklch(0.97 0.003 250);
+  --background: oklch(0.15 0.026 262);
+  --foreground: oklch(0.97 0.006 260);
 
-  --card: oklch(0.2 0.014 255);
-  --card-foreground: oklch(0.97 0.003 250);
-  --popover: oklch(0.2 0.014 255);
-  --popover-foreground: oklch(0.97 0.003 250);
+  --card: oklch(0.19 0.03 262);
+  --card-foreground: oklch(0.97 0.006 260);
+  --popover: oklch(0.19 0.03 262);
+  --popover-foreground: oklch(0.97 0.006 260);
 
-  --primary: oklch(0.72 0.15 220);
-  --primary-foreground: oklch(0.16 0.012 255);
+  --primary: oklch(0.65 0.19 262);
+  --primary-foreground: oklch(0.15 0.026 262);
 
-  --secondary: oklch(0.25 0.014 255);
-  --secondary-foreground: oklch(0.97 0.003 250);
+  --secondary: oklch(0.25 0.03 262);
+  --secondary-foreground: oklch(0.97 0.006 260);
 
-  --muted: oklch(0.25 0.014 255);
-  --muted-foreground: oklch(0.68 0.012 255);
+  --muted: oklch(0.25 0.03 262);
+  --muted-foreground: oklch(0.68 0.02 262);
 
-  --accent: oklch(0.28 0.04 220);
-  --accent-foreground: oklch(0.85 0.09 220);
+  --accent: oklch(0.3 0.06 262);
+  --accent-foreground: oklch(0.82 0.09 262);
 
   --destructive: oklch(0.65 0.19 27);
   --destructive-foreground: oklch(0.99 0 0);
 
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 14%);
-  --ring: oklch(0.72 0.15 220);
+  --ring: oklch(0.65 0.19 262);
 
-  --brand-glow: oklch(0.72 0.15 220 / 0.16);
+  --brand-glow: oklch(0.65 0.19 262 / 0.2);
 }
 
 @theme inline {
@@ -92,10 +92,11 @@
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 6px);
+  --radius-md: calc(var(--radius) - 4px);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-xl: calc(var(--radius) + 6px);
+  --radius-2xl: calc(var(--radius) + 12px);
 }
 
 @layer base {
@@ -116,14 +117,6 @@
 }
 
 @layer utilities {
-  /* Rejilla técnica de fondo del hero */
-  .bg-grid {
-    background-image:
-      linear-gradient(to right, var(--border) 1px, transparent 1px),
-      linear-gradient(to bottom, var(--border) 1px, transparent 1px);
-    background-size: 64px 64px;
-  }
-
   /* Reveal al hacer scroll — activado por components/reveal.tsx */
   .reveal {
     opacity: 0;
@@ -137,17 +130,29 @@
     transform: none;
   }
 
-  .glow-border {
-    box-shadow: 0 0 0 1px var(--border);
+  /* Tarjeta elegante: sombra suave en vez de borde marcado, se eleva al pasar el cursor */
+  .card-soft {
+    box-shadow:
+      0 1px 2px oklch(0.2 0.03 262 / 0.04),
+      0 8px 24px -12px oklch(0.2 0.03 262 / 0.08);
     transition:
       box-shadow 0.3s ease,
       transform 0.3s ease;
   }
-  .glow-border:hover {
+  .card-soft:hover {
     box-shadow:
-      0 0 0 1px var(--ring),
-      0 12px 32px -12px var(--brand-glow);
-    transform: translateY(-2px);
+      0 1px 2px oklch(0.2 0.03 262 / 0.05),
+      0 20px 40px -16px oklch(0.546 0.213 262.9 / 0.18);
+    transform: translateY(-3px);
+  }
+
+  /* Halo radial suave, usado detrás del panel visual del hero */
+  .bg-brand-halo {
+    background-image: radial-gradient(
+      60% 60% at 50% 40%,
+      var(--brand-glow),
+      transparent 70%
+    );
   }
 }
 
@@ -159,5 +164,8 @@
     opacity: 1;
     transform: none;
     transition: none;
+  }
+  .card-soft:hover {
+    transform: none;
   }
 }

@@ -6,7 +6,7 @@ export function Process() {
   return (
     <section
       id="como-trabajamos"
-      className="border-y border-border bg-muted/40 py-20 sm:py-28"
+      className="bg-secondary/50 py-20 sm:py-28"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <Reveal>
@@ -25,10 +25,10 @@ export function Process() {
 
           {steps.map((step, i) => (
             <Reveal as="li" key={step.n} delay={i * 120} className="relative">
-              <div className="flex size-12 items-center justify-center rounded-full border border-border bg-background text-sm font-semibold text-primary">
+              <div className="flex size-12 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground shadow-sm shadow-primary/30">
                 {step.n}
               </div>
-              <h3 className="mt-5 text-lg font-semibold tracking-tight">{step.title}</h3>
+              <h3 className="mt-5 text-lg font-bold tracking-tight">{step.title}</h3>
               <p className="mt-3 text-sm text-pretty text-muted-foreground">{step.body}</p>
             </Reveal>
           ))}

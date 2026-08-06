@@ -71,9 +71,9 @@ export function ContactSection() {
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="glow-border flex items-center gap-4 rounded-xl bg-card p-4"
+                  className="card-soft flex items-center gap-4 rounded-2xl bg-card p-4"
                 >
-                  <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-accent text-accent-foreground">
                     <MessageCircle aria-hidden className="size-5" />
                   </span>
                   <span className="text-sm">
@@ -87,9 +87,9 @@ export function ContactSection() {
               <li>
                 <a
                   href={`mailto:${site.email}`}
-                  className="glow-border flex items-center gap-4 rounded-xl bg-card p-4"
+                  className="card-soft flex items-center gap-4 rounded-2xl bg-card p-4"
                 >
-                  <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-accent text-accent-foreground">
                     <Mail aria-hidden className="size-5" />
                   </span>
                   <span className="text-sm">
@@ -98,8 +98,8 @@ export function ContactSection() {
                   </span>
                 </a>
               </li>
-              <li className="flex items-center gap-4 rounded-xl border border-border bg-card p-4">
-                <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+              <li className="card-soft flex items-center gap-4 rounded-2xl bg-card p-4">
+                <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-accent text-accent-foreground">
                   <MapPin aria-hidden className="size-5" />
                 </span>
                 <span className="text-sm">
@@ -114,7 +114,7 @@ export function ContactSection() {
 
           {/* Formulario */}
           <Reveal delay={120}>
-            <div className="rounded-2xl border border-border bg-card p-6 sm:p-8">
+            <div className="card-soft rounded-2xl bg-card p-6 sm:p-8">
               {sent ? (
                 <div className="flex min-h-80 flex-col items-center justify-center text-center">
                   <CheckCircle2 className="size-12 text-primary" />
