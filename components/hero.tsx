@@ -18,7 +18,7 @@ export function Hero() {
 
       <div className="relative mx-auto max-w-[1400px] px-6 lg:px-12">
         <p className="mb-6 text-[13px] font-medium uppercase tracking-[0.18em] text-accent">
-          Soporte TI para pymes en Santiago
+          Soporte TI remoto para pymes en Santiago
         </p>
 
         <h1 className="max-w-5xl text-balance font-display text-hero font-normal tracking-tight">
@@ -26,9 +26,9 @@ export function Hero() {
         </h1>
 
         <p className="mt-8 max-w-xl text-lg text-muted-foreground lg:text-xl">
-          Soporte técnico, desarrollo web y redes para pymes de Santiago. Un
-          solo número al que llamar cuando algo falla, y gente que ya conoce tu
-          empresa cuando contesta.
+          Nos conectamos y lo arreglamos, sin esperar que llegue un técnico. Un
+          solo número al que escribir cuando algo falla, y gente que ya conoce
+          tu empresa cuando contesta.
         </p>
 
         <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">

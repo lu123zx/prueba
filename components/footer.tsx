@@ -1,3 +1,5 @@
+import { SITE, WHATSAPP_URL } from "@/lib/site";
+
 const LEGAL_LINKS = [
   { href: "/politica-de-privacidad", label: "Política de privacidad" },
   { href: "/terminos-de-servicio", label: "Términos de servicio" },
@@ -5,15 +7,18 @@ const LEGAL_LINKS = [
 
 export function Footer() {
   return (
-    <footer className="bg-graphite py-16 text-bone">
+    // pb generoso: deja libre la franja que ocupa el botón flotante de
+    // WhatsApp, para que nunca tape la línea de copyright.
+    <footer className="bg-graphite pt-16 pb-28 text-bone">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
         <div className="grid grid-cols-1 gap-12 border-b border-bone/10 pb-12 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <p className="font-display text-2xl">
               TechFlow<span className="text-accent-tint">.</span>
             </p>
-            <p className="mt-4 max-w-[26ch] text-sm text-bone/60">
-              Soporte TI, desarrollo y automatización para pymes de Santiago.
+            <p className="mt-4 max-w-[28ch] text-sm text-bone/60">
+              Soporte TI remoto, desarrollo y automatización para pymes de
+              Santiago.
             </p>
           </div>
 
@@ -39,20 +44,20 @@ export function Footer() {
             <ul className="mt-4 flex flex-col gap-2 text-sm">
               <li>
                 <a
-                  href="mailto:contacto@techflowsoluciones.cl"
+                  href={`mailto:${SITE.email}`}
                   className="text-bone/70 transition-colors duration-200 hover:text-accent-tint"
                 >
-                  contacto@techflowsoluciones.cl
+                  {SITE.email}
                 </a>
               </li>
               <li>
                 <a
-                  href="https://wa.me/56987654321"
+                  href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-bone/70 transition-colors duration-200 hover:text-accent-tint"
                 >
-                  +56 9 8765 4321 (WhatsApp)
+                  {SITE.whatsappDisplay} (WhatsApp)
                 </a>
               </li>
             </ul>

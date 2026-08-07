@@ -31,9 +31,10 @@ export default function TerminosDeServicio() {
             Contratación
           </h2>
           <p className="leading-relaxed">
-            El diagnóstico inicial es gratuito y no obliga a contratar
-            ningún plan. Si decides contratar, te enviamos una propuesta
-            por escrito con el precio mensual, los servicios incluidos y la
+            El diagnóstico inicial es gratuito, se hace por videollamada y no
+            obliga a contratar ningún plan. Si decides contratar, te enviamos
+            una propuesta por escrito con el precio mensual en UF, los
+            servicios incluidos, las licencias que se facturan aparte y la
             fecha de inicio, antes de cobrarte nada.
           </p>
         </section>
@@ -58,6 +59,13 @@ export default function TerminosDeServicio() {
             Los dominios, licencias de software y cuentas que gestionamos
             para ti quedan siempre registrados a nombre de tu empresa, nunca
             a nombre de TechFlow.
+          </p>
+          <p className="mt-4 leading-relaxed">
+            Las licencias de terceros (Microsoft 365, antivirus, respaldo en la
+            nube y similares) no están incluidas en el valor del plan. Se
+            facturan aparte, al precio de costo que nos cobra el proveedor y en
+            una línea separada de la factura. Su valor puede cambiar si el
+            proveedor ajusta sus precios; te avisamos antes de que ocurra.
           </p>
         </section>
 

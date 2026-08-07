@@ -1,21 +1,23 @@
+import { WhatsAppIcon } from "@/components/icons/whatsapp";
+import { WHATSAPP_URL } from "@/lib/site";
+
+/**
+ * Botón flotante, visible en todos los tamaños: para una empresa que trabaja
+ * de forma remota, WhatsApp es la puerta de entrada principal.
+ */
 export function WhatsAppButton() {
   return (
     <a
-      href="https://wa.me/56987654321"
+      href={WHATSAPP_URL}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Escribir a TechFlow por WhatsApp"
-      className="fixed bottom-6 right-6 z-50 flex size-14 items-center justify-center rounded-full bg-accent text-accent-foreground transition-transform duration-200 hover:scale-105 motion-reduce:hover:scale-100 lg:hidden"
+      aria-label="Escribirnos por WhatsApp"
+      className="group fixed bottom-6 right-6 z-50 flex items-center gap-3 rounded-full bg-accent px-4 py-4 text-accent-foreground transition-colors duration-200 hover:bg-graphite sm:py-3.5"
     >
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        className="size-7"
-      >
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-        <path d="M12.001 2.003c-5.514 0-9.997 4.483-9.997 9.997 0 1.763.462 3.486 1.34 5.003l-1.424 5.201 5.328-1.397a9.96 9.96 0 0 0 4.753 1.21h.004c5.514 0 9.997-4.483 9.997-9.997 0-2.671-1.04-5.182-2.929-7.071a9.933 9.933 0 0 0-7.072-2.946zm0 18.176h-.003a8.19 8.19 0 0 1-4.174-1.145l-.3-.178-3.161.829.844-3.083-.195-.317a8.163 8.163 0 0 1-1.253-4.365c0-4.518 3.677-8.194 8.196-8.194 2.19 0 4.248.853 5.795 2.401a8.14 8.14 0 0 1 2.399 5.798c0 4.518-3.677 8.194-8.148 8.194z" />
-      </svg>
+      <WhatsAppIcon className="size-6 shrink-0" />
+      <span className="hidden text-sm font-medium sm:inline">
+        Escríbenos por WhatsApp
+      </span>
     </a>
   );
 }

@@ -1,4 +1,6 @@
 import { ContactForm } from "@/components/contact-form";
+import { WhatsAppIcon } from "@/components/icons/whatsapp";
+import { SITE, WHATSAPP_URL } from "@/lib/site";
 
 export function Contact() {
   return (
@@ -20,16 +22,17 @@ export function Contact() {
           </h2>
           <p className="mt-6 max-w-sm text-muted-foreground">
             Completa el formulario y te contactamos dentro de un día hábil para
-            coordinar tu diagnóstico gratuito. También puedes escribirnos
-            directo por WhatsApp.
+            coordinar tu diagnóstico gratuito por videollamada. Si prefieres ir
+            directo al grano, escríbenos por WhatsApp.
           </p>
           <a
-            href="https://wa.me/56987654321"
+            href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-6 inline-block border-b border-accent text-accent transition-colors duration-200 hover:border-foreground hover:text-foreground"
+            className="mt-6 inline-flex items-center gap-2 border-b border-accent pb-1 text-accent transition-colors duration-200 hover:border-foreground hover:text-foreground"
           >
-            +56 9 8765 4321 (WhatsApp)
+            <WhatsAppIcon className="size-4" />
+            {SITE.whatsappDisplay}
           </a>
         </div>
 

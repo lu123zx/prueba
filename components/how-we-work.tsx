@@ -3,7 +3,7 @@ const STEPS = [
     number: "01",
     title: "Diagnóstico gratuito",
     description:
-      "Vamos a tu oficina o revisamos tus sistemas por videollamada. Te decimos qué está fallando y qué riesgos corres, sin compromiso.",
+      "Revisamos tus sistemas en una videollamada de 30 minutos. Te decimos qué está fallando y qué riesgos corres, sin compromiso.",
   },
   {
     number: "02",
@@ -15,7 +15,7 @@ const STEPS = [
     number: "03",
     title: "Soporte continuo",
     description:
-      "Un equipo fijo conoce tu empresa, tus sistemas y tu forma de trabajar. Nada de explicarle tu problema a alguien nuevo cada vez.",
+      "Nos conectamos a tus equipos y resolvemos a distancia. Un equipo fijo conoce tu empresa, así no le explicas tu problema a alguien nuevo cada vez.",
   },
 ];
 

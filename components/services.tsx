@@ -17,7 +17,7 @@ const SERVICES: Service[] = [
     icon: HeadsetIcon,
     title: "Soporte TI gestionado",
     bullets: [
-      "Mesa de ayuda que responde en menos de 2 horas en horario hábil",
+      "Nos conectamos a tu equipo y lo arreglamos, sin esperar la visita del técnico",
       "Revisamos tus equipos y servidores para detectar fallas antes que tú",
       "Respaldo automático de tus archivos todos los días, sin que nadie lo recuerde",
     ],
@@ -44,9 +44,9 @@ const SERVICES: Service[] = [
     icon: NetworkIcon,
     title: "Infraestructura y redes",
     bullets: [
-      "Cableado y wifi de tu oficina, instalados y por fin ordenados",
+      "Configuramos y aseguramos tu red y tu wifi a distancia",
       "Servidores y respaldo en la nube, con acceso solo para quien corresponde",
-      "Revisión de seguridad para evitar virus, robo de datos y sorpresas",
+      "Si hay que poner las manos, coordinamos al técnico y supervisamos el trabajo",
     ],
   },
 ];
@@ -72,7 +72,8 @@ export function Services() {
             </h2>
           </div>
           <p className="max-w-sm text-muted-foreground">
-            Puedes contratar uno o todos. El plan se arma según lo que tu
+            Trabajamos de forma remota, así que no esperas la visita de nadie.
+            Puedes contratar uno o todos: el plan se arma según lo que tu
             empresa de verdad necesita.
           </p>
         </div>

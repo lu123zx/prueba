@@ -5,19 +5,23 @@ type Testimonial = {
   initials: string;
 };
 
+/**
+ * Sin nombre de empresa: se identifica el cargo, el rubro y la comuna, que es
+ * lo que le sirve al lector para reconocerse, sin exponer al cliente.
+ */
 const TESTIMONIALS: Testimonial[] = [
   {
     quote:
       "Dejamos de perder medio día cada vez que se caía el sistema de boletas. Ahora nos llaman ellos antes de que nosotros nos demos cuenta.",
-    name: "Marcela Reyes",
-    role: "Gerenta General, Distribuidora de Repuestos Industriales (Recoleta)",
+    name: "Marcela R.",
+    role: "Gerenta general — Distribuidora de repuestos, Recoleta",
     initials: "MR",
   },
   {
     quote:
-      "Nos armaron la tienda online en un mes y sigue siendo nuestra: el dominio, las fotos, todo. Si algún día nos cambiamos de proveedor, no perdemos nada.",
-    name: "Francisco Aránguiz",
-    role: "Socio Fundador, Muebles Aránguiz (San Joaquín)",
+      "Nos armaron la tienda online en un mes y sigue siendo nuestra: el dominio, las licencias, todo a nuestro nombre. Si algún día nos cambiamos, no perdemos nada.",
+    name: "Francisco A.",
+    role: "Socio fundador — Fábrica de muebles, San Joaquín",
     initials: "FA",
   },
 ];

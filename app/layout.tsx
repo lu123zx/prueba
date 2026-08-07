@@ -20,9 +20,9 @@ const instrumentSerif = Instrument_Serif({
 
 export const metadata: Metadata = {
   title:
-    "TechFlow Soluciones — Soporte TI, desarrollo y redes para pymes en Santiago",
+    "TechFlow Soluciones — Soporte TI remoto para pymes en Santiago",
   description:
-    "Soporte técnico gestionado, desarrollo web y automatización para pymes de Santiago. Respondemos en menos de 2 horas y sin contrato anual forzoso.",
+    "Soporte técnico remoto, desarrollo web y automatización para pymes de Santiago. Respondemos en menos de 2 horas, planes en UF y sin contrato anual forzoso.",
 };
 
 export default function RootLayout({

@@ -1,4 +1,6 @@
 import { Button } from "@/components/ui/button";
+import { WhatsAppIcon } from "@/components/icons/whatsapp";
+import { WHATSAPP_URL } from "@/lib/site";
 
 export function FinalCta() {
   return (
@@ -14,12 +16,20 @@ export function FinalCta() {
           Hablemos antes de que se caiga algo.
         </h2>
         <p className="mx-auto mt-6 max-w-md text-bone/60">
-          Agenda un diagnóstico gratuito de 30 minutos. Sin compromiso y sin
-          letra chica.
+          Agenda un diagnóstico gratuito de 30 minutos por videollamada. Sin
+          compromiso y sin letra chica.
         </p>
-        <Button asChild variant="default-dark" size="lg" className="mt-10">
-          <a href="#contacto">Agendar diagnóstico</a>
-        </Button>
+        <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
+          <Button asChild variant="default-dark" size="lg">
+            <a href="#contacto">Agendar diagnóstico</a>
+          </Button>
+          <Button asChild variant="outline-dark" size="lg">
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+              <WhatsAppIcon className="size-5" />
+              Escríbenos por WhatsApp
+            </a>
+          </Button>
+        </div>
       </div>
     </section>
   );
