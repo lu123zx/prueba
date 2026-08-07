@@ -11,7 +11,7 @@ export function Footer() {
     // WhatsApp, para que nunca tape la línea de copyright.
     <footer className="bg-graphite pt-16 pb-28 text-bone">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
-        <div className="grid grid-cols-1 gap-12 border-b border-bone/10 pb-12 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-12 border-b border-bone/10 pb-12 sm:grid-cols-2 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)]">
           <div>
             <p className="font-display text-2xl">
               TechFlow<span className="text-accent-tint">.</span>
@@ -20,21 +20,6 @@ export function Footer() {
               Soporte TI remoto, desarrollo y automatización para pymes de
               Santiago.
             </p>
-          </div>
-
-          <div>
-            <h2 className="text-[13px] font-medium uppercase tracking-wide text-bone/60">
-              Empresa
-            </h2>
-            <address className="mt-4 text-sm not-italic leading-relaxed text-bone/70">
-              TechFlow Soluciones SpA
-              <br />
-              RUT 76.543.210-9
-              <br />
-              Av. Apoquindo 4900, of. 602
-              <br />
-              Las Condes, Santiago
-            </address>
           </div>
 
           <div>
