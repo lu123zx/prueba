@@ -3,8 +3,10 @@ import Link from "next/link";
 import { ArrowLeftIcon } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Términos de servicio — TechFlow Soluciones",
-  description: "Condiciones bajo las que TechFlow Soluciones presta sus servicios.",
+  title: "Términos de servicio",
+  description:
+    "Condiciones de contratación de TechFlow Soluciones: planes mensuales en UF, sin contrato anual forzoso y con las licencias a nombre de tu empresa.",
+  alternates: { canonical: "/terminos-de-servicio" },
 };
 
 export default function TerminosDeServicio() {

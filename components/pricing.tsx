@@ -12,7 +12,7 @@ type Plan = {
   highlighted?: boolean;
 };
 
-const PLANS: Plan[] = [
+export const PLANS: Plan[] = [
   {
     name: "Esencial",
     uf: 4.5,

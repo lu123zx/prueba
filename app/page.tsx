@@ -1,4 +1,7 @@
 import { Header } from "@/components/header";
+import { FaqSchema, PricingSchema } from "@/components/structured-data";
+import { FAQS } from "@/components/faq";
+import { PLANS } from "@/components/pricing";
 import { Hero } from "@/components/hero";
 import { Problem } from "@/components/problem";
 import { Services } from "@/components/services";
@@ -26,6 +29,9 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
+
+      <PricingSchema plans={PLANS} />
+      <FaqSchema faqs={FAQS} />
     </>
   );
 }

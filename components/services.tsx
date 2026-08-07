@@ -1,4 +1,6 @@
+import Link from "next/link";
 import {
+  ArrowRightIcon,
   Code2Icon,
   HeadsetIcon,
   NetworkIcon,
@@ -6,50 +8,16 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-type Service = {
-  icon: LucideIcon;
-  title: string;
-  bullets: string[];
-};
+import { SERVICES } from "@/lib/services-data";
 
-const SERVICES: Service[] = [
-  {
-    icon: HeadsetIcon,
-    title: "Soporte TI gestionado",
-    bullets: [
-      "Nos conectamos a tu equipo y lo arreglamos, sin esperar la visita del técnico",
-      "Revisamos tus equipos y servidores para detectar fallas antes que tú",
-      "Respaldo automático de tus archivos todos los días, sin que nadie lo recuerde",
-    ],
-  },
-  {
-    icon: Code2Icon,
-    title: "Desarrollo web y e-commerce",
-    bullets: [
-      "Sitio o tienda online a tu nombre, sin plantillas repetidas",
-      "Pago en línea integrado: Webpay, Mercado Pago o los dos",
-      "Panel simple para que tú mismo cambies precios, productos o noticias",
-    ],
-  },
-  {
-    icon: WorkflowIcon,
-    title: "Automatización de procesos",
-    bullets: [
-      "Cotizaciones, boletas y reportes que salen solos, sin planillas a mano",
-      "Tu sistema de ventas conversando con tu contabilidad, sin digitar dos veces",
-      "Avisos por WhatsApp o correo cuando algo necesita tu firma",
-    ],
-  },
-  {
-    icon: NetworkIcon,
-    title: "Infraestructura y redes",
-    bullets: [
-      "Configuramos y aseguramos tu red y tu wifi a distancia",
-      "Servidores y respaldo en la nube, con acceso solo para quien corresponde",
-      "Si hay que poner las manos, coordinamos al técnico y supervisamos el trabajo",
-    ],
-  },
-];
+/** Los textos viven en lib/services-data.ts, junto con los de cada página
+ *  de servicio. Acá solo se elige el icono que le toca a cada slug. */
+const ICONS: Record<string, LucideIcon> = {
+  "soporte-informatico": HeadsetIcon,
+  "desarrollo-web": Code2Icon,
+  "automatizacion-de-procesos": WorkflowIcon,
+  "redes-y-ciberseguridad": NetworkIcon,
+};
 
 export function Services() {
   return (
@@ -80,34 +48,49 @@ export function Services() {
 
         <div className="grid grid-cols-1 border-l border-t border-border sm:grid-cols-2">
           {SERVICES.map((service) => {
-            const Icon = service.icon;
+            const Icon = ICONS[service.slug];
             return (
               <article
-                key={service.title}
-                className="group border-b border-r border-border p-8 transition-colors duration-200 hover:bg-graphite lg:p-10"
+                key={service.slug}
+                className="group border-b border-r border-border transition-colors duration-200 hover:bg-graphite"
               >
-                <Icon
-                  className="size-8 text-accent transition-colors duration-200 group-hover:text-accent-tint"
-                  strokeWidth={1.25}
-                  aria-hidden="true"
-                />
-                <h3 className="mt-8 font-display text-2xl transition-colors duration-200 group-hover:text-bone lg:text-[1.75rem]">
-                  {service.title}
-                </h3>
-                <ul className="mt-6 flex flex-col gap-3">
-                  {service.bullets.map((bullet) => (
-                    <li
-                      key={bullet}
-                      className="flex gap-3 text-sm leading-relaxed text-muted-foreground transition-colors duration-200 group-hover:text-bone/75"
-                    >
-                      <span
-                        aria-hidden="true"
-                        className="mt-2 size-1 shrink-0 rounded-full bg-accent transition-colors duration-200 group-hover:bg-accent-tint"
-                      />
-                      {bullet}
-                    </li>
-                  ))}
-                </ul>
+                {/* Toda la tarjeta es el enlace: más área de clic y un solo
+                    destino por tarjeta, que es lo que espera un lector de
+                    pantalla y lo que Google lee como enlace interno. */}
+                <Link
+                  href={`/servicios/${service.slug}`}
+                  className="flex h-full flex-col p-8 lg:p-10"
+                >
+                  <Icon
+                    className="size-8 text-accent transition-colors duration-200 group-hover:text-accent-tint"
+                    strokeWidth={1.25}
+                    aria-hidden="true"
+                  />
+                  <h3 className="mt-8 font-display text-2xl transition-colors duration-200 group-hover:text-bone lg:text-[1.75rem]">
+                    {service.name}
+                  </h3>
+                  <ul className="mt-6 flex flex-1 flex-col gap-3">
+                    {service.bullets.map((bullet) => (
+                      <li
+                        key={bullet}
+                        className="flex gap-3 text-sm leading-relaxed text-muted-foreground transition-colors duration-200 group-hover:text-bone/75"
+                      >
+                        <span
+                          aria-hidden="true"
+                          className="mt-2 size-1 shrink-0 rounded-full bg-accent transition-colors duration-200 group-hover:bg-accent-tint"
+                        />
+                        {bullet}
+                      </li>
+                    ))}
+                  </ul>
+                  <span className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-accent transition-colors duration-200 group-hover:text-accent-tint">
+                    Ver {service.name.toLowerCase()}
+                    <ArrowRightIcon
+                      className="size-4 transition-transform duration-200 group-hover:translate-x-1"
+                      aria-hidden="true"
+                    />
+                  </span>
+                </Link>
               </article>
             );
           })}

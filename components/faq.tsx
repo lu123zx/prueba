@@ -5,7 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const FAQS = [
+export const FAQS = [
   {
     question: "¿Se hacen cargo de todo o solo de la página?",
     answer:

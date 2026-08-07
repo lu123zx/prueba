@@ -3,8 +3,11 @@ import Link from "next/link";
 import { ArrowLeftIcon } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Política de privacidad — TechFlow Soluciones",
-  description: "Cómo TechFlow Soluciones recopila, usa y protege tus datos.",
+  // Sin la marca: la plantilla del layout ya la agrega.
+  title: "Política de privacidad",
+  description:
+    "Qué datos recopila TechFlow Soluciones cuando nos contactas, para qué los usamos y cómo pedir que los eliminemos.",
+  alternates: { canonical: "/politica-de-privacidad" },
 };
 
 export default function PoliticaDePrivacidad() {

@@ -1,4 +1,7 @@
+import Link from "next/link";
+
 import { SITE, WHATSAPP_URL } from "@/lib/site";
+import { SERVICES } from "@/lib/services-data";
 
 const LEGAL_LINKS = [
   { href: "/politica-de-privacidad", label: "Política de privacidad" },
@@ -11,15 +14,33 @@ export function Footer() {
     // WhatsApp, para que nunca tape la línea de copyright.
     <footer className="bg-graphite pt-16 pb-28 text-bone">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
-        <div className="grid grid-cols-1 gap-12 border-b border-bone/10 pb-12 sm:grid-cols-2 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)]">
+        <div className="grid grid-cols-1 gap-12 border-b border-bone/10 pb-12 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1.2fr)_minmax(0,1fr)_minmax(0,1fr)]">
           <div>
             <p className="font-display text-2xl">
               TechFlow<span className="text-accent-tint">.</span>
             </p>
             <p className="mt-4 max-w-[28ch] text-sm text-bone/60">
-              Soporte TI remoto, desarrollo y automatización para pymes de
-              Santiago.
+              Soporte informático remoto, desarrollo web y automatización para
+              pymes de Santiago.
             </p>
+          </div>
+
+          <div>
+            <h2 className="text-[13px] font-medium uppercase tracking-wide text-bone/60">
+              Servicios
+            </h2>
+            <ul className="mt-4 flex flex-col gap-2 text-sm">
+              {SERVICES.map((service) => (
+                <li key={service.slug}>
+                  <Link
+                    href={`/servicios/${service.slug}`}
+                    className="text-bone/70 transition-colors duration-200 hover:text-accent-tint"
+                  >
+                    {service.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div>

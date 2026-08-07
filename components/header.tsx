@@ -1,21 +1,34 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { MenuIcon, XIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-const NAV_LINKS = [
-  { href: "#servicios", label: "Servicios" },
-  { href: "#como-trabajamos", label: "Cómo trabajamos" },
-  { href: "#planes", label: "Planes" },
-  { href: "#preguntas-frecuentes", label: "Preguntas frecuentes" },
+/** Las secciones viven en la home; acá solo se guarda el ancla. */
+const NAV_SECTIONS = [
+  { anchor: "#servicios", label: "Servicios" },
+  { anchor: "#como-trabajamos", label: "Cómo trabajamos" },
+  { anchor: "#planes", label: "Planes" },
+  { anchor: "#preguntas-frecuentes", label: "Preguntas frecuentes" },
 ];
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Fuera de la home esas secciones no existen: un "#planes" pelado no
+  // llevaría a ninguna parte, así que se antepone la ruta raíz.
+  const isHome = pathname === "/";
+  const to = (anchor: string) => (isHome ? anchor : `/${anchor}`);
+
+  const NAV_LINKS = NAV_SECTIONS.map((s) => ({
+    href: to(s.anchor),
+    label: s.label,
+  }));
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -34,7 +47,7 @@ export function Header() {
       )}
     >
       <div className="mx-auto flex h-20 max-w-[1400px] items-center justify-between px-6 lg:px-12">
-        <a href="#inicio" className="font-display text-2xl tracking-tight">
+        <a href={to("#inicio")} className="font-display text-2xl tracking-tight">
           TechFlow<span className="text-accent">.</span>
         </a>
 
@@ -54,7 +67,7 @@ export function Header() {
         </nav>
 
         <Button asChild size="sm" className="hidden lg:inline-flex">
-          <a href="#contacto">Agendar diagnóstico</a>
+          <a href={to("#contacto")}>Agendar diagnóstico</a>
         </Button>
 
         <Button
@@ -94,7 +107,7 @@ export function Header() {
             ))}
           </ul>
           <Button asChild className="mt-4 w-full">
-            <a href="#contacto" onClick={() => setMenuOpen(false)}>
+            <a href={to("#contacto")} onClick={() => setMenuOpen(false)}>
               Agendar diagnóstico
             </a>
           </Button>
