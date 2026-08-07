@@ -12,16 +12,16 @@ export function Footer() {
             <p className="font-display text-2xl">
               TechFlow<span className="text-accent-tint">.</span>
             </p>
-            <p className="mt-4 max-w-[26ch] text-sm text-bone/55">
+            <p className="mt-4 max-w-[26ch] text-sm text-bone/60">
               Soporte TI, desarrollo y automatización para pymes de Santiago.
             </p>
           </div>
 
           <div>
-            <p className="text-[13px] font-medium uppercase tracking-wide text-bone/60">
+            <h2 className="text-[13px] font-medium uppercase tracking-wide text-bone/60">
               Empresa
-            </p>
-            <p className="mt-4 text-sm leading-relaxed text-bone/70">
+            </h2>
+            <address className="mt-4 text-sm not-italic leading-relaxed text-bone/70">
               TechFlow Soluciones SpA
               <br />
               RUT 76.543.210-9
@@ -29,46 +29,51 @@ export function Footer() {
               Av. Apoquindo 4900, of. 602
               <br />
               Las Condes, Santiago
-            </p>
+            </address>
           </div>
 
           <div>
-            <p className="text-[13px] font-medium uppercase tracking-wide text-bone/60">
+            <h2 className="text-[13px] font-medium uppercase tracking-wide text-bone/60">
               Contacto
-            </p>
-            <p className="mt-4 flex flex-col gap-2 text-sm">
-              <a
-                href="mailto:contacto@techflowsoluciones.cl"
-                className="text-bone/70 transition-colors duration-200 hover:text-accent-tint"
-              >
-                contacto@techflowsoluciones.cl
-              </a>
-              <a
-                href="https://wa.me/56987654321"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-bone/70 transition-colors duration-200 hover:text-accent-tint"
-              >
-                +56 9 8765 4321 (WhatsApp)
-              </a>
-            </p>
-          </div>
-
-          <div>
-            <p className="text-[13px] font-medium uppercase tracking-wide text-bone/60">
-              Legal
-            </p>
-            <p className="mt-4 flex flex-col gap-2 text-sm">
-              {LEGAL_LINKS.map((link) => (
+            </h2>
+            <ul className="mt-4 flex flex-col gap-2 text-sm">
+              <li>
                 <a
-                  key={link.href}
-                  href={link.href}
+                  href="mailto:contacto@techflowsoluciones.cl"
                   className="text-bone/70 transition-colors duration-200 hover:text-accent-tint"
                 >
-                  {link.label}
+                  contacto@techflowsoluciones.cl
                 </a>
+              </li>
+              <li>
+                <a
+                  href="https://wa.me/56987654321"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-bone/70 transition-colors duration-200 hover:text-accent-tint"
+                >
+                  +56 9 8765 4321 (WhatsApp)
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="text-[13px] font-medium uppercase tracking-wide text-bone/60">
+              Legal
+            </h2>
+            <ul className="mt-4 flex flex-col gap-2 text-sm">
+              {LEGAL_LINKS.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className="text-bone/70 transition-colors duration-200 hover:text-accent-tint"
+                  >
+                    {link.label}
+                  </a>
+                </li>
               ))}
-            </p>
+            </ul>
           </div>
         </div>
 

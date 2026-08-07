@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { MenuIcon, XIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -27,17 +27,14 @@ export function Header() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-colors duration-200",
+        "fixed inset-x-0 top-0 z-50 border-b transition-colors duration-200",
         scrolled
-          ? "border-b border-graphite/10 bg-bone/80 backdrop-blur-md"
-          : "border-b border-transparent bg-transparent"
+          ? "border-border bg-background/80 backdrop-blur-md"
+          : "border-transparent bg-transparent"
       )}
     >
       <div className="mx-auto flex h-20 max-w-[1400px] items-center justify-between px-6 lg:px-12">
-        <a
-          href="#inicio"
-          className="font-display text-2xl tracking-tight text-graphite"
-        >
+        <a href="#inicio" className="font-display text-2xl tracking-tight">
           TechFlow<span className="text-accent">.</span>
         </a>
 
@@ -49,44 +46,47 @@ export function Header() {
             <a
               key={link.href}
               href={link.href}
-              className="text-[15px] text-graphite/70 transition-colors duration-200 hover:text-graphite"
+              className="text-[15px] text-muted-foreground transition-colors duration-200 hover:text-foreground"
             >
               {link.label}
             </a>
           ))}
         </nav>
 
-        <div className="hidden lg:block">
-          <Button asChild size="sm">
-            <a href="#contacto">Agendar diagnóstico</a>
-          </Button>
-        </div>
+        <Button asChild size="sm" className="hidden lg:inline-flex">
+          <a href="#contacto">Agendar diagnóstico</a>
+        </Button>
 
-        <button
-          type="button"
-          className="flex h-10 w-10 items-center justify-center lg:hidden"
+        <Button
+          variant="ghost"
+          size="icon"
+          className="lg:hidden"
           aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={menuOpen}
           aria-controls="menu-movil"
           onClick={() => setMenuOpen((v) => !v)}
         >
-          {menuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+          {menuOpen ? (
+            <XIcon className="size-6" />
+          ) : (
+            <MenuIcon className="size-6" />
+          )}
+        </Button>
       </div>
 
       {menuOpen && (
         <nav
           id="menu-movil"
           aria-label="Navegación móvil"
-          className="border-t border-graphite/10 bg-bone px-6 pb-8 pt-4 lg:hidden"
+          className="border-t border-border bg-background px-6 pb-8 pt-4 lg:hidden"
         >
-          <ul className="flex flex-col gap-1">
+          <ul className="flex flex-col">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
                 <a
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className="block py-3 text-lg text-graphite/80 transition-colors duration-200 hover:text-graphite"
+                  className="block py-3 text-lg text-muted-foreground transition-colors duration-200 hover:text-foreground"
                 >
                   {link.label}
                 </a>

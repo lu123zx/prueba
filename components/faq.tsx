@@ -7,34 +7,35 @@ import {
 
 const FAQS = [
   {
-    question: "¿Se hacen cargo de todo o solo de la página web?",
+    question: "¿Se hacen cargo de todo o solo de la página?",
     answer:
-      "Nos hacemos cargo de lo que necesites: puede ser solo tu sitio web, o todo tu soporte técnico, redes y sistemas. Armamos el plan según lo que realmente uses, no un paquete cerrado que no te sirve.",
+      "De lo que necesites: puede ser solo tu sitio web, o todo tu soporte técnico, redes y sistemas. Armamos el plan según lo que de verdad uses, no un paquete cerrado que no te sirve.",
   },
   {
     question: "¿Quedo amarrado a ustedes?",
     answer:
-      "No. Los dominios, licencias, correos y accesos quedan siempre a nombre de tu empresa, no de TechFlow. Si en algún momento decides trabajar con otro proveedor, te entregamos todo ordenado y documentado, sin costo.",
+      "No. Los dominios, licencias, correos y accesos quedan siempre a nombre de tu empresa, no de TechFlow. Si algún día decides trabajar con otro proveedor, te entregamos todo ordenado y documentado, sin costo.",
   },
   {
     question: "¿Qué pasa si se cae algo un domingo?",
     answer:
-      "Los planes Negocio e Integral incluyen monitoreo las 24 horas. Si detectamos una falla fuera de horario, te avisamos y actuamos de inmediato: no esperamos hasta el lunes para revisar qué pasó.",
+      "Los planes Negocio e Integral incluyen revisión las 24 horas. Si detectamos una falla fuera de horario, te avisamos y actuamos de inmediato: no esperamos al lunes para mirar qué pasó.",
   },
   {
-    question: "No tenemos a nadie de informática en la empresa, ¿igual podemos contratarlos?",
+    question:
+      "No tenemos a nadie de informática en la empresa, ¿igual podemos contratarlos?",
     answer:
-      "Sí, y es lo más común. La mayoría de nuestros clientes no tiene un área de informática propia. Por eso existimos: te explicamos todo en simple y tomamos las decisiones técnicas por ti, sin tecnicismos.",
+      "Sí, y es lo más común. La mayoría de nuestros clientes no tiene un área de informática propia. Por eso existimos: te explicamos todo en simple y tomamos las decisiones técnicas por ti.",
   },
   {
     question: "¿Cuánto se demoran en responder cuando algo falla?",
     answer:
-      "En horario hábil, menos de 2 horas. Si tienes el plan Negocio o Integral, tienes además un encargado fijo que ya conoce tu empresa y no parte de cero explicando el problema cada vez.",
+      "En horario hábil, menos de 2 horas. Con el plan Negocio o Integral tienes además un encargado fijo que ya conoce tu empresa y no parte de cero cada vez.",
   },
   {
     question: "¿Cómo empezamos a trabajar juntos?",
     answer:
-      "Agendamos un diagnóstico gratuito, presencial en Santiago o por videollamada. En una semana tienes una propuesta clara, con precio fijo mensual y sin compromiso de firmar nada.",
+      "Agendamos un diagnóstico gratuito, en tu oficina o por videollamada. En una semana tienes una propuesta clara, con precio fijo mensual y sin compromiso de firmar nada.",
   },
 ];
 
@@ -53,19 +54,15 @@ export function Faq() {
             </p>
             <h2
               id="faq-titulo"
-              className="max-w-xs font-display text-4xl leading-tight95 text-graphite sm:text-5xl"
+              className="max-w-xs font-display text-4xl leading-[0.95] sm:text-5xl"
             >
               Las dudas que sí nos hacen.
             </h2>
           </div>
 
-          <Accordion type="single" collapsible className="w-full">
+          <Accordion type="single" collapsible className="w-full border-t border-border">
             {FAQS.map((faq, index) => (
-              <AccordionItem
-                key={faq.question}
-                value={`item-${index}`}
-                className={index === 0 ? "border-t border-graphite/12" : undefined}
-              >
+              <AccordionItem key={faq.question} value={`item-${index}`}>
                 <AccordionTrigger>{faq.question}</AccordionTrigger>
                 <AccordionContent>{faq.answer}</AccordionContent>
               </AccordionItem>

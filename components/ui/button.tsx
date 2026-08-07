@@ -5,51 +5,53 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-none text-sm font-medium tracking-wide transition-colors duration-200 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap text-sm font-medium tracking-wide outline-none transition-colors duration-200 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
-        primary:
-          "bg-accent text-accent-foreground hover:bg-graphite border border-accent hover:border-graphite",
-        "primary-dark":
-          "bg-accent text-accent-foreground hover:bg-bone hover:text-graphite border border-accent",
-        secondary:
-          "bg-transparent text-graphite border border-graphite/30 hover:border-graphite",
-        "secondary-dark":
-          "bg-transparent text-bone border border-bone/30 hover:border-bone",
-        ghost: "bg-transparent hover:bg-graphite/5",
+        // Sobre fondo hueso.
+        default:
+          "border border-accent bg-accent text-accent-foreground hover:border-graphite hover:bg-graphite",
+        outline:
+          "border border-graphite/30 bg-transparent text-graphite hover:border-graphite",
+        ghost: "bg-transparent text-graphite hover:bg-graphite/5",
+        // Sobre fondo grafito: al invertir, el hover pasa a hueso.
+        "default-dark":
+          "border border-accent bg-accent text-accent-foreground hover:bg-bone hover:text-graphite",
+        "outline-dark":
+          "border border-bone/30 bg-transparent text-bone hover:border-bone",
       },
       size: {
-        default: "h-12 px-7",
+        default: "h-12 px-7 has-[>svg]:px-6",
         sm: "h-10 px-5 text-[13px]",
         lg: "h-14 px-9 text-base",
+        icon: "size-11",
       },
     },
     defaultVariants: {
-      variant: "primary",
+      variant: "default",
       size: "default",
     },
   }
 );
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean;
-}
+function Button({
+  className,
+  variant,
+  size,
+  asChild = false,
+  ...props
+}: React.ComponentProps<"button"> &
+  VariantProps<typeof buttonVariants> & { asChild?: boolean }) {
+  const Comp = asChild ? Slot : "button";
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button";
-    return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref}
-        {...props}
-      />
-    );
-  }
-);
-Button.displayName = "Button";
+  return (
+    <Comp
+      data-slot="button"
+      className={cn(buttonVariants({ variant, size, className }))}
+      {...props}
+    />
+  );
+}
 
 export { Button, buttonVariants };

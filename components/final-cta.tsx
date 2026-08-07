@@ -9,7 +9,7 @@ export function FinalCta() {
       <div className="mx-auto max-w-[1400px] px-6 text-center lg:px-12">
         <h2
           id="cta-final-titulo"
-          className="mx-auto max-w-3xl font-display text-4xl leading-tight95 sm:text-5xl lg:text-6xl"
+          className="mx-auto max-w-3xl font-display text-4xl leading-[0.95] sm:text-5xl lg:text-6xl"
         >
           Hablemos antes de que se caiga algo.
         </h2>
@@ -17,11 +17,9 @@ export function FinalCta() {
           Agenda un diagnóstico gratuito de 30 minutos. Sin compromiso y sin
           letra chica.
         </p>
-        <div className="mt-10 flex justify-center">
-          <Button asChild variant="primary-dark" size="lg">
-            <a href="#contacto">Agendar diagnóstico</a>
-          </Button>
-        </div>
+        <Button asChild variant="default-dark" size="lg" className="mt-10">
+          <a href="#contacto">Agendar diagnóstico</a>
+        </Button>
       </div>
     </section>
   );

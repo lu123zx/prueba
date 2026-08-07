@@ -3,7 +3,7 @@ const STEPS = [
     number: "01",
     title: "Diagnóstico gratuito",
     description:
-      "Visitamos tu oficina o revisamos tu sistema por videollamada. Te decimos qué está fallando y qué riesgos corres, sin compromiso ni letra chica.",
+      "Vamos a tu oficina o revisamos tus sistemas por videollamada. Te decimos qué está fallando y qué riesgos corres, sin compromiso.",
   },
   {
     number: "02",
@@ -15,7 +15,7 @@ const STEPS = [
     number: "03",
     title: "Soporte continuo",
     description:
-      "Un equipo fijo de personas conoce tu empresa, tus sistemas y tu forma de trabajar. Nada de explicarle tu problema a alguien nuevo cada vez.",
+      "Un equipo fijo conoce tu empresa, tus sistemas y tu forma de trabajar. Nada de explicarle tu problema a alguien nuevo cada vez.",
   },
 ];
 
@@ -32,26 +32,27 @@ export function HowWeWork() {
         </p>
         <h2
           id="como-trabajamos-titulo"
-          className="max-w-xl font-display text-4xl leading-tight95 sm:text-5xl"
+          className="max-w-xl font-display text-4xl leading-[0.95] sm:text-5xl"
         >
           Tres pasos, sin sorpresas en el camino.
         </h2>
 
-        <div className="mt-16 grid grid-cols-1 gap-12 border-t border-bone/10 pt-12 sm:grid-cols-3 sm:gap-8 lg:mt-20 lg:pt-16">
+        <ol className="mt-16 grid grid-cols-1 gap-12 border-t border-bone/10 pt-12 sm:grid-cols-3 sm:gap-8 lg:mt-20 lg:pt-16">
           {STEPS.map((step) => (
-            <div key={step.number}>
-              <p className="font-display text-7xl leading-none text-accent-tint lg:text-8xl">
+            <li key={step.number}>
+              <span
+                aria-hidden="true"
+                className="block font-display text-7xl leading-none text-accent-tint lg:text-8xl"
+              >
                 {step.number}
-              </p>
-              <h3 className="mt-6 text-xl font-medium text-bone">
-                {step.title}
-              </h3>
+              </span>
+              <h3 className="mt-6 text-xl font-medium">{step.title}</h3>
               <p className="mt-4 max-w-xs text-[15px] leading-relaxed text-bone/60">
                 {step.description}
               </p>
-            </div>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   );

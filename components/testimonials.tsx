@@ -26,7 +26,7 @@ export function Testimonials() {
   return (
     <section
       aria-labelledby="testimonios-titulo"
-      className="border-y border-graphite/10 py-24 lg:py-32"
+      className="border-y border-border py-24 lg:py-32"
     >
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
         <h2
@@ -39,21 +39,19 @@ export function Testimonials() {
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-12">
           {TESTIMONIALS.map((testimonial) => (
             <figure key={testimonial.name} className="flex flex-col">
-              <blockquote className="font-display text-2xl leading-snug text-graphite sm:text-3xl">
+              <blockquote className="font-display text-2xl leading-snug sm:text-3xl">
                 &ldquo;{testimonial.quote}&rdquo;
               </blockquote>
               <figcaption className="mt-8 flex items-center gap-4">
                 <span
                   aria-hidden="true"
-                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-accent text-sm font-medium text-accent"
+                  className="flex size-12 shrink-0 items-center justify-center rounded-full border border-accent text-sm font-medium text-accent"
                 >
                   {testimonial.initials}
                 </span>
                 <span className="text-sm">
-                  <span className="block font-medium text-graphite">
-                    {testimonial.name}
-                  </span>
-                  <span className="block text-graphite/65">
+                  <span className="block font-medium">{testimonial.name}</span>
+                  <span className="block text-muted-foreground">
                     {testimonial.role}
                   </span>
                 </span>
