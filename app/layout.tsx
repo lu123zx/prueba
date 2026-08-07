@@ -25,13 +25,12 @@ export const metadata: Metadata = {
   // esto, Next emite rutas relativas y los previsualizadores no cargan nada.
   metadataBase: new URL(SITE_URL),
   title: {
-    default:
-      "Soporte informático para pymes en Santiago | TechFlow Soluciones",
+    default: "Soporte informático para pymes en Santiago | TechFlow",
     // Las páginas hijas solo declaran su nombre y heredan la marca.
     template: "%s | TechFlow Soluciones",
   },
   description:
-    "Soporte informático remoto para pymes de Santiago: respondemos en menos de 2 horas, revisamos tus sistemas todos los días y no te amarramos con contratos anuales. Precio por computador, desde 4,25 UF al mes.",
+    "Soporte informático remoto para pymes de Santiago. Respondemos en menos de 2 horas hábiles, sin contrato anual. Precio por computador, desde 4,25 UF.",
   applicationName: SITE_NAME,
   authors: [{ name: SITE_NAME, url: SITE_URL }],
   creator: SITE_NAME,
@@ -51,15 +50,15 @@ export const metadata: Metadata = {
     locale: "es_CL",
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: "Soporte informático para pymes en Santiago | TechFlow Soluciones",
+    title: "Soporte informático para pymes en Santiago | TechFlow",
     description:
-      "Nos conectamos y lo arreglamos, sin esperar que llegue un técnico. Respuesta en menos de 2 horas y precio por computador, desde 4,25 UF al mes.",
+      "Nos conectamos y lo arreglamos, sin esperar que llegue un técnico. Respuesta en 2 horas hábiles y precio por computador, desde 4,25 UF al mes.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Soporte informático para pymes en Santiago | TechFlow Soluciones",
+    title: "Soporte informático para pymes en Santiago | TechFlow",
     description:
-      "Nos conectamos y lo arreglamos, sin esperar que llegue un técnico. Respuesta en menos de 2 horas.",
+      "Nos conectamos y lo arreglamos, sin esperar que llegue un técnico. Respuesta en 2 horas hábiles.",
   },
   robots: {
     index: true,

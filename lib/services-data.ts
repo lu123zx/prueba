@@ -30,7 +30,7 @@ export const SERVICES: Service[] = [
   {
     slug: "soporte-informatico",
     name: "Soporte informático gestionado",
-    metaTitle: "Soporte informático para empresas en Santiago | Desde 4,25 UF al mes",
+    metaTitle: "Soporte informático para empresas en Santiago | Desde 4,25 UF",
     metaDescription:
       "Soporte informático remoto para pymes de Santiago. Respondemos en menos de 2 horas hábiles, monitoreamos tus equipos y no te amarramos con contratos anuales.",
     h1: "Soporte informático para empresas que no tienen a nadie de informática",
@@ -80,7 +80,7 @@ export const SERVICES: Service[] = [
   {
     slug: "desarrollo-web",
     name: "Desarrollo web y e-commerce",
-    metaTitle: "Desarrollo de páginas web y tiendas online para pymes | Santiago",
+    metaTitle: "Páginas web y tiendas online para pymes | Santiago",
     metaDescription:
       "Diseñamos y programamos sitios web y tiendas online para pymes de Santiago, con Webpay y Mercado Pago. El dominio y los accesos quedan a nombre de tu empresa.",
     h1: "Páginas web y tiendas online que quedan a tu nombre",
@@ -130,7 +130,7 @@ export const SERVICES: Service[] = [
   {
     slug: "automatizacion-de-procesos",
     name: "Automatización de procesos",
-    metaTitle: "Automatización de procesos para pymes en Santiago | TechFlow",
+    metaTitle: "Automatización de procesos para pymes | Santiago",
     metaDescription:
       "Automatizamos cotizaciones, boletas, reportes y traspasos entre sistemas para pymes de Santiago. Menos planillas, menos digitar dos veces, menos errores.",
     h1: "Automatización de procesos: que el computador haga lo repetitivo",
@@ -171,7 +171,7 @@ export const SERVICES: Service[] = [
   {
     slug: "redes-y-ciberseguridad",
     name: "Redes y ciberseguridad",
-    metaTitle: "Redes y ciberseguridad para pymes en Santiago | TechFlow Soluciones",
+    metaTitle: "Redes y ciberseguridad para pymes | Santiago",
     metaDescription:
       "Configuramos y protegemos la red, el wifi y los respaldos de tu pyme en Santiago. Prevención de virus, ransomware y robo de datos, con revisión periódica.",
     h1: "Redes y ciberseguridad para que no te pase lo que le pasó al vecino",
