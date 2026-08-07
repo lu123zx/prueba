@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { SITE, WHATSAPP_URL } from "@/lib/site";
+import { LEGAL, SITE, WHATSAPP_URL } from "@/lib/site";
 import { SERVICES } from "@/lib/services-data";
 
 const LEGAL_LINKS = [
@@ -88,10 +88,19 @@ export function Footer() {
           </div>
         </div>
 
-        <p className="pt-8 text-xs text-bone/60">
-          © {new Date().getFullYear()} TechFlow Soluciones SpA. Todos los
-          derechos reservados.
-        </p>
+        <div className="flex flex-col gap-2 pt-8 text-xs text-bone/60">
+          <p>
+            © {new Date().getFullYear()} {LEGAL.tradeName}. Todos los derechos
+            reservados.
+          </p>
+          {/* Identificación del prestador: es una persona natural, no una
+              sociedad. Publicar una razón social que no existe sería una
+              afirmación falsa frente al cliente. */}
+          <p>
+            {LEGAL.tradeName} es el nombre comercial de {LEGAL.fullName}, RUT{" "}
+            {LEGAL.rut}. {LEGAL.taxNote}
+          </p>
+        </div>
       </div>
     </footer>
   );

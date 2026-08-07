@@ -32,7 +32,7 @@ export const SERVICES: Service[] = [
     name: "Soporte informático gestionado",
     metaTitle: "Soporte informático para empresas en Santiago | Desde 4,25 UF al mes",
     metaDescription:
-      "Soporte informático remoto para pymes de Santiago. Respondemos en menos de 2 horas, revisamos tus equipos todos los días y no te amarramos con contratos anuales.",
+      "Soporte informático remoto para pymes de Santiago. Respondemos en menos de 2 horas hábiles, monitoreamos tus equipos y no te amarramos con contratos anuales.",
     h1: "Soporte informático para empresas que no tienen a nadie de informática",
     intro:
       "El soporte informático gestionado es tener un equipo externo que se hace cargo de todos los computadores, servidores y sistemas de tu empresa por un precio fijo al mes. Nos conectamos a distancia, arreglamos lo que falla y revisamos que nada se caiga, sin que tengas que contratar a nadie interno.",
@@ -48,27 +48,27 @@ export const SERVICES: Service[] = [
       },
       {
         heading: "En cuánto respondemos",
-        body: "Menos de 2 horas en horario hábil, y en los planes Negocio e Integral revisamos tus sistemas las 24 horas. Si detectamos una falla un domingo, te avisamos y actuamos: no esperamos al lunes. Cada empresa tiene un encargado fijo, así no le explicas tu problema a alguien nuevo cada vez que llamas.",
+        body: "Menos de 2 horas en horario hábil. En los planes Negocio e Integral el monitoreo vigila tus sistemas también de noche y el fin de semana, y avisa apenas detecta una falla; las emergencias de fin de semana se atienden en el plan Integral, coordinadas por WhatsApp. Cada empresa tiene un encargado fijo, así no le explicas tu problema a alguien nuevo cada vez que escribes.",
       },
       {
         heading: "Para qué tamaño de empresa sirve",
-        body: "Trabajamos con pymes de 10 a 60 equipos en Santiago. Bajo ese tamaño casi siempre conviene un plan por horas; sobre eso conviene evaluar un encargado interno más nuestro respaldo. En el diagnóstico gratuito te decimos cuál de los tres casos es el tuyo, aunque la respuesta sea que todavía no nos necesitas.",
+        body: "El servicio está dimensionado para pymes de 10 a 60 equipos en Santiago. Bajo ese tamaño casi siempre conviene un plan por horas; sobre eso conviene evaluar un encargado interno más nuestro respaldo. En el diagnóstico gratuito te decimos cuál de los tres casos es el tuyo, aunque la respuesta sea que todavía no nos necesitas.",
       },
       {
         heading: "Cuánto cuesta",
-        body: "Se cobra un cargo fijo al mes más un valor por cada computador que cuidamos, así pagas por lo que de verdad tienes y no por un tramo. Una empresa de 10 equipos parte en 6 UF al mes más IVA en el plan Esencial y 8,5 UF en el plan Negocio; una de 20, en 9,5 y 13 UF. Cobramos en UF para no subirte el precio cada año. Las licencias (Microsoft 365, antivirus, respaldo en la nube) van aparte, al precio que nos cuestan a nosotros y a nombre de tu empresa.",
+        body: "Se cobra un cargo fijo al mes más un valor por cada computador que cuidamos, así pagas por lo que de verdad tienes y no por un tramo. Una empresa de 10 equipos parte en 6 UF al mes en el plan Esencial y 8,5 UF en el plan Negocio; una de 20, en 9,5 y 13 UF. Cobramos en UF para no subirte el precio cada año. El servicio se documenta con boleta de honorarios, exenta de IVA. Las licencias (Microsoft 365, antivirus, respaldo en la nube) van aparte, al precio que nos cuestan a nosotros y a nombre de tu empresa.",
       },
     ],
     faqs: [
       {
         question: "¿Cuánto cuesta el soporte informático para una pyme en Santiago?",
         answer:
-          "Se paga un cargo fijo al mes más un valor por computador. Para una empresa de 10 equipos son 6 UF al mes más IVA en el plan Esencial y 8,5 UF en el plan Negocio; para una de 20 equipos, 9,5 y 13 UF. No incluye las licencias de terceros, que se facturan aparte a precio de costo y quedan a nombre de tu empresa.",
+          "Se paga un cargo fijo al mes más un valor por computador. Para una empresa de 10 equipos son 6 UF al mes en el plan Esencial y 8,5 UF en el plan Negocio; para una de 20 equipos, 9,5 y 13 UF. El servicio se documenta con boleta de honorarios, que está exenta de IVA. No incluye las licencias de terceros, que se cobran aparte a precio de costo y quedan a nombre de tu empresa.",
       },
       {
         question: "¿Necesito tener un informático contratado además del soporte?",
         answer:
-          "No. La mayoría de nuestros clientes no tiene área de informática. Nosotros tomamos las decisiones técnicas y te las explicamos en simple, sin tecnicismos.",
+          "No. El servicio está pensado justamente para empresas que no tienen a nadie de informática: nosotros tomamos las decisiones técnicas y te las explicamos en simple, sin tecnicismos.",
       },
       {
         question: "¿El soporte informático remoto sirve igual que uno presencial?",
@@ -164,7 +164,7 @@ export const SERVICES: Service[] = [
       {
         question: "¿Cuánto tiempo se ahorra con una automatización?",
         answer:
-          "En las pymes con las que trabajamos, entre 10 y 30 horas al mes por proceso automatizado. Antes de empezar medimos cuánto toma hoy, para poder comparar después con un número y no con una impresión.",
+          "Depende del proceso, y por eso no partimos con una promesa. Antes de empezar medimos cuántas horas al mes toma hoy el trabajo a mano, y al mes siguiente lo volvemos a medir. Si no bajó, lo conversamos con el número al frente y no con una impresión.",
       },
     ],
   },

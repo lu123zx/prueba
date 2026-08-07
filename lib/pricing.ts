@@ -53,14 +53,14 @@ export const PLANS: Plan[] = [
   {
     id: "negocio",
     name: "Negocio",
-    description: "El más elegido por pymes de 15 a 40 personas en Santiago.",
+    description: "El que recomendamos para pymes de 15 a 40 personas en Santiago.",
     base: 4,
     perEquipo: 0.45,
     highlighted: true,
     features: [
       "Todo lo del plan Esencial",
-      "Respuesta garantizada en menos de 2 horas hábiles",
-      "Revisamos tus sistemas las 24 horas, todos los días",
+      "Respuesta en menos de 2 horas hábiles",
+      "Monitoreo automático de tus sistemas, con aviso ante fallas",
       "Un encargado fijo que conoce tu empresa",
       "Administramos tus licencias y sus renovaciones",
     ],
@@ -73,7 +73,7 @@ export const PLANS: Plan[] = [
     perEquipo: 0.55,
     features: [
       "Todo lo del plan Negocio",
-      "Atención también fuera de horario y fines de semana",
+      "Atención de emergencias fuera de horario, coordinada por WhatsApp",
       "Mantención de tu sitio o tienda web incluida",
       "Revisión de ciberseguridad y prueba de respaldos cada trimestre",
       "Reunión mensual de revisión con tu encargado",

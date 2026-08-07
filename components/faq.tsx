@@ -24,7 +24,7 @@ export const FAQS = [
   {
     question: "¿Qué pasa si se cae algo un domingo?",
     answer:
-      "Los planes Negocio e Integral incluyen revisión las 24 horas. Si detectamos una falla fuera de horario, te avisamos y nos conectamos de inmediato: no esperamos al lunes para mirar qué pasó.",
+      "Los planes Negocio e Integral incluyen monitoreo automático que vigila tus sistemas también fuera de horario y avisa apenas algo falla. En el plan Integral atendemos emergencias el fin de semana, coordinadas por WhatsApp. En los otros planes el aviso queda registrado y se atiende a primera hora del día hábil siguiente: preferimos decírtelo así y cumplirlo, en vez de prometer una guardia de 24 horas que no tendrías cómo exigirnos.",
   },
   {
     question: "Si trabajan a distancia, ¿cómo arreglan un computador?",
@@ -34,7 +34,7 @@ export const FAQS = [
   {
     question: "No tenemos a nadie de informática, ¿igual podemos contratarlos?",
     answer:
-      "Sí, y es lo más común. La mayoría de nuestros clientes no tiene un área de informática propia. Por eso existimos: te explicamos todo en simple y tomamos las decisiones técnicas por ti.",
+      "Sí. El servicio está pensado justamente para empresas que no tienen un área de informática propia: te explicamos todo en simple y tomamos las decisiones técnicas por ti.",
   },
   {
     question: "¿Por qué cobran en UF y no en pesos?",
@@ -45,6 +45,11 @@ export const FAQS = [
     question: "¿Por qué cobran por computador y no un precio plano?",
     answer:
       "Porque cuidar 30 computadores cuesta el doble que cuidar 15, y un precio plano por tramos termina cobrándole lo mismo a los dos. Con el precio por equipo pagas por lo que de verdad tienes: si el mes que viene contratas a dos personas más, suben dos equipos y nada más. Y si alguien se va, baja.",
+  },
+  {
+    question: "¿Me dan factura?",
+    answer:
+      "No: el servicio lo presta una persona natural y se documenta con boleta de honorarios electrónica, que está exenta de IVA. Para tu empresa el gasto es igual de deducible, y como no hay IVA tampoco hay crédito fiscal que recuperar. Lo que sí debes hacer, si tributas en primera categoría, es practicar la retención de segunda categoría al pagar la boleta. Te lo dejamos indicado en cada documento para que no tengas que calcularlo.",
   },
   {
     question: "¿Cómo empezamos a trabajar juntos?",

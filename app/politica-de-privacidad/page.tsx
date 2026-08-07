@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeftIcon } from "lucide-react";
 
+import { LEGAL, SITE } from "@/lib/site";
+
 export const metadata: Metadata = {
   // Sin la marca: la plantilla del layout ya la agrega.
   title: "Política de privacidad",
@@ -59,9 +61,35 @@ export default function PoliticaDePrivacidad() {
             Dónde se guardan
           </h2>
           <p className="leading-relaxed">
-            Tus datos se almacenan en sistemas con acceso restringido al
-            equipo de TechFlow que necesita contactarte. Nunca vendemos ni
+            Tus datos se almacenan en sistemas con acceso restringido a quien
+            presta el servicio y necesita contactarte. Nunca vendemos ni
             arrendamos tu información a otras empresas.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="mb-3 font-display text-2xl text-foreground">
+            Con qué justificación los tratamos
+          </h2>
+          <p className="leading-relaxed">
+            Tratamos tus datos porque tú nos los entregas voluntariamente para
+            que te contactemos, y porque son necesarios para preparar o cumplir
+            el contrato de servicios que nos pidas. Para escribirte sobre
+            servicios nuevos pedimos tu consentimiento por separado, y puedes
+            retirarlo cuando quieras sin que eso afecte el servicio contratado.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="mb-3 font-display text-2xl text-foreground">
+            Cuánto tiempo los guardamos
+          </h2>
+          <p className="leading-relaxed">
+            Si no llegamos a trabajar juntos, eliminamos los datos del
+            formulario a los 12 meses. Si contratas el servicio, los mantenemos
+            mientras dure la relación y hasta 6 años después del término, que
+            es el plazo en que la ley nos puede exigir respaldo tributario y
+            contable.
           </p>
         </section>
 
@@ -70,13 +98,46 @@ export default function PoliticaDePrivacidad() {
             Tus derechos
           </h2>
           <p className="leading-relaxed">
-            Puedes pedirnos en cualquier momento que te mostremos, corrijamos
-            o eliminemos los datos que tenemos sobre ti, escribiendo a{" "}
+            Puedes pedirnos en cualquier momento que te mostremos los datos que
+            tenemos sobre ti, que los corrijamos si están errados, que los
+            eliminemos, que suspendamos su uso, o que te los entreguemos en un
+            formato que puedas llevarte a otra parte. Escríbenos a{" "}
             <a
-              href="mailto:contacto@techflowsoluciones.cl"
+              href={`mailto:${SITE.email}`}
               className="text-accent underline underline-offset-4"
             >
-              contacto@techflowsoluciones.cl
+              {SITE.email}
+            </a>{" "}
+            y respondemos dentro de 30 días corridos. Si no quedas conforme,
+            puedes reclamar ante la Agencia de Protección de Datos Personales.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="mb-3 font-display text-2xl text-foreground">
+            Si ocurre una filtración
+          </h2>
+          <p className="leading-relaxed">
+            Si tus datos se ven comprometidos, te avisamos a ti y a la
+            autoridad tan pronto lo detectemos, contándote qué pasó, qué datos
+            se vieron afectados y qué estamos haciendo al respecto.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="mb-3 font-display text-2xl text-foreground">
+            Quién es responsable
+          </h2>
+          <p className="leading-relaxed">
+            El responsable del tratamiento es {LEGAL.fullName}, RUT{" "}
+            {LEGAL.rut}, que presta servicios bajo el nombre comercial{" "}
+            {LEGAL.tradeName}. Puedes contactarnos por cualquier tema de datos
+            personales en{" "}
+            <a
+              href={`mailto:${SITE.email}`}
+              className="text-accent underline underline-offset-4"
+            >
+              {SITE.email}
             </a>
             .
           </p>

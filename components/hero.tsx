@@ -1,10 +1,21 @@
 import { Button } from "@/components/ui/button";
 import { NetworkCanvas } from "@/components/network-canvas";
 
+/**
+ * PENDIENTE DE CONFIRMAR ANTES DE PUBLICAR.
+ *
+ * Estos tres datos son afirmaciones objetivas y comprobables: si no son
+ * ciertas, son publicidad engañosa (art. 28 Ley 19.496). Se reemplazaron
+ * "120+ equipos gestionados" y "9 años" porque no hay operación previa que
+ * los respalde. Los de abajo describen cómo funciona el servicio, no un
+ * historial, así que se sostienen desde el primer cliente.
+ *
+ * Cuando existan cifras reales de clientes y trayectoria, se cambian acá.
+ */
 const STATS = [
-  { value: "2 horas", label: "Tiempo de respuesta en horario hábil" },
-  { value: "120+", label: "Equipos gestionados hoy en Santiago" },
-  { value: "9 años", label: "Trabajando solo con pymes chilenas" },
+  { value: "2 horas", label: "Plazo de respuesta en horario hábil" },
+  { value: "100% remoto", label: "Sin esperar la visita de un técnico" },
+  { value: "Mes a mes", label: "Sin permanencia mínima ni multa de salida" },
 ];
 
 export function Hero() {

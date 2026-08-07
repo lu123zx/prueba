@@ -95,7 +95,7 @@ export function Pricing() {
               >
                 {plan.highlighted && (
                   <p className="mb-6 w-fit border border-accent-tint px-3 py-1 text-[12px] font-medium uppercase tracking-wide text-accent-tint">
-                    Más elegido
+                    Recomendado
                   </p>
                 )}
 
@@ -119,7 +119,7 @@ export function Pricing() {
                       plan.highlighted ? "text-bone/60" : "text-muted-foreground"
                     )}
                   >
-                    /mes + IVA
+                    /mes
                   </span>
                 </p>
                 <p
@@ -183,16 +183,19 @@ export function Pricing() {
           <div className="flex flex-col gap-4 text-muted-foreground">
             <p className="leading-relaxed">
               <strong className="font-medium text-foreground">
-                Las licencias no están incluidas en el plan.
+                Las licencias no están incluidas en el plan y no pasan por
+                nosotros.
               </strong>{" "}
               Microsoft 365, antivirus, respaldo en la nube y cualquier programa
-              que tu empresa use se cobran aparte,{" "}
+              que uses se contratan{" "}
               <strong className="font-medium text-foreground">
-                al precio que nos cuestan a nosotros
+                directamente a nombre de tu empresa
               </strong>
-              , sin recargo. Te llegan en la misma factura, en una línea
-              separada, para que veas exactamente cuánto es cada cosa. Suelen
-              salir entre $8.000 y $14.000 por persona al mes.
+              , con tu medio de pago. Nosotros te decimos qué necesitas, te
+              ayudamos a contratarlo y lo administramos, pero el proveedor te
+              cobra a ti: así no te recargamos nada y el día que te vayas la
+              licencia ya es tuya. Suelen salir entre $8.000 y $14.000 por
+              persona al mes.
             </p>
             <p className="leading-relaxed">
               <strong className="font-medium text-foreground">
@@ -214,10 +217,14 @@ export function Pricing() {
           </div>
         </div>
 
-        <p className="mt-10 text-xs text-muted-foreground">
-          Valores en UF, sin IVA. El equivalente en pesos es referencial, con la
-          UF del {UF_DATE}. Bajo {EQUIPOS_MIN} equipos conviene más el soporte
-          por hora: te lo decimos en el diagnóstico.
+        <p className="mt-10 max-w-3xl text-xs leading-relaxed text-muted-foreground">
+          Valores en UF. El equivalente en pesos es referencial, con la UF del{" "}
+          {UF_DATE}. El servicio lo presta una persona natural y se documenta
+          con boleta de honorarios electrónica, que está exenta de IVA: no se
+          agrega ese 19% al valor publicado. Si tu empresa tributa en primera
+          categoría, debe practicar la retención de segunda categoría que
+          corresponda al emitirse la boleta. Bajo {EQUIPOS_MIN} equipos conviene
+          más el soporte por hora: te lo decimos en el diagnóstico.
         </p>
       </div>
     </section>

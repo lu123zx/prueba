@@ -1,3 +1,5 @@
+import { CheckIcon } from "lucide-react";
+
 type Testimonial = {
   quote: string;
   name: string;
@@ -6,63 +8,104 @@ type Testimonial = {
 };
 
 /**
- * Sin nombre de empresa: se identifica el cargo, el rubro y la comuna, que es
- * lo que le sirve al lector para reconocerse, sin exponer al cliente.
+ * VACÍO A PROPÓSITO.
+ *
+ * Publicar testimonios inventados es publicidad engañosa (art. 28 de la Ley
+ * 19.496, que alcanza a este negocio por el art. 9 de la Ley 20.416 al ser los
+ * clientes micro y pequeñas empresas). Acá solo van clientes reales, con su
+ * autorización por escrito para usar nombre, cargo y rubro.
+ *
+ * Mientras no haya ninguno, la sección muestra los compromisos del servicio,
+ * que son afirmaciones propias y verificables, no opiniones de terceros.
  */
-const TESTIMONIALS: Testimonial[] = [
+const TESTIMONIALS: Testimonial[] = [];
+
+/** Compromisos: se pueden sostener desde el primer día de operación. */
+const COMPROMISOS = [
   {
-    quote:
-      "Dejamos de perder medio día cada vez que se caía el sistema de boletas. Ahora nos llaman ellos antes de que nosotros nos demos cuenta.",
-    name: "Marcela R.",
-    role: "Gerenta general — Distribuidora de repuestos, Recoleta",
-    initials: "MR",
+    title: "Los accesos son tuyos",
+    body: "Dominios, licencias y cuentas quedan a nombre de tu empresa desde el primer día. Si te vas, te llevas todo, documentado y sin costo de salida.",
   },
   {
-    quote:
-      "Nos armaron la tienda online en un mes y sigue siendo nuestra: el dominio, las licencias, todo a nuestro nombre. Si algún día nos cambiamos, no perdemos nada.",
-    name: "Francisco A.",
-    role: "Socio fundador — Fábrica de muebles, San Joaquín",
-    initials: "FA",
+    title: "Sin permanencia mínima",
+    body: "El servicio es mes a mes. Terminas avisando con 30 días y no hay multa por salirte antes de ningún plazo.",
+  },
+  {
+    title: "El precio está publicado",
+    body: "Lo que ves en el simulador es lo que se cobra. Las licencias las contratas tú directamente y los proyectos se cotizan aparte, con precio cerrado.",
   },
 ];
 
 export function Testimonials() {
+  if (TESTIMONIALS.length > 0) {
+    return (
+      <section
+        aria-labelledby="testimonios-titulo"
+        className="border-y border-border py-24 lg:py-32"
+      >
+        <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
+          <h2
+            id="testimonios-titulo"
+            className="mb-16 text-[13px] font-medium uppercase tracking-[0.18em] text-accent lg:mb-20"
+          >
+            Clientes
+          </h2>
+
+          <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-12">
+            {TESTIMONIALS.map((testimonial) => (
+              <figure key={testimonial.name} className="flex flex-col">
+                <blockquote className="font-display text-2xl leading-snug sm:text-3xl">
+                  &ldquo;{testimonial.quote}&rdquo;
+                </blockquote>
+                <figcaption className="mt-8 flex items-center gap-4">
+                  <span
+                    aria-hidden="true"
+                    className="flex size-12 shrink-0 items-center justify-center rounded-full border border-accent text-sm font-medium text-accent"
+                  >
+                    {testimonial.initials}
+                  </span>
+                  <span className="text-sm">
+                    <span className="block font-medium">{testimonial.name}</span>
+                    <span className="block text-muted-foreground">
+                      {testimonial.role}
+                    </span>
+                  </span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section
-      aria-labelledby="testimonios-titulo"
+      aria-labelledby="compromisos-titulo"
       className="border-y border-border py-24 lg:py-32"
     >
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
+        <p className="mb-4 text-[13px] font-medium uppercase tracking-[0.18em] text-accent">
+          Nuestro compromiso
+        </p>
         <h2
-          id="testimonios-titulo"
-          className="mb-16 text-[13px] font-medium uppercase tracking-[0.18em] text-accent lg:mb-20"
+          id="compromisos-titulo"
+          className="max-w-xl font-display text-4xl leading-[0.95] sm:text-5xl"
         >
-          Clientes
+          Tres cosas que quedan por escrito.
         </h2>
 
-        <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-12">
-          {TESTIMONIALS.map((testimonial) => (
-            <figure key={testimonial.name} className="flex flex-col">
-              <blockquote className="font-display text-2xl leading-snug sm:text-3xl">
-                &ldquo;{testimonial.quote}&rdquo;
-              </blockquote>
-              <figcaption className="mt-8 flex items-center gap-4">
-                <span
-                  aria-hidden="true"
-                  className="flex size-12 shrink-0 items-center justify-center rounded-full border border-accent text-sm font-medium text-accent"
-                >
-                  {testimonial.initials}
-                </span>
-                <span className="text-sm">
-                  <span className="block font-medium">{testimonial.name}</span>
-                  <span className="block text-muted-foreground">
-                    {testimonial.role}
-                  </span>
-                </span>
-              </figcaption>
-            </figure>
+        <ul className="mt-16 grid grid-cols-1 gap-12 border-t border-border pt-12 sm:grid-cols-3 sm:gap-8">
+          {COMPROMISOS.map((c) => (
+            <li key={c.title}>
+              <CheckIcon className="size-6 text-accent" aria-hidden="true" />
+              <h3 className="mt-6 text-xl font-medium">{c.title}</h3>
+              <p className="mt-3 max-w-xs text-[15px] leading-relaxed text-muted-foreground">
+                {c.body}
+              </p>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );
