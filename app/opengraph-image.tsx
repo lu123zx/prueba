@@ -64,7 +64,7 @@ export default function OpengraphImage() {
           }}
         >
           <span>Respuesta en 2 horas</span>
-          <span>Planes desde 4,5 UF</span>
+          <span>Desde 4,25 UF al mes</span>
           <span>Sin contrato anual</span>
         </div>
       </div>

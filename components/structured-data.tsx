@@ -1,6 +1,6 @@
 import { SITE } from "@/lib/site";
 import { absoluteUrl, COMUNAS, SITE_NAME, SITE_URL } from "@/lib/seo";
-import { UF_CLP } from "@/lib/pricing";
+import { EQUIPOS_DEFAULT, UF_CLP, planPriceUF, type Plan } from "@/lib/pricing";
 import { SERVICES } from "@/lib/services-data";
 
 /**
@@ -88,11 +88,17 @@ export function WebSiteSchema() {
   );
 }
 
-/** Los tres planes, con el precio en pesos que Google necesita para mostrarlos. */
+/**
+ * Los planes. Como el precio depende del número de equipos, se declara el
+ * valor para una empresa de referencia y se deja explícita esa cantidad con
+ * referenceQuantity: publicar solo el cargo base sería engañoso.
+ */
 export function PricingSchema({
   plans,
+  equiposReferencia = EQUIPOS_DEFAULT,
 }: {
-  plans: { name: string; uf: number; description: string }[];
+  plans: Plan[];
+  equiposReferencia?: number;
 }) {
   return (
     <JsonLd
@@ -102,23 +108,32 @@ export function PricingSchema({
         name: "Soporte informático gestionado para pymes",
         provider: { "@id": ORGANIZATION_ID },
         areaServed: { "@type": "City", name: "Santiago, Chile" },
-        offers: plans.map((plan) => ({
-          "@type": "Offer",
-          name: `Plan ${plan.name}`,
-          description: plan.description,
-          price: Math.round(plan.uf * UF_CLP),
-          priceCurrency: "CLP",
-          url: absoluteUrl("/#planes"),
-          availability: "https://schema.org/InStock",
-          eligibleCustomerType: "https://schema.org/Business",
-          priceSpecification: {
-            "@type": "UnitPriceSpecification",
-            price: Math.round(plan.uf * UF_CLP),
+        offers: plans.map((plan) => {
+          const precio = Math.round(planPriceUF(plan, equiposReferencia) * UF_CLP);
+          return {
+            "@type": "Offer",
+            name: `Plan ${plan.name}`,
+            description: `${plan.description} Valor para una empresa de ${equiposReferencia} equipos.`,
+            price: precio,
             priceCurrency: "CLP",
-            unitCode: "MON", // mensual
-            valueAddedTaxIncluded: false,
-          },
-        })),
+            url: absoluteUrl("/#planes"),
+            availability: "https://schema.org/InStock",
+            eligibleCustomerType: "https://schema.org/Business",
+            priceSpecification: {
+              "@type": "UnitPriceSpecification",
+              price: precio,
+              priceCurrency: "CLP",
+              billingIncrement: 1,
+              unitText: "mes",
+              valueAddedTaxIncluded: false,
+              referenceQuantity: {
+                "@type": "QuantitativeValue",
+                value: equiposReferencia,
+                unitText: "equipos",
+              },
+            },
+          };
+        }),
       }}
     />
   );

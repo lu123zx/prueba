@@ -9,7 +9,7 @@ export const FAQS = [
   {
     question: "¿Se hacen cargo de todo o solo de la página?",
     answer:
-      "De lo que necesites: puede ser solo tu sitio web, o todo tu soporte técnico, redes y sistemas. Armamos el plan según lo que de verdad uses, no un paquete cerrado que no te sirve.",
+      "De lo que necesites. El plan mensual cubre el soporte informático, las redes y la seguridad de tu empresa. Hacer tu página web o automatizar un proceso son proyectos con principio y fin: se cotizan aparte, una sola vez y con precio cerrado.",
   },
   {
     question: "¿Quedo amarrado a ustedes?",
@@ -40,6 +40,11 @@ export const FAQS = [
     question: "¿Por qué cobran en UF y no en pesos?",
     answer:
       "Para no tener que subirte el precio todos los años. La UF se reajusta sola con la inflación, así el valor real de lo que pagas se mantiene parejo y tú no recibes una carta de aumento cada enero. En cada plan te mostramos cuánto es hoy en pesos.",
+  },
+  {
+    question: "¿Por qué cobran por computador y no un precio plano?",
+    answer:
+      "Porque cuidar 30 computadores cuesta el doble que cuidar 15, y un precio plano por tramos termina cobrándole lo mismo a los dos. Con el precio por equipo pagas por lo que de verdad tienes: si el mes que viene contratas a dos personas más, suben dos equipos y nada más. Y si alguien se va, baja.",
   },
   {
     question: "¿Cómo empezamos a trabajar juntos?",

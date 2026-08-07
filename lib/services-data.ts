@@ -30,7 +30,7 @@ export const SERVICES: Service[] = [
   {
     slug: "soporte-informatico",
     name: "Soporte informático gestionado",
-    metaTitle: "Soporte informático para empresas en Santiago | Planes desde 4,5 UF",
+    metaTitle: "Soporte informático para empresas en Santiago | Desde 4,25 UF al mes",
     metaDescription:
       "Soporte informático remoto para pymes de Santiago. Respondemos en menos de 2 horas, revisamos tus equipos todos los días y no te amarramos con contratos anuales.",
     h1: "Soporte informático para empresas que no tienen a nadie de informática",
@@ -56,14 +56,14 @@ export const SERVICES: Service[] = [
       },
       {
         heading: "Cuánto cuesta",
-        body: "Desde 4,5 UF al mes más IVA para hasta 15 equipos, y 8,5 UF para hasta 35. Cobramos en UF para no subirte el precio cada año. Las licencias (Microsoft 365, antivirus, respaldo en la nube) van aparte, al precio que nos cuestan a nosotros y a nombre de tu empresa.",
+        body: "Se cobra un cargo fijo al mes más un valor por cada computador que cuidamos, así pagas por lo que de verdad tienes y no por un tramo. Una empresa de 10 equipos parte en 6 UF al mes más IVA en el plan Esencial y 8,5 UF en el plan Negocio; una de 20, en 9,5 y 13 UF. Cobramos en UF para no subirte el precio cada año. Las licencias (Microsoft 365, antivirus, respaldo en la nube) van aparte, al precio que nos cuestan a nosotros y a nombre de tu empresa.",
       },
     ],
     faqs: [
       {
         question: "¿Cuánto cuesta el soporte informático para una pyme en Santiago?",
         answer:
-          "En TechFlow parte en 4,5 UF al mes más IVA para empresas de hasta 15 equipos, y 8,5 UF para hasta 35 equipos. El precio es fijo y no incluye licencias de terceros, que se facturan aparte a precio de costo.",
+          "Se paga un cargo fijo al mes más un valor por computador. Para una empresa de 10 equipos son 6 UF al mes más IVA en el plan Esencial y 8,5 UF en el plan Negocio; para una de 20 equipos, 9,5 y 13 UF. No incluye las licencias de terceros, que se facturan aparte a precio de costo y quedan a nombre de tu empresa.",
       },
       {
         question: "¿Necesito tener un informático contratado además del soporte?",
@@ -102,11 +102,11 @@ export const SERVICES: Service[] = [
       },
       {
         heading: "Cuánto se demora y cuánto cuesta",
-        body: "Un sitio institucional toma entre 3 y 5 semanas; una tienda online, entre 6 y 10, según cuántos productos haya que cargar. El desarrollo se cotiza por proyecto, y la mantención posterior viene incluida en el plan Integral. En el diagnóstico gratuito te damos el número de tu caso.",
+        body: "Un sitio institucional toma entre 3 y 5 semanas; una tienda online, entre 6 y 10, según cuántos productos haya que cargar. El desarrollo se cotiza por proyecto, con precio cerrado antes de empezar: no lo metemos en la mensualidad porque eso te obligaría a firmar un contrato largo. La mantención posterior sí es mensual y viene incluida en el plan Integral.",
       },
       {
         heading: "Qué pasa después de que se publica",
-        body: "Te entregamos todos los accesos y una guía en simple para que cargues productos o publiques noticias sin depender de nadie. Si prefieres que lo mantengamos nosotros, va dentro del plan mensual. Si algún día trabajas con otro proveedor, se lleva todo tal cual, sin costo de salida.",
+        body: "Te entregamos todos los accesos y una guía en simple para que cargues productos o publiques noticias sin depender de nadie. Si prefieres que lo mantengamos nosotros, la mantención va dentro del plan Integral. Si algún día trabajas con otro proveedor, se lleva todo tal cual, sin costo de salida.",
       },
     ],
     faqs: [

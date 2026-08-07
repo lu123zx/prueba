@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     template: "%s | TechFlow Soluciones",
   },
   description:
-    "Soporte informático remoto para pymes de Santiago: respondemos en menos de 2 horas, revisamos tus sistemas todos los días y no te amarramos con contratos anuales. Planes desde 4,5 UF al mes.",
+    "Soporte informático remoto para pymes de Santiago: respondemos en menos de 2 horas, revisamos tus sistemas todos los días y no te amarramos con contratos anuales. Precio por computador, desde 4,25 UF al mes.",
   applicationName: SITE_NAME,
   authors: [{ name: SITE_NAME, url: SITE_URL }],
   creator: SITE_NAME,
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     title: "Soporte informático para pymes en Santiago | TechFlow Soluciones",
     description:
-      "Nos conectamos y lo arreglamos, sin esperar que llegue un técnico. Respuesta en menos de 2 horas y planes desde 4,5 UF al mes.",
+      "Nos conectamos y lo arreglamos, sin esperar que llegue un técnico. Respuesta en menos de 2 horas y precio por computador, desde 4,25 UF al mes.",
   },
   twitter: {
     card: "summary_large_image",

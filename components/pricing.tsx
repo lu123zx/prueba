@@ -1,62 +1,30 @@
+"use client";
+
+import { useState } from "react";
 import { CheckIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { formatUF, ufToCLP, UF_DATE } from "@/lib/pricing";
+import { Label } from "@/components/ui/label";
+import { Slider } from "@/components/ui/slider";
+import {
+  EQUIPOS_DEFAULT,
+  EQUIPOS_MAX,
+  EQUIPOS_MIN,
+  PLANS,
+  UF_DATE,
+  formatUF,
+  planPriceUF,
+  ufToCLP,
+} from "@/lib/pricing";
 import { cn } from "@/lib/utils";
 
-type Plan = {
-  name: string;
-  uf: number;
-  description: string;
-  features: string[];
-  highlighted?: boolean;
-};
-
-export const PLANS: Plan[] = [
-  {
-    name: "Esencial",
-    uf: 4.5,
-    description: "Para empresas de hasta 15 equipos que recién ordenan su TI.",
-    features: [
-      "Hasta 15 equipos cubiertos",
-      "Mesa de ayuda por teléfono, WhatsApp y remoto",
-      "Respaldo diario de archivos",
-      "Revisión de seguridad mensual",
-    ],
-  },
-  {
-    name: "Negocio",
-    uf: 8.5,
-    description: "El más elegido por pymes de 15 a 35 personas en Santiago.",
-    highlighted: true,
-    features: [
-      "Hasta 35 equipos cubiertos",
-      "Respuesta garantizada en menos de 2 horas",
-      "Revisamos tus sistemas las 24 horas",
-      "Un encargado fijo asignado a tu empresa",
-      "Administramos tus licencias y renovaciones",
-    ],
-  },
-  {
-    name: "Integral",
-    uf: 14.5,
-    description:
-      "Para empresas que quieren TI, web y automatización en un solo lugar.",
-    features: [
-      "Equipos ilimitados",
-      "Todo lo del plan Negocio",
-      "Mantención de tu sitio o tienda web",
-      "Una automatización de proceso incluida al año",
-      "Reunión mensual de revisión con tu encargado",
-    ],
-  },
-];
-
 export function Pricing() {
+  const [equipos, setEquipos] = useState(EQUIPOS_DEFAULT);
+
   return (
     <section id="planes" aria-labelledby="planes-titulo" className="py-24 lg:py-32">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
-        <div className="mb-16 lg:mb-20">
+        <div className="mb-14 lg:mb-16">
           <p className="mb-4 text-[13px] font-medium uppercase tracking-[0.18em] text-accent">
             Planes
           </p>
@@ -64,97 +32,148 @@ export function Pricing() {
             id="planes-titulo"
             className="max-w-xl font-display text-4xl leading-[0.95] sm:text-5xl"
           >
-            Un precio fijo, mes a mes.
+            Pagas por los computadores que cuidamos.
           </h2>
           <p className="mt-6 max-w-xl text-muted-foreground">
-            Cobramos en UF para no tener que subirte el precio cada año. Lo que
-            ves es lo que pagas: acá abajo te decimos exactamente qué se
-            factura aparte.
+            Un cargo fijo al mes más un valor por cada equipo. Mueve la barra
+            hasta el tamaño de tu empresa y verás el precio exacto: sin tramos
+            donde terminas pagando por equipos que no tienes.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-px bg-border lg:grid-cols-3">
-          {PLANS.map((plan) => (
-            <article
-              key={plan.name}
-              className={cn(
-                "flex flex-col p-8 lg:p-10",
-                plan.highlighted
-                  ? "bg-graphite text-bone"
-                  : "bg-background text-foreground"
-              )}
+        {/* Control de tamaño: el precio de las tres tarjetas se recalcula
+            en vivo, así el gerente no tiene que adivinar en qué tramo cae. */}
+        <div className="mb-12 border border-border p-6 sm:p-8">
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <Label htmlFor="equipos-slider" className="text-foreground">
+                ¿Cuántos computadores tiene tu empresa?
+              </Label>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Cuenta notebooks, computadores de escritorio y servidores.
+              </p>
+            </div>
+            <output
+              htmlFor="equipos-slider"
+              className="font-display text-5xl tabular-nums"
+              aria-live="polite"
             >
-              {plan.highlighted && (
-                <p className="mb-6 w-fit border border-accent-tint px-3 py-1 text-[12px] font-medium uppercase tracking-wide text-accent-tint">
-                  Más elegido
-                </p>
-              )}
+              {equipos}
+              {equipos === EQUIPOS_MAX && "+"}
+            </output>
+          </div>
 
-              <h3 className="font-display text-2xl">{plan.name}</h3>
-              <p
+          <Slider
+            id="equipos-slider"
+            className="mt-8"
+            min={EQUIPOS_MIN}
+            max={EQUIPOS_MAX}
+            step={1}
+            value={[equipos]}
+            onValueChange={([v]) => setEquipos(v)}
+            aria-label="Cantidad de computadores"
+            aria-valuetext={`${equipos} computadores`}
+          />
+          <div className="mt-3 flex justify-between text-xs text-muted-foreground">
+            <span>{EQUIPOS_MIN}</span>
+            <span>{EQUIPOS_MAX} o más</span>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 gap-px bg-border lg:grid-cols-3">
+          {PLANS.map((plan) => {
+            const precioUF = planPriceUF(plan, equipos);
+            return (
+              <article
+                key={plan.id}
                 className={cn(
-                  "mt-3 text-sm",
-                  plan.highlighted ? "text-bone/60" : "text-muted-foreground"
+                  "flex flex-col p-8 lg:p-10",
+                  plan.highlighted
+                    ? "bg-graphite text-bone"
+                    : "bg-background text-foreground"
                 )}
               >
-                {plan.description}
-              </p>
+                {plan.highlighted && (
+                  <p className="mb-6 w-fit border border-accent-tint px-3 py-1 text-[12px] font-medium uppercase tracking-wide text-accent-tint">
+                    Más elegido
+                  </p>
+                )}
 
-              <p className="mt-8">
-                <span className="font-display text-5xl">
-                  {formatUF(plan.uf)} UF
-                </span>
-                <span
+                <h3 className="font-display text-2xl">{plan.name}</h3>
+                <p
                   className={cn(
-                    "ml-2 text-sm",
+                    "mt-3 text-sm",
                     plan.highlighted ? "text-bone/60" : "text-muted-foreground"
                   )}
                 >
-                  /mes + IVA
-                </span>
-              </p>
-              <p
-                className={cn(
-                  "mt-2 text-sm",
-                  plan.highlighted ? "text-bone/60" : "text-muted-foreground"
-                )}
-              >
-                Hoy son unos ${ufToCLP(plan.uf)} al mes
-              </p>
+                  {plan.description}
+                </p>
 
-              <ul className="mt-8 flex flex-1 flex-col gap-3">
-                {plan.features.map((feature) => (
-                  <li key={feature} className="flex gap-3 text-sm leading-relaxed">
-                    <CheckIcon
-                      className={cn(
-                        "mt-0.5 size-4 shrink-0",
-                        plan.highlighted ? "text-accent-tint" : "text-accent"
-                      )}
-                      aria-hidden="true"
-                    />
-                    <span className={plan.highlighted ? "text-bone/80" : undefined}>
-                      {feature}
-                    </span>
-                  </li>
-                ))}
-              </ul>
+                <p className="mt-8">
+                  <span className="font-display text-5xl tabular-nums">
+                    {formatUF(precioUF)} UF
+                  </span>
+                  <span
+                    className={cn(
+                      "ml-2 text-sm",
+                      plan.highlighted ? "text-bone/60" : "text-muted-foreground"
+                    )}
+                  >
+                    /mes + IVA
+                  </span>
+                </p>
+                <p
+                  className={cn(
+                    "mt-2 text-sm tabular-nums",
+                    plan.highlighted ? "text-bone/60" : "text-muted-foreground"
+                  )}
+                >
+                  Hoy son unos ${ufToCLP(precioUF)} al mes por {equipos} equipos
+                </p>
+                <p
+                  className={cn(
+                    "mt-1 text-xs",
+                    plan.highlighted ? "text-bone/50" : "text-muted-foreground"
+                  )}
+                >
+                  {formatUF(plan.base)} UF fijas + {formatUF(plan.perEquipo)} UF
+                  por equipo
+                </p>
 
-              <Button
-                asChild
-                className="mt-10 w-full"
-                variant={plan.highlighted ? "default-dark" : "default"}
-              >
-                <a href="#contacto">
-                  Agendar diagnóstico
-                  <span className="sr-only"> — plan {plan.name}</span>
-                </a>
-              </Button>
-            </article>
-          ))}
+                <ul className="mt-8 flex flex-1 flex-col gap-3">
+                  {plan.features.map((feature) => (
+                    <li key={feature} className="flex gap-3 text-sm leading-relaxed">
+                      <CheckIcon
+                        className={cn(
+                          "mt-0.5 size-4 shrink-0",
+                          plan.highlighted ? "text-accent-tint" : "text-accent"
+                        )}
+                        aria-hidden="true"
+                      />
+                      <span className={plan.highlighted ? "text-bone/80" : undefined}>
+                        {feature}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+
+                <Button
+                  asChild
+                  className="mt-10 w-full"
+                  variant={plan.highlighted ? "default-dark" : "default"}
+                >
+                  <a href="#contacto">
+                    Agendar diagnóstico
+                    <span className="sr-only"> — plan {plan.name}</span>
+                  </a>
+                </Button>
+              </article>
+            );
+          })}
         </div>
 
-        {/* Las licencias son la sorpresa clásica en la primera factura.
-            Van explicadas acá, no en la letra chica de un contrato. */}
+        {/* Las licencias y los proyectos son las dos sorpresas clásicas en la
+            primera factura. Van explicadas acá, no en la letra chica. */}
         <div className="mt-12 grid grid-cols-1 gap-8 border-t border-border pt-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] lg:gap-16">
           <div>
             <h3 className="font-display text-2xl">
@@ -172,28 +191,33 @@ export function Pricing() {
                 al precio que nos cuestan a nosotros
               </strong>
               , sin recargo. Te llegan en la misma factura, en una línea
-              separada, para que veas exactamente cuánto es cada cosa.
+              separada, para que veas exactamente cuánto es cada cosa. Suelen
+              salir entre $8.000 y $14.000 por persona al mes.
             </p>
             <p className="leading-relaxed">
-              Para que te hagas una idea: una licencia de Microsoft 365 y
-              antivirus por persona suele salir entre $8.000 y $14.000 al mes.
-              En el diagnóstico te entregamos el número exacto de tu caso, antes
-              de que decidas.
+              <strong className="font-medium text-foreground">
+                Los proyectos se cotizan por separado.
+              </strong>{" "}
+              Hacer tu página web, montar una tienda online o automatizar un
+              proceso son trabajos con principio y fin: se cotizan una vez, con
+              precio cerrado. No los metemos dentro de la mensualidad porque
+              eso te obligaría a firmar un contrato largo, y no trabajamos así.
             </p>
             <p className="leading-relaxed">
-              Quedan{" "}
+              Todo queda{" "}
               <strong className="font-medium text-foreground">
                 a nombre de tu empresa
               </strong>
-              , no del nuestro. Si algún día te vas, las licencias se van
-              contigo. Sin contrato anual forzoso.
+              , no del nuestro. Si algún día te vas, se va contigo. Sin contrato
+              anual forzoso.
             </p>
           </div>
         </div>
 
         <p className="mt-10 text-xs text-muted-foreground">
           Valores en UF, sin IVA. El equivalente en pesos es referencial, con la
-          UF del {UF_DATE}.
+          UF del {UF_DATE}. Bajo {EQUIPOS_MIN} equipos conviene más el soporte
+          por hora: te lo decimos en el diagnóstico.
         </p>
       </div>
     </section>

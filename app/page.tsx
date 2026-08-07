@@ -1,7 +1,7 @@
 import { Header } from "@/components/header";
 import { FaqSchema, PricingSchema } from "@/components/structured-data";
 import { FAQS } from "@/components/faq";
-import { PLANS } from "@/components/pricing";
+import { PLANS } from "@/lib/pricing";
 import { Hero } from "@/components/hero";
 import { Problem } from "@/components/problem";
 import { Services } from "@/components/services";
