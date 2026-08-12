@@ -2,7 +2,7 @@
 export const SITE = {
   whatsappNumber: "56987654321",
   whatsappDisplay: "+56 9 8765 4321",
-  email: "contacto@techflowsoluciones.cl",
+  email: "contacto@techflowsoluciones.com",
 } as const;
 
 /**

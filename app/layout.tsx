@@ -36,6 +36,10 @@ export const metadata: Metadata = {
   creator: SITE_NAME,
   publisher: SITE_NAME,
   alternates: { canonical: "/" },
+  // Verificación de Google Search Console. Se hereda del sitio anterior en
+  // este mismo dominio: sin esto, al cambiar el proyecto que sirve
+  // techflowsoluciones.com se pierde la propiedad ya verificada.
+  verification: { google: "P-cFh3lF_IIJb930pCtKiUPJImNnHZIURX_tgQ-sk1g" },
   category: "Tecnología",
   keywords: [
     "soporte informático empresas Santiago",
