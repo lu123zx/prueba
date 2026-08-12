@@ -5,8 +5,12 @@
  * publiquen canonicals apuntando a producción. En local cae al dominio real,
  * que es lo que se usa al generar el sitemap y las URLs absolutas de Open Graph.
  */
+/** Dominio de producción. Única fuente de verdad: canonical, Open Graph,
+ *  sitemap y JSON-LD se construyen a partir de acá. */
+export const PRODUCTION_URL = "https://techflowsoluciones.com";
+
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://techflowsoluciones.cl"
+  process.env.NEXT_PUBLIC_SITE_URL ?? PRODUCTION_URL
 ).replace(/\/$/, "");
 
 export const SITE_NAME = "TechFlow Soluciones";
