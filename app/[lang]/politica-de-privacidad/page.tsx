@@ -3,13 +3,27 @@ import Link from "next/link";
 import { ArrowLeftIcon } from "lucide-react";
 
 import { LEGAL, SITE } from "@/lib/site";
+import { routePath } from "@/lib/i18n";
+
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return [{ lang: "es" }];
+}
 
 export const metadata: Metadata = {
   // Sin la marca: la plantilla del layout ya la agrega.
   title: "Política de privacidad",
   description:
     "Qué datos recopila TechFlow Soluciones cuando nos contactas, para qué los usamos y cómo pedir que los eliminemos.",
-  alternates: { canonical: "/politica-de-privacidad" },
+  alternates: {
+    canonical: routePath("es", "privacy"),
+    languages: {
+      "es-CL": routePath("es", "privacy"),
+      en: routePath("en", "privacy"),
+      "x-default": routePath("es", "privacy"),
+    },
+  },
 };
 
 export default function PoliticaDePrivacidad() {

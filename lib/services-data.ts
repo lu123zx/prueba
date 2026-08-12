@@ -5,9 +5,27 @@
  * y por "desarrollo de páginas web para pymes" al mismo tiempo: son búsquedas
  * distintas y Google necesita una URL distinta para cada una. Cada servicio
  * vive en /servicios/<slug> y esta es su fuente de contenido.
+ *
+ * Cada servicio existe en los dos idiomas y con slug propio en cada uno
+ * (/servicios/soporte-informatico y /en/services/managed-it-support). El
+ * campo `id` es el que los une: es lo que permite emitir el hreflang que le
+ * dice a Google que las dos URLs son la misma página en distinto idioma.
+ * El slug se traduce porque una URL en el idioma del contenido posiciona
+ * mejor; el id nunca se toca, porque cambiarlo rompe ese vínculo.
  */
 
+import type { Locale } from "@/lib/i18n/config";
+
+/** Identificador estable, común a todos los idiomas. No se traduce. */
+export type ServiceId =
+  | "it-support"
+  | "web-development"
+  | "automation"
+  | "networks-security";
+
 export type Service = {
+  id: ServiceId;
+  /** Trozo final de la URL, propio de cada idioma. */
   slug: string;
   /** Nombre corto, para tarjetas y navegación. */
   name: string;
@@ -26,8 +44,9 @@ export type Service = {
   faqs: { question: string; answer: string }[];
 };
 
-export const SERVICES: Service[] = [
+const SERVICES_ES: Service[] = [
   {
+    id: "it-support",
     slug: "soporte-informatico",
     name: "Soporte informático gestionado",
     metaTitle: "Soporte informático para empresas en Santiago | Desde 4,25 UF",
@@ -78,6 +97,7 @@ export const SERVICES: Service[] = [
     ],
   },
   {
+    id: "web-development",
     slug: "desarrollo-web",
     name: "Desarrollo web y e-commerce",
     metaTitle: "Páginas web y tiendas online para pymes | Santiago",
@@ -128,6 +148,7 @@ export const SERVICES: Service[] = [
     ],
   },
   {
+    id: "automation",
     slug: "automatizacion-de-procesos",
     name: "Automatización de procesos",
     metaTitle: "Automatización de procesos para pymes | Santiago",
@@ -169,6 +190,7 @@ export const SERVICES: Service[] = [
     ],
   },
   {
+    id: "networks-security",
     slug: "redes-y-ciberseguridad",
     name: "Redes y ciberseguridad",
     metaTitle: "Redes y ciberseguridad para pymes | Santiago",
@@ -216,6 +238,220 @@ export const SERVICES: Service[] = [
   },
 ];
 
-export function getService(slug: string) {
-  return SERVICES.find((s) => s.slug === slug);
+const SERVICES_EN: Service[] = [
+  {
+    id: "it-support",
+    slug: "managed-it-support",
+    name: "Managed IT support",
+    metaTitle: "Managed IT support for small businesses | Santiago, Chile",
+    metaDescription:
+      "Remote IT support for small and mid-sized companies in Santiago, Chile. Under 2 business hours to respond, proactive monitoring, and no annual lock-in.",
+    h1: "IT support for companies with nobody in IT",
+    intro:
+      "Managed IT support means an outside team takes responsibility for all the computers, servers and systems in your company for a fixed monthly price. We connect remotely, fix what breaks and keep watch so things don't fall over, without you hiring anyone in-house.",
+    bullets: [
+      "We connect to the machine and fix it, with no waiting for a technician",
+      "We watch your machines and servers and catch failures before you do",
+      "Automatic daily backups of your files, with nobody having to remember",
+    ],
+    sections: [
+      {
+        heading: "What the support covers",
+        body: "We look after your staff when something breaks: the computer that won't start, the email that isn't arriving, the printer that stopped responding, the billing system that went down. We connect to the machine over the internet, with the person's permission, and solve it there and then. We also keep Windows, antivirus and backups current, which is what stops the problem happening in the first place.",
+      },
+      {
+        heading: "How fast we respond",
+        body: "Under 2 hours during business hours. On the Negocio and Integral plans, monitoring watches your systems overnight and at weekends too, and alerts as soon as it detects a failure; weekend emergencies are handled on the Integral plan, coordinated over WhatsApp. Every company has a fixed point of contact, so you're not explaining your problem to someone new each time you write.",
+      },
+      {
+        heading: "What size of company it suits",
+        body: "The service is sized for companies with 10 to 60 machines in Santiago. Below that, an hourly plan almost always works out better; above it, it's worth weighing an in-house lead plus our backup. In the free assessment we tell you which of the three cases is yours, even if the answer is that you don't need us yet.",
+      },
+      {
+        heading: "What it costs",
+        body: "There's a fixed monthly fee plus a rate for each computer we look after, so you pay for what you actually have rather than for a bracket. A company with 10 machines starts at 6 UF a month on the Esencial plan and 8.5 UF on Negocio; one with 20, at 9.5 and 13 UF. UF is the Chilean inflation-indexed unit, which is how we avoid raising your price every year. Licences (Microsoft 365, antivirus, cloud backup) are separate, at cost, and stay in your company's name.",
+      },
+    ],
+    faqs: [
+      {
+        question: "How much does IT support cost for a small business in Santiago?",
+        answer:
+          "You pay a fixed monthly fee plus a rate per computer. For a company with 10 machines that's 6 UF a month on the Esencial plan and 8.5 UF on Negocio; for one with 20 machines, 9.5 and 13 UF. UF is the Chilean inflation-indexed unit. The service is documented with an electronic fee receipt, which is exempt from Chilean VAT. It doesn't include third-party licences, which are billed separately at cost and stay in your company's name.",
+      },
+      {
+        question: "Do I need someone in IT as well as the support service?",
+        answer:
+          "No. The service is designed precisely for companies with nobody in IT: we make the technical decisions and explain them to you in plain language, without jargon.",
+      },
+      {
+        question: "Is remote IT support as good as on-site support?",
+        answer:
+          "For most problems it's better, because we solve things in minutes instead of waiting for a scheduled visit. We connect to the machine over the internet and work on it with your permission. When the problem is physical, like swapping a machine or running cable, we coordinate a technician and supervise the work.",
+      },
+    ],
+  },
+  {
+    id: "web-development",
+    slug: "web-development",
+    name: "Web development and e-commerce",
+    metaTitle: "Websites and online stores for small businesses | Santiago, Chile",
+    metaDescription:
+      "We design and build websites and online stores for small businesses in Chile, with local payment gateways. The domain and all accounts stay in your company's name.",
+    h1: "Websites and online stores that stay in your name",
+    intro:
+      "We design and build your company's website or online store, with a Chilean payment gateway and a simple admin panel so you can change prices, products or copy yourself. The domain, the hosting and every account are registered in your company's name, not ours.",
+    bullets: [
+      "A site or store in your name, with no generic templates",
+      "Payment gateway built in: Webpay, Mercado Pago or both",
+      "A simple panel so you can add products, prices or news yourself",
+    ],
+    sections: [
+      {
+        heading: "What we build",
+        body: "Company sites for businesses that need to be found and taken seriously, and online stores for those selling direct. All built around your business: no templates where your company looks like a hundred others. The site is fast on a phone, which is where most of your customers will look at it.",
+      },
+      {
+        heading: "Payments and receipts",
+        body: "We integrate Transbank's Webpay Plus, Mercado Pago or both, depending on which works out better on fees. If you need sales to issue an electronic receipt automatically, we connect the store to your billing system so nothing is keyed in twice.",
+      },
+      {
+        heading: "How long it takes and what it costs",
+        body: "A company site takes 3 to 5 weeks; an online store, 6 to 10, depending on how many products need loading. Development is quoted per project, at a fixed price agreed before we start: we don't fold it into the monthly fee, because that would force you into a long contract. Ongoing maintenance is monthly and is included in the Integral plan.",
+      },
+      {
+        heading: "What happens after launch",
+        body: "We hand over every account and a plain-language guide so you can add products or publish news without depending on anyone. If you'd rather we maintained it, maintenance sits inside the Integral plan. If you ever move to another provider, it all goes with you as-is, at no exit cost.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Does the website stay in my company's name?",
+        answer:
+          "Yes. The domain, the hosting, the licences and every account are registered in your company's name from day one. If you ever decide to change provider, you take everything at no cost.",
+      },
+      {
+        question: "Can I update the site myself without knowing how to code?",
+        answer:
+          "Yes. We leave a simple panel for changing copy, prices, products and photos, and we teach you to use it in one session. You don't need to know anything technical.",
+      },
+      {
+        question: "How long does it take to build a website for a small business?",
+        answer:
+          "A company site takes 3 to 5 weeks from the point we sign off the design. An online store takes 6 to 10 weeks, depending on how many products need loading.",
+      },
+    ],
+  },
+  {
+    id: "automation",
+    slug: "process-automation",
+    name: "Process automation",
+    metaTitle: "Process automation for small businesses | Santiago, Chile",
+    metaDescription:
+      "We automate quotes, receipts, reports and hand-offs between systems for small businesses in Chile. Fewer spreadsheets, less double entry, fewer errors.",
+    h1: "Process automation: let the computer do the repetitive part",
+    intro:
+      "Automating a process means getting the system to do a task somebody does by hand every day — copying data from one spreadsheet to another, building the same quote, sending Monday's report. In a small business that usually gives back somewhere between 10 and 30 hours of work a month.",
+    bullets: [
+      "Quotes, receipts and reports that generate themselves, without spreadsheets",
+      "Your sales system talking to your accounting, with no double entry",
+      "Automatic alerts by WhatsApp or email when something needs your sign-off",
+    ],
+    sections: [
+      {
+        heading: "What can be automated in a small business",
+        body: "The things we're asked to automate most: quotes that today get built by copying a template, moving sales into the accounting system, the reports someone prepares by hand every Monday, telling the customer their order is ready, and the stock control living in a spreadsheet only one person understands.",
+      },
+      {
+        heading: "How we do it",
+        body: "First we look at how you work today, without changing anything. Then we connect the systems you already have — your billing tool, your spreadsheet, your store, your email — so they pass information between them. There's almost never a need to buy a new system: the saving comes from the ones you already use no longer being islands.",
+      },
+      {
+        heading: "How we tell whether it was worth it",
+        body: "Before we start we count how many hours a month the process takes today. The following month we count again. If it hasn't gone down, we don't charge the difference: we'd rather do that than sell you an automation that demos well and nobody uses.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Do I have to replace the systems I already use?",
+        answer:
+          "Almost never. The normal path is to connect the ones you already have so they pass information between them. We only propose replacing a system when the one you have genuinely can't cope, and we explain why.",
+      },
+      {
+        question: "How much time does an automation save?",
+        answer:
+          "It depends on the process, which is why we don't open with a promise. Before starting we measure how many hours a month the manual work takes today, and the following month we measure again. If it hasn't gone down, we discuss it with the number in front of us rather than an impression.",
+      },
+    ],
+  },
+  {
+    id: "networks-security",
+    slug: "networks-and-cybersecurity",
+    name: "Networks and cybersecurity",
+    metaTitle: "Networks and cybersecurity for small businesses | Santiago, Chile",
+    metaDescription:
+      "We configure and protect your company's network, wifi and backups. Defence against viruses, ransomware and data theft, with regular review.",
+    h1: "Networks and cybersecurity, so what happened to them doesn't happen to you",
+    intro:
+      "We take responsibility for your company's network working and your data being protected: stable wifi, access separated per person, backups that can genuinely be restored, and defences against viruses and ransomware. All configured and reviewed remotely.",
+    bullets: [
+      "We configure and secure your network and wifi remotely",
+      "Servers and cloud backup, with access only for the people who should have it",
+      "When hands-on work is needed, we coordinate the technician and supervise",
+    ],
+    sections: [
+      {
+        heading: "The real risk for a small business",
+        body: "Small companies assume they're not a target because they're small, and that's exactly why they are: ransomware attacks are automated and look for whoever left the door open, not for the biggest. The typical damage isn't the ransom, it's being unable to invoice for days because nobody had a backup that worked.",
+      },
+      {
+        heading: "What we review",
+        body: "Who has access to what and with which password; whether the backup can actually be restored — by testing it, not by reading a green tick; whether the guest wifi is separated from the company's; whether there are machines running unpatched Windows; and whether someone who no longer works with you still has access to email.",
+      },
+      {
+        heading: "Networks and wifi",
+        body: "We configure routers, firewalls and wifi access points remotely, and separate the network by area so a visitor can't see the accounting files. When there's physical work, like running new cable or installing hardware, we coordinate the technician and check the job is done properly.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Does a small company really need cybersecurity?",
+        answer:
+          "Yes, and more than a large one, because the attacks are automated and look for whoever left the door open rather than for the biggest target. The usual damage isn't paying a ransom, it's being unable to invoice for days.",
+      },
+      {
+        question: "How do I know my backups actually work?",
+        answer:
+          "By testing them. In the review we restore a test backup to confirm it can be recovered. Plenty of companies find out on the day it matters that the backup had been failing silently for months.",
+      },
+      {
+        question: "Can you configure the network if you work remotely?",
+        answer:
+          "Yes. Routers, firewalls and wifi hardware are managed over the internet, so configuration, changes and monitoring are all done remotely. Only physical work needs someone on site, and there we coordinate and supervise the technician.",
+      },
+    ],
+  },
+];
+
+const BY_LOCALE: Record<Locale, Service[]> = {
+  es: SERVICES_ES,
+  en: SERVICES_EN,
+};
+
+/** Servicios de un idioma, en orden de presentación. */
+export function getServices(locale: Locale): Service[] {
+  return BY_LOCALE[locale] ?? SERVICES_ES;
+}
+
+/** Busca por el slug de ese idioma. Devuelve undefined si no existe. */
+export function getService(locale: Locale, slug: string) {
+  return getServices(locale).find((s) => s.slug === slug);
+}
+
+/**
+ * Busca por id, que es el mismo en todos los idiomas. Es lo que permite,
+ * estando en /servicios/soporte-informatico, saber que la versión en inglés
+ * es /en/services/managed-it-support y emitir el hreflang correcto.
+ */
+export function getServiceById(locale: Locale, id: ServiceId) {
+  return getServices(locale).find((s) => s.id === id);
 }

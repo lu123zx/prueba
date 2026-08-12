@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { WhatsAppIcon } from "@/components/icons/whatsapp";
-import { WHATSAPP_URL } from "@/lib/site";
+import { whatsappUrl } from "@/lib/site";
+import type { Dictionary } from "@/lib/i18n";
 
-export function FinalCta() {
+export function FinalCta({ dict }: { dict: Dictionary }) {
   return (
     <section
       aria-labelledby="cta-final-titulo"
@@ -13,20 +14,21 @@ export function FinalCta() {
           id="cta-final-titulo"
           className="mx-auto max-w-3xl font-display text-4xl leading-[0.95] sm:text-5xl lg:text-6xl"
         >
-          Hablemos antes de que se caiga algo.
+          {dict.finalCta.title}
         </h2>
-        <p className="mx-auto mt-6 max-w-md text-bone/60">
-          Agenda un diagnóstico gratuito de 30 minutos por videollamada. Sin
-          compromiso y sin letra chica.
-        </p>
+        <p className="mx-auto mt-6 max-w-md text-bone/60">{dict.finalCta.lead}</p>
         <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
           <Button asChild variant="default-dark" size="lg">
-            <a href="#contacto">Agendar diagnóstico</a>
+            <a href="#contacto">{dict.finalCta.primary}</a>
           </Button>
           <Button asChild variant="outline-dark" size="lg">
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+            <a
+              href={whatsappUrl(dict.whatsapp.prefilled)}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <WhatsAppIcon className="size-5" />
-              Escríbenos por WhatsApp
+              {dict.finalCta.whatsapp}
             </a>
           </Button>
         </div>

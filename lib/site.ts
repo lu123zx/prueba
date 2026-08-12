@@ -25,12 +25,23 @@ export const LEGAL = {
   fullName: "[COMPLETAR: nombre y apellidos]",
   /** RUT de la persona natural, no de una sociedad. */
   rut: "[COMPLETAR: RUT persona natural]",
-  /** Régimen tributario, para que el cliente sepa qué documento va a recibir. */
-  taxNote:
-    "Servicios prestados por persona natural. Se emite boleta de honorarios electrónica, exenta de IVA.",
+  /**
+   * Régimen tributario, para que el cliente sepa qué documento va a recibir.
+   * Va por idioma porque "boleta de honorarios" no tiene equivalente fuera de
+   * Chile: al lector en inglés hay que explicarle qué es, no traducirle el
+   * nombre.
+   */
+  taxNote: {
+    es: "Servicios prestados por persona natural. Se emite boleta de honorarios electrónica, exenta de IVA.",
+    en: "Services provided by a sole trader. Documented with a Chilean electronic fee receipt (boleta de honorarios), which is exempt from VAT.",
+  },
 } as const;
 
-/** Mensaje precargado: el cliente no parte de una conversación en blanco. */
-export const WHATSAPP_URL = `https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent(
-  "Hola, quiero agendar el diagnóstico gratuito para mi empresa."
-)}`;
+/**
+ * Mensaje precargado: el cliente no parte de una conversación en blanco.
+ * El texto va en el idioma en que está leyendo, para que quien escribe no
+ * tenga que borrar una frase en un idioma que no habla.
+ */
+export function whatsappUrl(prefilled: string) {
+  return `https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent(prefilled)}`;
+}

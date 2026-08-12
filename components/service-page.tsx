@@ -1,6 +1,4 @@
-import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import { ArrowLeftIcon, ArrowRightIcon, CheckIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -17,73 +15,51 @@ import {
   FaqSchema,
   ServiceSchema,
 } from "@/components/structured-data";
-import { SERVICES, getService } from "@/lib/services-data";
+import { getServices, type Service } from "@/lib/services-data";
 import { COMUNAS } from "@/lib/seo";
+import { getDictionary, localePath, routePath, type Locale } from "@/lib/i18n";
 
-export function generateStaticParams() {
-  return SERVICES.map((service) => ({ slug: service.slug }));
-}
-
-export async function generateMetadata({
-  params,
+/**
+ * Cuerpo de una página de servicio, compartido por los dos idiomas.
+ *
+ * Cada idioma tiene su propia ruta (/servicios/... y /en/services/...) para
+ * que la URL esté en el idioma del contenido, pero el marcado es este y solo
+ * este: si el diseño cambia, cambia en ambos a la vez.
+ */
+export function ServicePage({
+  service,
+  locale,
 }: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
-  const { slug } = await params;
-  const service = getService(slug);
-  if (!service) return {};
-
-  const path = `/servicios/${service.slug}`;
-
-  return {
-    // absolute: este título ya incluye la marca donde corresponde y no debe
-    // heredar la plantilla "%s | TechFlow Soluciones".
-    title: { absolute: service.metaTitle },
-    description: service.metaDescription,
-    alternates: { canonical: path },
-    openGraph: {
-      type: "article",
-      locale: "es_CL",
-      url: path,
-      title: service.metaTitle,
-      description: service.metaDescription,
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: service.metaTitle,
-      description: service.metaDescription,
-    },
-  };
-}
-
-export default async function ServicioPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
+  service: Service;
+  locale: Locale;
 }) {
-  const { slug } = await params;
-  const service = getService(slug);
-  if (!service) notFound();
+  const dict = getDictionary(locale);
+  const otros = getServices(locale).filter((s) => s.id !== service.id);
+  const home = localePath(locale, "/");
+  const path = routePath(locale, "services", service.slug);
 
-  const otros = SERVICES.filter((s) => s.slug !== service.slug);
+  const comunas = [...COMUNAS];
+  const where = dict.servicePage.whereBody
+    .replace("{list}", comunas.slice(0, -1).join(", "))
+    .replace("{last}", comunas.at(-1) ?? "");
 
   return (
     <>
-      <Header />
+      <Header dict={dict} locale={locale} />
 
       <main>
         <article>
           <header className="pt-40 pb-16 lg:pt-48 lg:pb-20">
             <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
-              <nav aria-label="Ruta de navegación" className="mb-10">
+              <nav aria-label={dict.servicePage.breadcrumbLabel} className="mb-10">
                 <ol className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
                   <li>
                     <Link
-                      href="/"
+                      href={home}
                       className="inline-flex items-center gap-2 transition-colors duration-200 hover:text-accent"
                     >
                       <ArrowLeftIcon className="size-4" aria-hidden="true" />
-                      Inicio
+                      {dict.servicePage.breadcrumbHome}
                     </Link>
                   </li>
                   <li aria-hidden="true">/</li>
@@ -109,10 +85,14 @@ export default async function ServicioPage({
 
               <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                 <Button asChild size="lg">
-                  <Link href="/#contacto">Agendar diagnóstico gratuito</Link>
+                  <Link href={`${home === "/" ? "" : home}/#contacto`}>
+                    {dict.servicePage.ctaPrimary}
+                  </Link>
                 </Button>
                 <Button asChild variant="outline" size="lg">
-                  <Link href="/#planes">Ver planes y precios</Link>
+                  <Link href={`${home === "/" ? "" : home}/#planes`}>
+                    {dict.servicePage.ctaSecondary}
+                  </Link>
                 </Button>
               </div>
             </div>
@@ -137,7 +117,7 @@ export default async function ServicioPage({
           <div className="py-20 lg:py-28">
             <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-12 px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.7fr)] lg:gap-20 lg:px-12">
               <p className="text-[13px] font-medium uppercase tracking-[0.18em] text-accent">
-                En detalle
+                {dict.servicePage.detailLabel}
               </p>
               <div className="flex flex-col gap-12">
                 {service.sections.map((section) => (
@@ -153,13 +133,10 @@ export default async function ServicioPage({
 
                 <section>
                   <h2 className="font-display text-2xl sm:text-3xl">
-                    Dónde atendemos
+                    {dict.servicePage.whereTitle}
                   </h2>
                   <p className="mt-4 max-w-2xl leading-relaxed text-muted-foreground">
-                    Trabajamos de forma remota con pymes de toda la Región
-                    Metropolitana, entre ellas {COMUNAS.slice(0, -1).join(", ")} y{" "}
-                    {COMUNAS.at(-1)}. Como no dependemos de trasladarnos, la
-                    comuna en la que estés no cambia el tiempo de respuesta.
+                    {where}
                   </p>
                 </section>
               </div>
@@ -175,7 +152,7 @@ export default async function ServicioPage({
                 id="faq-servicio"
                 className="max-w-xs font-display text-3xl leading-[0.95] sm:text-4xl"
               >
-                Preguntas sobre este servicio
+                {dict.servicePage.faqTitle}
               </h2>
               <Accordion
                 type="single"
@@ -204,13 +181,13 @@ export default async function ServicioPage({
               id="otros-servicios"
               className="mb-12 font-display text-3xl sm:text-4xl"
             >
-              Otros servicios
+              {dict.servicePage.otherServices}
             </h2>
             <ul className="grid grid-cols-1 border-l border-t border-border sm:grid-cols-3">
               {otros.map((otro) => (
-                <li key={otro.slug} className="border-b border-r border-border">
+                <li key={otro.id} className="border-b border-r border-border">
                   <Link
-                    href={`/servicios/${otro.slug}`}
+                    href={routePath(locale, "services", otro.slug)}
                     className="group flex h-full flex-col justify-between gap-8 p-8 transition-colors duration-200 hover:bg-graphite hover:text-bone"
                   >
                     <span className="font-display text-xl">{otro.name}</span>
@@ -226,18 +203,19 @@ export default async function ServicioPage({
         </section>
       </main>
 
-      <Footer />
+      <Footer dict={dict} locale={locale} />
 
       <ServiceSchema
         name={service.name}
         description={service.intro}
-        slug={service.slug}
+        path={path}
+        locale={locale}
       />
-      <FaqSchema faqs={service.faqs} />
+      <FaqSchema faqs={service.faqs} locale={locale} />
       <BreadcrumbSchema
         items={[
-          { name: "Inicio", path: "/" },
-          { name: service.name, path: `/servicios/${service.slug}` },
+          { name: dict.servicePage.breadcrumbHome, path: home },
+          { name: service.name, path },
         ]}
       />
     </>

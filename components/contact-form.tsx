@@ -7,7 +7,12 @@ import { toast } from "sonner";
 import { CircleAlertIcon, CircleCheckIcon, LoaderCircleIcon } from "lucide-react";
 
 import { submitContact } from "@/app/actions/contact";
-import { contactSchema, EQUIPOS_OPTIONS, type ContactValues } from "@/lib/contact-schema";
+import {
+  createContactSchema,
+  equiposOptions,
+  type ContactValues,
+} from "@/lib/contact-schema";
+import type { Dictionary, Locale } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -36,12 +41,22 @@ const EMPTY: ContactValues = {
   mensaje: "",
 };
 
-export function ContactForm() {
+export function ContactForm({
+  dict,
+  locale,
+}: {
+  dict: Dictionary;
+  locale: Locale;
+}) {
   const [sent, setSent] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
 
+  // El esquema se arma por idioma para que los mensajes de error salgan en
+  // el idioma que el visitante está leyendo.
+  const options = equiposOptions(locale);
+
   const form = useForm<ContactValues>({
-    resolver: zodResolver(contactSchema),
+    resolver: zodResolver(createContactSchema(locale)),
     defaultValues: EMPTY,
     mode: "onBlur",
   });
@@ -61,7 +76,7 @@ export function ContactForm() {
 
     setSent(true);
     form.reset(EMPTY);
-    toast.success("Recibimos tu solicitud.");
+    toast.success(dict.form.successTitle);
   }
 
   if (sent) {
@@ -71,13 +86,10 @@ export function ContactForm() {
         className="flex flex-col items-start gap-4 border border-accent bg-accent/5 p-10"
       >
         <CircleCheckIcon className="size-8 text-accent" aria-hidden="true" />
-        <h3 className="font-display text-2xl">Recibimos tu solicitud.</h3>
-        <p className="text-muted-foreground">
-          Te escribimos dentro de 1 día hábil para coordinar el diagnóstico
-          gratuito.
-        </p>
+        <h3 className="font-display text-2xl">{dict.form.successTitle}</h3>
+        <p className="text-muted-foreground">{dict.form.successBody}</p>
         <Button variant="outline" onClick={() => setSent(false)}>
-          Enviar otra solicitud
+          {dict.form.successAgain}
         </Button>
       </div>
     );
@@ -96,7 +108,7 @@ export function ContactForm() {
             name="nombre"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Nombre</FormLabel>
+                <FormLabel>{dict.form.name}</FormLabel>
                 <FormControl>
                   <Input autoComplete="name" {...field} />
                 </FormControl>
@@ -110,7 +122,7 @@ export function ContactForm() {
             name="empresa"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Empresa</FormLabel>
+                <FormLabel>{dict.form.company}</FormLabel>
                 <FormControl>
                   <Input autoComplete="organization" {...field} />
                 </FormControl>
@@ -124,15 +136,15 @@ export function ContactForm() {
             name="equipos"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Cantidad de equipos</FormLabel>
+                <FormLabel>{dict.form.units}</FormLabel>
                 <Select onValueChange={field.onChange} value={field.value}>
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder="Elige un rango" />
+                      <SelectValue placeholder={dict.form.unitsPlaceholder} />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {EQUIPOS_OPTIONS.map((option) => (
+                    {options.map((option) => (
                       <SelectItem key={option.value} value={option.value}>
                         {option.label}
                       </SelectItem>
@@ -149,12 +161,12 @@ export function ContactForm() {
             name="telefono"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Teléfono</FormLabel>
+                <FormLabel>{dict.form.phone}</FormLabel>
                 <FormControl>
                   <Input
                     type="tel"
                     autoComplete="tel"
-                    placeholder="+56 9 1234 5678"
+                    placeholder={dict.form.phonePlaceholder}
                     {...field}
                   />
                 </FormControl>
@@ -168,12 +180,12 @@ export function ContactForm() {
             name="correo"
             render={({ field }) => (
               <FormItem className="sm:col-span-2">
-                <FormLabel>Correo</FormLabel>
+                <FormLabel>{dict.form.email}</FormLabel>
                 <FormControl>
                   <Input
                     type="email"
                     autoComplete="email"
-                    placeholder="nombre@empresa.cl"
+                    placeholder={dict.form.emailPlaceholder}
                     {...field}
                   />
                 </FormControl>
@@ -187,10 +199,10 @@ export function ContactForm() {
             name="mensaje"
             render={({ field }) => (
               <FormItem className="sm:col-span-2">
-                <FormLabel>Mensaje</FormLabel>
+                <FormLabel>{dict.form.message}</FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder="Cuéntanos qué se te está cayendo o qué necesitas resolver."
+                    placeholder={dict.form.messagePlaceholder}
                     {...field}
                   />
                 </FormControl>
@@ -219,10 +231,10 @@ export function ContactForm() {
           {isSubmitting ? (
             <>
               <LoaderCircleIcon className="animate-spin" aria-hidden="true" />
-              Enviando…
+              {dict.form.submitting}
             </>
           ) : (
-            "Agendar diagnóstico gratuito"
+            dict.form.submit
           )}
         </Button>
       </form>

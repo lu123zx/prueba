@@ -3,12 +3,26 @@ import Link from "next/link";
 import { ArrowLeftIcon } from "lucide-react";
 
 import { LEGAL, SITE } from "@/lib/site";
+import { routePath } from "@/lib/i18n";
+
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return [{ lang: "es" }];
+}
 
 export const metadata: Metadata = {
   title: "Términos de servicio",
   description:
     "Condiciones de contratación de TechFlow Soluciones: planes mensuales en UF, sin contrato anual forzoso y con las licencias a nombre de tu empresa.",
-  alternates: { canonical: "/terminos-de-servicio" },
+  alternates: {
+    canonical: routePath("es", "terms"),
+    languages: {
+      "es-CL": routePath("es", "terms"),
+      en: routePath("en", "terms"),
+      "x-default": routePath("es", "terms"),
+    },
+  },
 };
 
 export default function TerminosDeServicio() {

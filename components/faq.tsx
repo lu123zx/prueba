@@ -4,61 +4,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import type { Dictionary } from "@/lib/i18n";
 
-export const FAQS = [
-  {
-    question: "¿Se hacen cargo de todo o solo de la página?",
-    answer:
-      "De lo que necesites. El plan mensual cubre el soporte informático, las redes y la seguridad de tu empresa. Hacer tu página web o automatizar un proceso son proyectos con principio y fin: se cotizan aparte, una sola vez y con precio cerrado.",
-  },
-  {
-    question: "¿Quedo amarrado a ustedes?",
-    answer:
-      "No. Los dominios, licencias, correos y accesos quedan siempre a nombre de tu empresa, no de TechFlow. Si algún día decides trabajar con otro proveedor, te entregamos todo ordenado y documentado, sin costo.",
-  },
-  {
-    question: "¿Las licencias están incluidas en el precio del plan?",
-    answer:
-      "No, y lo decimos antes de firmar. El plan cubre nuestro trabajo. Las licencias (Microsoft 365, antivirus, respaldo en la nube) se cobran aparte, al mismo precio que nos cuestan a nosotros, sin recargo. Suelen salir entre $8.000 y $14.000 por persona al mes, y en el diagnóstico te damos el número exacto de tu caso.",
-  },
-  {
-    question: "¿Qué pasa si se cae algo un domingo?",
-    answer:
-      "Los planes Negocio e Integral incluyen monitoreo automático que vigila tus sistemas también fuera de horario y avisa apenas algo falla. En el plan Integral atendemos emergencias el fin de semana, coordinadas por WhatsApp. En los otros planes el aviso queda registrado y se atiende a primera hora del día hábil siguiente: preferimos decírtelo así y cumplirlo, en vez de prometer una guardia de 24 horas que no tendrías cómo exigirnos.",
-  },
-  {
-    question: "Si trabajan a distancia, ¿cómo arreglan un computador?",
-    answer:
-      "Nos conectamos a tu equipo por internet y trabajamos en él como si estuviéramos sentados al lado, con tu permiso y solo cuando tú lo autorizas. Así resolvemos en minutos lo que antes esperaba días a que llegara alguien. Si hay algo físico que hacer, como cambiar un equipo o instalar cableado, coordinamos a un técnico y supervisamos el trabajo.",
-  },
-  {
-    question: "No tenemos a nadie de informática, ¿igual podemos contratarlos?",
-    answer:
-      "Sí. El servicio está pensado justamente para empresas que no tienen un área de informática propia: te explicamos todo en simple y tomamos las decisiones técnicas por ti.",
-  },
-  {
-    question: "¿Por qué cobran en UF y no en pesos?",
-    answer:
-      "Para no tener que subirte el precio todos los años. La UF se reajusta sola con la inflación, así el valor real de lo que pagas se mantiene parejo y tú no recibes una carta de aumento cada enero. En cada plan te mostramos cuánto es hoy en pesos.",
-  },
-  {
-    question: "¿Por qué cobran por computador y no un precio plano?",
-    answer:
-      "Porque cuidar 30 computadores cuesta el doble que cuidar 15, y un precio plano por tramos termina cobrándole lo mismo a los dos. Con el precio por equipo pagas por lo que de verdad tienes: si el mes que viene contratas a dos personas más, suben dos equipos y nada más. Y si alguien se va, baja.",
-  },
-  {
-    question: "¿Me dan factura?",
-    answer:
-      "No: el servicio lo presta una persona natural y se documenta con boleta de honorarios electrónica, que está exenta de IVA. Para tu empresa el gasto es igual de deducible, y como no hay IVA tampoco hay crédito fiscal que recuperar. Lo que sí debes hacer, si tributas en primera categoría, es practicar la retención de segunda categoría al pagar la boleta. Te lo dejamos indicado en cada documento para que no tengas que calcularlo.",
-  },
-  {
-    question: "¿Cómo empezamos a trabajar juntos?",
-    answer:
-      "Agendamos un diagnóstico gratuito de 30 minutos por videollamada. En una semana tienes una propuesta clara, con precio fijo mensual y sin compromiso de firmar nada.",
-  },
-];
-
-export function Faq() {
+export function Faq({ dict }: { dict: Dictionary }) {
   return (
     <section
       id="preguntas-frecuentes"
@@ -69,18 +17,18 @@ export function Faq() {
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] lg:gap-16">
           <div>
             <p className="mb-4 text-[13px] font-medium uppercase tracking-[0.18em] text-accent">
-              Preguntas frecuentes
+              {dict.faq.eyebrow}
             </p>
             <h2
               id="faq-titulo"
               className="max-w-xs font-display text-4xl leading-[0.95] sm:text-5xl"
             >
-              Las dudas que sí nos hacen.
+              {dict.faq.title}
             </h2>
           </div>
 
           <Accordion type="single" collapsible className="w-full border-t border-border">
-            {FAQS.map((faq, index) => (
+            {dict.faq.items.map((faq, index) => (
               <AccordionItem key={faq.question} value={`item-${index}`}>
                 <AccordionTrigger>{faq.question}</AccordionTrigger>
                 <AccordionContent>{faq.answer}</AccordionContent>
