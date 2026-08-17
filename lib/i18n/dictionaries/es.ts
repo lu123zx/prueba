@@ -277,7 +277,7 @@ export const es = {
     terms: "Términos de servicio",
     rights: "Todos los derechos reservados.",
     /** {trade}, {full} y {rut} se reemplazan con los datos de lib/site.ts. */
-    legalLine: "{trade} es el nombre comercial de {full}, RUT {rut}.",
+    legalInfo: "Identificación del prestador y régimen tributario",
   },
 
   servicePage: {

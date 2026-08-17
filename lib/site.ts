@@ -52,6 +52,31 @@ export const LEGAL = {
 } as const;
 
 /**
+ * Aviso en el build si la identidad sigue sin completar.
+ *
+ * Desde que la identificación salió del footer, vive únicamente en los
+ * Términos de servicio y en la Política de privacidad. Si esos campos
+ * quedan con el texto de relleno, el sitio se publica sin que el cliente
+ * pueda saber a quién le está contratando ni quién responde por sus datos
+ * personales: eso es exactamente lo que no se quiere.
+ *
+ * Es un aviso, no un error, para no bloquear un despliegue sin avisar. Si
+ * se prefiere que directamente no compile, cambiar el console.warn por un
+ * throw.
+ */
+export const LEGAL_IDENTITY_PENDING =
+  LEGAL.fullName.includes("[COMPLETAR") || LEGAL.rut.includes("[COMPLETAR");
+
+if (LEGAL_IDENTITY_PENDING && process.env.NODE_ENV === "production") {
+  console.warn(
+    "\n⚠️  IDENTIDAD LEGAL SIN COMPLETAR en lib/site.ts.\n" +
+      "   Los Términos de servicio y la Política de privacidad se van a\n" +
+      "   publicar con [COMPLETAR: ...] en lugar del nombre y el RUT.\n" +
+      "   Completa LEGAL.fullName y LEGAL.rut antes de publicar.\n"
+  );
+}
+
+/**
  * Mensaje precargado: el cliente no parte de una conversación en blanco.
  * El texto va en el idioma en que está leyendo, para que quien escribe no
  * tenga que borrar una frase en un idioma que no habla.
