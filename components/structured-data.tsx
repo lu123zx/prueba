@@ -1,4 +1,4 @@
-import { SITE } from "@/lib/site";
+import { SITE, WHATSAPP_ENABLED } from "@/lib/site";
 import { absoluteUrl, COMUNAS, SITE_NAME, SITE_URL } from "@/lib/seo";
 import { planPriceUF, type Plan, type PlanId } from "@/lib/pricing";
 import { getServices } from "@/lib/services-data";
@@ -85,7 +85,10 @@ export function OrganizationSchema({ locale }: { locale: Locale }) {
         name: SITE_NAME,
         url: SITE_URL,
         email: SITE.email,
-        telephone: `+${SITE.whatsappNumber}`,
+        // El teléfono se declara solo si es real. Un número de relleno en
+        // datos estructurados es peor que no tener el campo: Google lo
+        // publica tal cual en el panel de conocimiento.
+        ...(WHATSAPP_ENABLED ? { telephone: `+${SITE.whatsappNumber}` } : {}),
         description: text.description,
         slogan: text.slogan,
         priceRange: "$$",

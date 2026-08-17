@@ -1,6 +1,6 @@
 import { ContactForm } from "@/components/contact-form";
 import { WhatsAppIcon } from "@/components/icons/whatsapp";
-import { SITE, whatsappUrl } from "@/lib/site";
+import { SITE, WHATSAPP_ENABLED, whatsappUrl } from "@/lib/site";
 import type { Dictionary, Locale } from "@/lib/i18n";
 
 export function Contact({
@@ -28,14 +28,21 @@ export function Contact({
             {dict.contact.title}
           </h2>
           <p className="mt-6 max-w-sm text-muted-foreground">{dict.contact.lead}</p>
+          {/* Sin WhatsApp, el correo es el único canal directo: se muestra
+              en su lugar para no dejar la columna sin punto de contacto. */}
           <a
-            href={whatsappUrl(dict.whatsapp.prefilled)}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={
+              WHATSAPP_ENABLED
+                ? whatsappUrl(dict.whatsapp.prefilled)
+                : `mailto:${SITE.email}`
+            }
+            {...(WHATSAPP_ENABLED
+              ? { target: "_blank", rel: "noopener noreferrer" }
+              : {})}
             className="mt-6 inline-flex items-center gap-2 border-b border-accent pb-1 text-accent transition-colors duration-200 hover:border-foreground hover:text-foreground"
           >
-            <WhatsAppIcon className="size-4" />
-            {SITE.whatsappDisplay}
+            {WHATSAPP_ENABLED && <WhatsAppIcon className="size-4" />}
+            {WHATSAPP_ENABLED ? SITE.whatsappDisplay : SITE.email}
           </a>
         </div>
 

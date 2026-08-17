@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { WhatsAppIcon } from "@/components/icons/whatsapp";
-import { whatsappUrl } from "@/lib/site";
+import { WHATSAPP_ENABLED, whatsappUrl } from "@/lib/site";
 import type { Dictionary } from "@/lib/i18n";
 
 export function FinalCta({ dict }: { dict: Dictionary }) {
@@ -21,16 +21,18 @@ export function FinalCta({ dict }: { dict: Dictionary }) {
           <Button asChild variant="default-dark" size="lg">
             <a href="#contacto">{dict.finalCta.primary}</a>
           </Button>
-          <Button asChild variant="outline-dark" size="lg">
-            <a
-              href={whatsappUrl(dict.whatsapp.prefilled)}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <WhatsAppIcon className="size-5" />
-              {dict.finalCta.whatsapp}
-            </a>
-          </Button>
+          {WHATSAPP_ENABLED && (
+            <Button asChild variant="outline-dark" size="lg">
+              <a
+                href={whatsappUrl(dict.whatsapp.prefilled)}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <WhatsAppIcon className="size-5" />
+                {dict.finalCta.whatsapp}
+              </a>
+            </Button>
+          )}
         </div>
       </div>
     </section>

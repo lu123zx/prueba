@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { LEGAL, SITE, whatsappUrl } from "@/lib/site";
+import { LEGAL, SITE, WHATSAPP_ENABLED, whatsappUrl } from "@/lib/site";
 import { getServices } from "@/lib/services-data";
 import { routePath, type Dictionary, type Locale } from "@/lib/i18n";
 
@@ -19,9 +19,13 @@ export function Footer({
   ];
 
   return (
-    // pb generoso: deja libre la franja que ocupa el botón flotante de
-    // WhatsApp, para que nunca tape la línea de copyright.
-    <footer className="bg-graphite pt-16 pb-28 text-bone">
+    // El pb extra solo hace falta cuando está el botón flotante de WhatsApp:
+    // es la franja que ocupa, para que no tape la línea de copyright.
+    <footer
+      className={`bg-graphite pt-16 text-bone ${
+        WHATSAPP_ENABLED ? "pb-28" : "pb-16"
+      }`}
+    >
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
         <div className="grid grid-cols-1 gap-12 border-b border-bone/10 pb-12 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1.2fr)_minmax(0,1fr)_minmax(0,1fr)]">
           <div>
@@ -64,16 +68,18 @@ export function Footer({
                   {SITE.email}
                 </a>
               </li>
-              <li>
-                <a
-                  href={whatsappUrl(dict.whatsapp.prefilled)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-bone/70 transition-colors duration-200 hover:text-accent-tint"
-                >
-                  {SITE.whatsappDisplay} (WhatsApp)
-                </a>
-              </li>
+              {WHATSAPP_ENABLED && (
+                <li>
+                  <a
+                    href={whatsappUrl(dict.whatsapp.prefilled)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-bone/70 transition-colors duration-200 hover:text-accent-tint"
+                  >
+                    {SITE.whatsappDisplay} (WhatsApp)
+                  </a>
+                </li>
+              )}
             </ul>
           </div>
 

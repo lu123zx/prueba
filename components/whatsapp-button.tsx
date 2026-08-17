@@ -1,5 +1,5 @@
 import { WhatsAppIcon } from "@/components/icons/whatsapp";
-import { whatsappUrl } from "@/lib/site";
+import { WHATSAPP_ENABLED, whatsappUrl } from "@/lib/site";
 import type { Dictionary } from "@/lib/i18n";
 
 /**
@@ -7,6 +7,8 @@ import type { Dictionary } from "@/lib/i18n";
  * de forma remota, WhatsApp es la puerta de entrada principal.
  */
 export function WhatsAppButton({ dict }: { dict: Dictionary }) {
+  if (!WHATSAPP_ENABLED) return null;
+
   return (
     <a
       href={whatsappUrl(dict.whatsapp.prefilled)}

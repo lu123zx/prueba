@@ -1,3 +1,17 @@
+/**
+ * WhatsApp apagado temporalmente.
+ *
+ * El número que hay más abajo es de relleno: 56987654321 / +56 9 8765 4321.
+ * Mientras no haya uno real, publicarlo manda al visitante a una
+ * conversación con un desconocido y, en el JSON-LD, le declara a Google un
+ * teléfono falso, que es peor que no declarar ninguno.
+ *
+ * Para volver a encenderlo: reemplazar el número por el real y poner esto
+ * en true. No hay nada más que tocar; los componentes ya consultan la
+ * bandera.
+ */
+export const WHATSAPP_ENABLED = false;
+
 /** Datos de contacto en un solo lugar: el número no se repite por el código. */
 export const SITE = {
   whatsappNumber: "56987654321",
