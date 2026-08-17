@@ -285,7 +285,7 @@ export const en: Dictionary = {
     privacy: "Privacy policy",
     terms: "Terms of service",
     rights: "All rights reserved.",
-    legalLine: "{trade} is the trading name of {full}, Chilean tax ID {rut}.",
+    legalInfo: "Provider identification and tax status",
   },
 
   servicePage: {

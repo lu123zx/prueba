@@ -106,17 +106,29 @@ export function Footer({
           <p>
             © {new Date().getFullYear()} {LEGAL.tradeName}. {dict.footer.rights}
           </p>
-          {/* Identificación del prestador: es una persona natural, no una
-              sociedad. Publicar una razón social que no existe sería una
-              afirmación falsa frente al cliente. El régimen tributario se
-              explica en el idioma del visitante, porque "boleta de
-              honorarios" no significa nada fuera de Chile. */}
+          {/*
+            La identificación del prestador (nombre civil y RUT) ya NO va en
+            el footer, pero sigue publicada en los Términos de servicio y en
+            la Política de privacidad, ambos enlazados arriba.
+
+            Por qué importa que siga en alguna parte: ninguna ley chilena
+            obliga a poner el RUT en el pie de página, pero sí hay que poder
+            identificar a quién contrata el cliente y quién responde por sus
+            datos personales. Dejarla solo en las páginas legales cumple eso
+            y mantiene el pie limpio.
+
+            Lo que NO se puede hacer es quitarla de todas partes, ni sugerir
+            que "TechFlow Soluciones" es una sociedad: es el nombre de
+            fantasía de una persona natural, y afirmar lo contrario sería una
+            afirmación falsa frente al cliente.
+          */}
           <p>
-            {dict.footer.legalLine
-              .replace("{trade}", LEGAL.tradeName)
-              .replace("{full}", LEGAL.fullName)
-              .replace("{rut}", LEGAL.rut)}{" "}
-            {LEGAL.taxNote[locale]}
+            <Link
+              href={routePath(locale, "terms")}
+              className="underline underline-offset-4 transition-colors duration-200 hover:text-accent-tint"
+            >
+              {dict.footer.legalInfo}
+            </Link>
           </p>
         </div>
       </div>

@@ -168,9 +168,8 @@ export default function PrivacyPolicy() {
             Who is responsible
           </h2>
           <p className="leading-relaxed">
-            The data controller is {LEGAL.fullName}, Chilean tax ID{" "}
-            {LEGAL.rut}, who provides services under the trading name{" "}
-            {LEGAL.tradeName}. You can contact us about any personal data
+            The data controller is {LEGAL.fullName}, who provides services under
+            the trading name {LEGAL.tradeName}. You can contact us about any personal data
             matter at{" "}
             <a
               href={`mailto:${SITE.email}`}
