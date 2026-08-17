@@ -1,25 +1,6 @@
-const STEPS = [
-  {
-    number: "01",
-    title: "Diagnóstico gratuito",
-    description:
-      "Revisamos tus sistemas en una videollamada de 30 minutos. Te decimos qué está fallando y qué riesgos corres, sin compromiso.",
-  },
-  {
-    number: "02",
-    title: "Plan a medida",
-    description:
-      "Te armamos una propuesta con precio fijo mensual, hecha para tu empresa y no para una plantilla. Solo pagas por lo que vas a usar.",
-  },
-  {
-    number: "03",
-    title: "Soporte continuo",
-    description:
-      "Nos conectamos a tus equipos y resolvemos a distancia. Un equipo fijo conoce tu empresa, así no le explicas tu problema a alguien nuevo cada vez.",
-  },
-];
+import type { Dictionary } from "@/lib/i18n";
 
-export function HowWeWork() {
+export function HowWeWork({ dict }: { dict: Dictionary }) {
   return (
     <section
       id="como-trabajamos"
@@ -28,17 +9,17 @@ export function HowWeWork() {
     >
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
         <p className="mb-4 text-[13px] font-medium uppercase tracking-[0.18em] text-accent-tint">
-          Cómo trabajamos
+          {dict.howWeWork.eyebrow}
         </p>
         <h2
           id="como-trabajamos-titulo"
           className="max-w-xl font-display text-4xl leading-[0.95] sm:text-5xl"
         >
-          Tres pasos, sin sorpresas en el camino.
+          {dict.howWeWork.title}
         </h2>
 
         <ol className="mt-16 grid grid-cols-1 gap-12 border-t border-bone/10 pt-12 sm:grid-cols-3 sm:gap-8 lg:mt-20 lg:pt-16">
-          {STEPS.map((step) => (
+          {dict.howWeWork.steps.map((step) => (
             <li key={step.number}>
               <span
                 aria-hidden="true"

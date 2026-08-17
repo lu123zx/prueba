@@ -1,3 +1,17 @@
+/**
+ * WhatsApp apagado temporalmente.
+ *
+ * El número que hay más abajo es de relleno: 56987654321 / +56 9 8765 4321.
+ * Mientras no haya uno real, publicarlo manda al visitante a una
+ * conversación con un desconocido y, en el JSON-LD, le declara a Google un
+ * teléfono falso, que es peor que no declarar ninguno.
+ *
+ * Para volver a encenderlo: reemplazar el número por el real y poner esto
+ * en true. No hay nada más que tocar; los componentes ya consultan la
+ * bandera.
+ */
+export const WHATSAPP_ENABLED = false;
+
 /** Datos de contacto en un solo lugar: el número no se repite por el código. */
 export const SITE = {
   whatsappNumber: "56987654321",
@@ -25,12 +39,23 @@ export const LEGAL = {
   fullName: "[COMPLETAR: nombre y apellidos]",
   /** RUT de la persona natural, no de una sociedad. */
   rut: "[COMPLETAR: RUT persona natural]",
-  /** Régimen tributario, para que el cliente sepa qué documento va a recibir. */
-  taxNote:
-    "Servicios prestados por persona natural. Se emite boleta de honorarios electrónica, exenta de IVA.",
+  /**
+   * Régimen tributario, para que el cliente sepa qué documento va a recibir.
+   * Va por idioma porque "boleta de honorarios" no tiene equivalente fuera de
+   * Chile: al lector en inglés hay que explicarle qué es, no traducirle el
+   * nombre.
+   */
+  taxNote: {
+    es: "Servicios prestados por persona natural. Se emite boleta de honorarios electrónica, exenta de IVA.",
+    en: "Services provided by a sole trader. Documented with a Chilean electronic fee receipt (boleta de honorarios), which is exempt from VAT.",
+  },
 } as const;
 
-/** Mensaje precargado: el cliente no parte de una conversación en blanco. */
-export const WHATSAPP_URL = `https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent(
-  "Hola, quiero agendar el diagnóstico gratuito para mi empresa."
-)}`;
+/**
+ * Mensaje precargado: el cliente no parte de una conversación en blanco.
+ * El texto va en el idioma en que está leyendo, para que quien escribe no
+ * tenga que borrar una frase en un idioma que no habla.
+ */
+export function whatsappUrl(prefilled: string) {
+  return `https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent(prefilled)}`;
+}

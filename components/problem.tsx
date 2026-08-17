@@ -1,10 +1,6 @@
-const PAINS = [
-  "Se me cayó el sistema el viernes a las seis y el proveedor contestó el lunes.",
-  "Nadie sabe qué contraseña tiene qué, ni dónde quedaron guardadas las licencias.",
-  "Pago mantención todos los meses y el que llama al técnico sigo siendo yo.",
-];
+import type { Dictionary } from "@/lib/i18n";
 
-export function Problem() {
+export function Problem({ dict }: { dict: Dictionary }) {
   return (
     <section
       id="problema"
@@ -16,11 +12,11 @@ export function Problem() {
           id="problema-titulo"
           className="mb-16 text-[13px] font-medium uppercase tracking-[0.18em] text-accent-tint lg:mb-20"
         >
-          El problema
+          {dict.problem.title}
         </h2>
 
         <ul className="flex flex-col divide-y divide-bone/10 border-t border-bone/10">
-          {PAINS.map((pain) => (
+          {dict.problem.pains.map((pain) => (
             <li key={pain} className="py-10 lg:py-14">
               <blockquote className="max-w-4xl font-display text-3xl leading-[1.15] text-bone/90 sm:text-4xl lg:text-5xl">
                 &ldquo;{pain}&rdquo;

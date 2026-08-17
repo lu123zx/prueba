@@ -1,5 +1,7 @@
 import { CheckIcon } from "lucide-react";
 
+import type { Dictionary } from "@/lib/i18n";
+
 type Testimonial = {
   quote: string;
   name: string;
@@ -17,26 +19,14 @@ type Testimonial = {
  *
  * Mientras no haya ninguno, la sección muestra los compromisos del servicio,
  * que son afirmaciones propias y verificables, no opiniones de terceros.
+ *
+ * Si algún día se llena, los testimonios van en el idioma en que los dijo el
+ * cliente: traducir una cita textual y seguir presentándola entre comillas
+ * es ponerle en la boca palabras que no dijo.
  */
 const TESTIMONIALS: Testimonial[] = [];
 
-/** Compromisos: se pueden sostener desde el primer día de operación. */
-const COMPROMISOS = [
-  {
-    title: "Los accesos son tuyos",
-    body: "Dominios, licencias y cuentas quedan a nombre de tu empresa desde el primer día. Si te vas, te llevas todo, documentado y sin costo de salida.",
-  },
-  {
-    title: "Sin permanencia mínima",
-    body: "El servicio es mes a mes. Terminas avisando con 30 días y no hay multa por salirte antes de ningún plazo.",
-  },
-  {
-    title: "El precio está publicado",
-    body: "Lo que ves en el simulador es lo que se cobra. Las licencias las contratas tú directamente y los proyectos se cotizan aparte, con precio cerrado.",
-  },
-];
-
-export function Testimonials() {
+export function Testimonials({ dict }: { dict: Dictionary }) {
   if (TESTIMONIALS.length > 0) {
     return (
       <section
@@ -48,7 +38,7 @@ export function Testimonials() {
             id="testimonios-titulo"
             className="mb-16 text-[13px] font-medium uppercase tracking-[0.18em] text-accent lg:mb-20"
           >
-            Clientes
+            {dict.commitments.clientsTitle}
           </h2>
 
           <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-12">
@@ -86,17 +76,17 @@ export function Testimonials() {
     >
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
         <p className="mb-4 text-[13px] font-medium uppercase tracking-[0.18em] text-accent">
-          Nuestro compromiso
+          {dict.commitments.eyebrow}
         </p>
         <h2
           id="compromisos-titulo"
           className="max-w-xl font-display text-4xl leading-[0.95] sm:text-5xl"
         >
-          Tres cosas que quedan por escrito.
+          {dict.commitments.title}
         </h2>
 
         <ul className="mt-16 grid grid-cols-1 gap-12 border-t border-border pt-12 sm:grid-cols-3 sm:gap-8">
-          {COMPROMISOS.map((c) => (
+          {dict.commitments.items.map((c) => (
             <li key={c.title}>
               <CheckIcon className="size-6 text-accent" aria-hidden="true" />
               <h3 className="mt-6 text-xl font-medium">{c.title}</h3>

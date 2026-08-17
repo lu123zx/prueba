@@ -2,33 +2,43 @@
 
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { MenuIcon, XIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { equivalentPath } from "@/lib/i18n/paths";
+import { localePath, type Dictionary, type Locale } from "@/lib/i18n";
 
-/** Las secciones viven en la home; acá solo se guarda el ancla. */
-const NAV_SECTIONS = [
-  { anchor: "#servicios", label: "Servicios" },
-  { anchor: "#como-trabajamos", label: "Cómo trabajamos" },
-  { anchor: "#planes", label: "Planes" },
-  { anchor: "#preguntas-frecuentes", label: "Preguntas frecuentes" },
-];
-
-export function Header() {
+export function Header({
+  dict,
+  locale,
+}: {
+  dict: Dictionary;
+  locale: Locale;
+}) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  // Fuera de la home esas secciones no existen: un "#planes" pelado no
-  // llevaría a ninguna parte, así que se antepone la ruta raíz.
-  const isHome = pathname === "/";
-  const to = (anchor: string) => (isHome ? anchor : `/${anchor}`);
+  const home = localePath(locale, "/");
 
-  const NAV_LINKS = NAV_SECTIONS.map((s) => ({
-    href: to(s.anchor),
-    label: s.label,
-  }));
+  // Fuera de la home esas secciones no existen: un "#planes" pelado no
+  // llevaría a ninguna parte, así que se antepone la home del idioma.
+  const isHome = pathname === home;
+  const to = (anchor: string) => (isHome ? anchor : `${home === "/" ? "" : home}/${anchor}`);
+
+  const navLinks = [
+    { anchor: "#servicios", label: dict.nav.services },
+    { anchor: "#como-trabajamos", label: dict.nav.howWeWork },
+    { anchor: "#planes", label: dict.nav.plans },
+    { anchor: "#preguntas-frecuentes", label: dict.nav.faq },
+  ].map((s) => ({ href: to(s.anchor), label: s.label }));
+
+  // La misma página en el otro idioma. Si no existe equivalente se cae a la
+  // home de ese idioma, que siempre existe: mejor eso que un enlace muerto.
+  const other: Locale = locale === "es" ? "en" : "es";
+  const switchHref = equivalentPath(pathname, other) ?? localePath(other, "/");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -52,10 +62,10 @@ export function Header() {
         </a>
 
         <nav
-          aria-label="Navegación principal"
+          aria-label={dict.nav.mainNav}
           className="hidden items-center gap-10 lg:flex"
         >
-          {NAV_LINKS.map((link) => (
+          {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
@@ -66,15 +76,27 @@ export function Header() {
           ))}
         </nav>
 
-        <Button asChild size="sm" className="hidden lg:inline-flex">
-          <a href={to("#contacto")}>Agendar diagnóstico</a>
-        </Button>
+        <div className="hidden items-center gap-6 lg:flex">
+          {/* hrefLang le dice al navegador y al rastreador en qué idioma está
+              lo que hay al otro lado, sin depender del texto del enlace. */}
+          <Link
+            href={switchHref}
+            hrefLang={other}
+            aria-label={dict.nav.languageLabel}
+            className="text-[15px] text-muted-foreground transition-colors duration-200 hover:text-foreground"
+          >
+            {dict.nav.switchTo}
+          </Link>
+          <Button asChild size="sm">
+            <a href={to("#contacto")}>{dict.nav.cta}</a>
+          </Button>
+        </div>
 
         <Button
           variant="ghost"
           size="icon"
           className="lg:hidden"
-          aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
+          aria-label={menuOpen ? dict.nav.closeMenu : dict.nav.openMenu}
           aria-expanded={menuOpen}
           aria-controls="menu-movil"
           onClick={() => setMenuOpen((v) => !v)}
@@ -90,11 +112,11 @@ export function Header() {
       {menuOpen && (
         <nav
           id="menu-movil"
-          aria-label="Navegación móvil"
+          aria-label={dict.nav.mobileNav}
           className="border-t border-border bg-background px-6 pb-8 pt-4 lg:hidden"
         >
           <ul className="flex flex-col">
-            {NAV_LINKS.map((link) => (
+            {navLinks.map((link) => (
               <li key={link.href}>
                 <a
                   href={link.href}
@@ -105,10 +127,20 @@ export function Header() {
                 </a>
               </li>
             ))}
+            <li>
+              <Link
+                href={switchHref}
+                hrefLang={other}
+                onClick={() => setMenuOpen(false)}
+                className="block py-3 text-lg text-muted-foreground transition-colors duration-200 hover:text-foreground"
+              >
+                {dict.nav.switchTo}
+              </Link>
+            </li>
           </ul>
           <Button asChild className="mt-4 w-full">
             <a href={to("#contacto")} onClick={() => setMenuOpen(false)}>
-              Agendar diagnóstico
+              {dict.nav.cta}
             </a>
           </Button>
         </nav>

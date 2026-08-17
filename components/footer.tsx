@@ -1,18 +1,31 @@
 import Link from "next/link";
 
-import { LEGAL, SITE, WHATSAPP_URL } from "@/lib/site";
-import { SERVICES } from "@/lib/services-data";
+import { LEGAL, SITE, WHATSAPP_ENABLED, whatsappUrl } from "@/lib/site";
+import { getServices } from "@/lib/services-data";
+import { routePath, type Dictionary, type Locale } from "@/lib/i18n";
 
-const LEGAL_LINKS = [
-  { href: "/politica-de-privacidad", label: "Política de privacidad" },
-  { href: "/terminos-de-servicio", label: "Términos de servicio" },
-];
+export function Footer({
+  dict,
+  locale,
+}: {
+  dict: Dictionary;
+  locale: Locale;
+}) {
+  const services = getServices(locale);
 
-export function Footer() {
+  const legalLinks = [
+    { href: routePath(locale, "privacy"), label: dict.footer.privacy },
+    { href: routePath(locale, "terms"), label: dict.footer.terms },
+  ];
+
   return (
-    // pb generoso: deja libre la franja que ocupa el botón flotante de
-    // WhatsApp, para que nunca tape la línea de copyright.
-    <footer className="bg-graphite pt-16 pb-28 text-bone">
+    // El pb extra solo hace falta cuando está el botón flotante de WhatsApp:
+    // es la franja que ocupa, para que no tape la línea de copyright.
+    <footer
+      className={`bg-graphite pt-16 text-bone ${
+        WHATSAPP_ENABLED ? "pb-28" : "pb-16"
+      }`}
+    >
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
         <div className="grid grid-cols-1 gap-12 border-b border-bone/10 pb-12 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1.2fr)_minmax(0,1fr)_minmax(0,1fr)]">
           <div>
@@ -20,20 +33,19 @@ export function Footer() {
               TechFlow<span className="text-accent-tint">.</span>
             </p>
             <p className="mt-4 max-w-[28ch] text-sm text-bone/60">
-              Soporte informático remoto, desarrollo web y automatización para
-              pymes de Santiago.
+              {dict.footer.tagline}
             </p>
           </div>
 
           <div>
             <h2 className="text-[13px] font-medium uppercase tracking-wide text-bone/60">
-              Servicios
+              {dict.footer.services}
             </h2>
             <ul className="mt-4 flex flex-col gap-2 text-sm">
-              {SERVICES.map((service) => (
-                <li key={service.slug}>
+              {services.map((service) => (
+                <li key={service.id}>
                   <Link
-                    href={`/servicios/${service.slug}`}
+                    href={routePath(locale, "services", service.slug)}
                     className="text-bone/70 transition-colors duration-200 hover:text-accent-tint"
                   >
                     {service.name}
@@ -45,7 +57,7 @@ export function Footer() {
 
           <div>
             <h2 className="text-[13px] font-medium uppercase tracking-wide text-bone/60">
-              Contacto
+              {dict.footer.contact}
             </h2>
             <ul className="mt-4 flex flex-col gap-2 text-sm">
               <li>
@@ -56,32 +68,34 @@ export function Footer() {
                   {SITE.email}
                 </a>
               </li>
-              <li>
-                <a
-                  href={WHATSAPP_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-bone/70 transition-colors duration-200 hover:text-accent-tint"
-                >
-                  {SITE.whatsappDisplay} (WhatsApp)
-                </a>
-              </li>
+              {WHATSAPP_ENABLED && (
+                <li>
+                  <a
+                    href={whatsappUrl(dict.whatsapp.prefilled)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-bone/70 transition-colors duration-200 hover:text-accent-tint"
+                  >
+                    {SITE.whatsappDisplay} (WhatsApp)
+                  </a>
+                </li>
+              )}
             </ul>
           </div>
 
           <div>
             <h2 className="text-[13px] font-medium uppercase tracking-wide text-bone/60">
-              Legal
+              {dict.footer.legal}
             </h2>
             <ul className="mt-4 flex flex-col gap-2 text-sm">
-              {LEGAL_LINKS.map((link) => (
+              {legalLinks.map((link) => (
                 <li key={link.href}>
-                  <a
+                  <Link
                     href={link.href}
                     className="text-bone/70 transition-colors duration-200 hover:text-accent-tint"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -90,15 +104,19 @@ export function Footer() {
 
         <div className="flex flex-col gap-2 pt-8 text-xs text-bone/60">
           <p>
-            © {new Date().getFullYear()} {LEGAL.tradeName}. Todos los derechos
-            reservados.
+            © {new Date().getFullYear()} {LEGAL.tradeName}. {dict.footer.rights}
           </p>
           {/* Identificación del prestador: es una persona natural, no una
               sociedad. Publicar una razón social que no existe sería una
-              afirmación falsa frente al cliente. */}
+              afirmación falsa frente al cliente. El régimen tributario se
+              explica en el idioma del visitante, porque "boleta de
+              honorarios" no significa nada fuera de Chile. */}
           <p>
-            {LEGAL.tradeName} es el nombre comercial de {LEGAL.fullName}, RUT{" "}
-            {LEGAL.rut}. {LEGAL.taxNote}
+            {dict.footer.legalLine
+              .replace("{trade}", LEGAL.tradeName)
+              .replace("{full}", LEGAL.fullName)
+              .replace("{rut}", LEGAL.rut)}{" "}
+            {LEGAL.taxNote[locale]}
           </p>
         </div>
       </div>
