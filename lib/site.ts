@@ -30,14 +30,23 @@ export const SITE = {
  * "TechFlow Soluciones" se usa como nombre de fantasía, lo que sí puede hacer
  * una persona natural, siempre que la identidad real esté disponible.
  *
- * PENDIENTE: reemplazar nombre y RUT por los reales antes de publicar.
+ * PENDIENTE: reemplazar el nombre por el real antes de publicar. El RUT no
+ * se publica en el sitio (ver la nota del campo).
  */
 export const LEGAL = {
   /** Nombre comercial que ve el cliente. */
   tradeName: "TechFlow Soluciones",
   /** Nombre civil de quien presta el servicio y emite la boleta. */
   fullName: "[COMPLETAR: nombre y apellidos]",
-  /** RUT de la persona natural, no de una sociedad. */
+  /**
+   * RUT de la persona natural.
+   *
+   * NO SE PUBLICA en el sitio, a propósito. El RUT es un dato personal y
+   * dejarlo abierto en internet expone a suplantación de identidad. La ley
+   * pide que el prestador sea identificable y contactable, y eso se cumple
+   * con el nombre completo más el correo; el cliente igual recibe el RUT en
+   * la boleta de honorarios. Queda acá por si hace falta para documentos.
+   */
   rut: "[COMPLETAR: RUT persona natural]",
   /**
    * Régimen tributario, para que el cliente sepa qué documento va a recibir.
@@ -64,15 +73,16 @@ export const LEGAL = {
  * se prefiere que directamente no compile, cambiar el console.warn por un
  * throw.
  */
-export const LEGAL_IDENTITY_PENDING =
-  LEGAL.fullName.includes("[COMPLETAR") || LEGAL.rut.includes("[COMPLETAR");
+export const LEGAL_IDENTITY_PENDING = LEGAL.fullName.includes("[COMPLETAR");
 
 if (LEGAL_IDENTITY_PENDING && process.env.NODE_ENV === "production") {
   console.warn(
     "\n⚠️  IDENTIDAD LEGAL SIN COMPLETAR en lib/site.ts.\n" +
       "   Los Términos de servicio y la Política de privacidad se van a\n" +
-      "   publicar con [COMPLETAR: ...] en lugar del nombre y el RUT.\n" +
-      "   Completa LEGAL.fullName y LEGAL.rut antes de publicar.\n"
+      "   publicar con [COMPLETAR: ...] en lugar del nombre del prestador.\n" +
+      "   Sin eso, el sitio no identifica a nadie: ni con quién contrata el\n" +
+      "   cliente, ni quién responde por sus datos personales.\n" +
+      "   Completa LEGAL.fullName antes de publicar.\n"
   );
 }
 

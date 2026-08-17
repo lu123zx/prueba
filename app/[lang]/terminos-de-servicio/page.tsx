@@ -94,8 +94,7 @@ export default function TerminosDeServicio() {
           </h2>
           <p className="leading-relaxed">
             {LEGAL.tradeName} es el nombre comercial bajo el que{" "}
-            {LEGAL.fullName}, RUT {LEGAL.rut}, presta estos servicios como
-            persona natural. No se trata de una sociedad. El servicio se
+            {LEGAL.fullName} presta estos servicios como persona natural. No se trata de una sociedad. El servicio se
             documenta con boleta de honorarios electrónica, que está exenta de
             IVA; si tu empresa tributa en primera categoría, debe practicar la
             retención de segunda categoría vigente al momento de la emisión.

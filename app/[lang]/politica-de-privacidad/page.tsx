@@ -143,9 +143,8 @@ export default function PoliticaDePrivacidad() {
             Quién es responsable
           </h2>
           <p className="leading-relaxed">
-            El responsable del tratamiento es {LEGAL.fullName}, RUT{" "}
-            {LEGAL.rut}, que presta servicios bajo el nombre comercial{" "}
-            {LEGAL.tradeName}. Puedes contactarnos por cualquier tema de datos
+            El responsable del tratamiento es {LEGAL.fullName}, que presta
+            servicios bajo el nombre comercial {LEGAL.tradeName}. Puedes contactarnos por cualquier tema de datos
             personales en{" "}
             <a
               href={`mailto:${SITE.email}`}

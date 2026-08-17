@@ -119,13 +119,12 @@ export default function TermsOfService() {
             Who provides the service
           </h2>
           <p className="leading-relaxed">
-            {LEGAL.tradeName} is the trading name under which {LEGAL.fullName},
-            Chilean tax ID {LEGAL.rut}, provides these services as a sole
-            trader. It is not a company. The service is documented with a
-            Chilean electronic fee receipt (boleta de honorarios), which is
-            exempt from VAT; if your company is a Chilean first-category
-            taxpayer, it must apply the withholding in force at the time of
-            issue.
+            {LEGAL.tradeName} is the trading name under which{" "}
+            {LEGAL.fullName} provides these services as a sole trader. It is
+            not a company. The service is documented with a Chilean electronic
+            fee receipt (boleta de honorarios), which is exempt from VAT; if
+            your company is a Chilean first-category taxpayer, it must apply
+            the withholding in force at the time of issue.
           </p>
         </section>
 
