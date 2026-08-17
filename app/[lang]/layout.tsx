@@ -35,36 +35,44 @@ export function generateStaticParams() {
   return LOCALES.map((lang) => ({ lang }));
 }
 
-/** Metadatos de la home de cada idioma. */
+/**
+ * Metadatos de la home de cada idioma.
+ *
+ * La home NO compite por "soporte informático empresas Santiago": esa
+ * búsqueda es de /servicios/soporte-informatico, que la responde con una
+ * página entera. Cuando dos URLs del mismo sitio pelean por el mismo
+ * término, Google reparte señales entre ambas y ninguna sube.
+ *
+ * La home juega un nivel más arriba: la empresa completa, con los cuatro
+ * servicios, para quien busca proveedor y todavía no sabe qué necesita.
+ */
 const META: Record<Locale, { title: string; description: string; ogDescription: string; keywords: string[] }> = {
   es: {
-    title: "Soporte informático para pymes en Santiago | TechFlow",
+    title: "Empresa de informática para pymes en Santiago | TechFlow",
     description:
-      "Soporte informático remoto para pymes de Santiago. Respondemos en menos de 2 horas hábiles, sin contrato anual. Precio por computador, desde 4,25 UF.",
+      "Nos hacemos cargo de la informática de tu pyme en Santiago: soporte remoto, páginas web, automatización y ciberseguridad. Precio por computador, sin contrato anual.",
     ogDescription:
       "Nos conectamos y lo arreglamos, sin esperar que llegue un técnico. Respuesta en 2 horas hábiles y precio por computador, desde 4,25 UF al mes.",
     keywords: [
-      "soporte informático empresas Santiago",
-      "soporte TI pymes",
+      "empresa de informática Santiago",
       "outsourcing informático Chile",
-      "soporte técnico remoto empresas",
-      "desarrollo web pymes Santiago",
-      "ciberseguridad pymes",
+      "servicios TI para pymes",
+      "proveedor informático pymes Santiago",
+      "área de informática externa",
     ],
   },
   en: {
-    title: "Managed IT support for small businesses in Chile | TechFlow",
+    title: "Your IT department, outsourced | TechFlow, Santiago de Chile",
     description:
-      "Remote IT support for small and mid-sized companies in Santiago, Chile. Under 2 business hours to respond, no annual contract, priced per computer.",
+      "We take over IT for small companies in Santiago, Chile: remote support, websites, automation and cybersecurity. Priced per computer, with no annual contract.",
     ogDescription:
       "We connect and fix it, with no waiting for a technician. Response within 2 business hours and a price per computer.",
     keywords: [
-      "managed IT support Chile",
-      "outsourced IT support Santiago",
-      "remote IT support small business",
-      "IT support provider Chile",
-      "web development Chile",
-      "cybersecurity small business Chile",
+      "outsourced IT department Chile",
+      "IT provider for small business Santiago",
+      "IT outsourcing Chile",
+      "nearshore IT support Chile",
+      "small business IT services Santiago",
     ],
   },
 };

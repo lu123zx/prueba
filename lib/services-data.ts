@@ -67,7 +67,7 @@ const SERVICES_ES: Service[] = [
       },
       {
         heading: "En cuánto respondemos",
-        body: "Menos de 2 horas en horario hábil. En los planes Negocio e Integral el monitoreo vigila tus sistemas también de noche y el fin de semana, y avisa apenas detecta una falla; las emergencias de fin de semana se atienden en el plan Integral, coordinadas por WhatsApp. Cada empresa tiene un encargado fijo, así no le explicas tu problema a alguien nuevo cada vez que escribes.",
+        body: "Menos de 2 horas en horario hábil. En los planes Negocio e Integral el monitoreo vigila tus sistemas también de noche y el fin de semana, y avisa apenas detecta una falla; las emergencias de fin de semana se atienden en el plan Integral, por los canales que acordemos contigo. Cada empresa tiene un encargado fijo, así no le explicas tu problema a alguien nuevo cada vez que escribes.",
       },
       {
         heading: "Para qué tamaño de empresa sirve",
@@ -160,7 +160,7 @@ const SERVICES_ES: Service[] = [
     bullets: [
       "Cotizaciones, boletas y reportes que se generan solos, sin planillas",
       "Tu sistema de ventas conversando con tu contabilidad, sin digitar dos veces",
-      "Alertas automáticas por WhatsApp o correo cuando algo necesita tu firma",
+      "Alertas automáticas por correo cuando algo necesita tu firma",
     ],
     sections: [
       {
@@ -261,7 +261,7 @@ const SERVICES_EN: Service[] = [
       },
       {
         heading: "How fast we respond",
-        body: "Under 2 hours during business hours. On the Negocio and Integral plans, monitoring watches your systems overnight and at weekends too, and alerts as soon as it detects a failure; weekend emergencies are handled on the Integral plan, coordinated over WhatsApp. Every company has a fixed point of contact, so you're not explaining your problem to someone new each time you write.",
+        body: "Under 2 hours during business hours. On the Negocio and Integral plans, monitoring watches your systems overnight and at weekends too, and alerts as soon as it detects a failure; weekend emergencies are handled on the Integral plan, through the channels we agree with you. Every company has a fixed point of contact, so you're not explaining your problem to someone new each time you write.",
       },
       {
         heading: "What size of company it suits",
@@ -354,7 +354,7 @@ const SERVICES_EN: Service[] = [
     bullets: [
       "Quotes, receipts and reports that generate themselves, without spreadsheets",
       "Your sales system talking to your accounting, with no double entry",
-      "Automatic alerts by WhatsApp or email when something needs your sign-off",
+      "Automatic alerts by email when something needs your sign-off",
     ],
     sections: [
       {

@@ -51,7 +51,7 @@ export default function PoliticaDePrivacidad() {
           </h2>
           <p className="leading-relaxed">
             Cuando completas el formulario de contacto o nos escribes por
-            WhatsApp o correo, recibimos tu nombre, el nombre de tu empresa,
+            correo, recibimos tu nombre, el nombre de tu empresa,
             teléfono, correo electrónico y el contenido del mensaje que nos
             envías. No recopilamos datos de navegación con fines
             publicitarios ni los compartimos con terceros para ese fin.

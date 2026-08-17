@@ -110,12 +110,28 @@ export function middleware(request: NextRequest) {
         )
       : NextResponse.next();
 
-  response.cookies.set(COUNTRY_COOKIE, country, { path: "/", maxAge: 86_400 });
+  /**
+   * Las cookies se escriben lo menos posible, y NUNCA para un rastreador.
+   *
+   * Una respuesta HTML que lleva Set-Cookie no la cachea el CDN de Vercel.
+   * Si se la mandáramos a Googlebot, cada rastreo se serviría sin caché de
+   * borde y perderíamos el beneficio de tener las páginas pregeneradas: peor
+   * TTFB, que es justo una de las señales que mira Google.
+   *
+   * Los rastreadores no necesitan ninguna de las dos cookies: no eligen
+   * moneda ni idioma. Y al visitante se le escriben solo si cambian, para
+   * que la segunda visita también salga cacheada.
+   */
+  if (!crawler) {
+    if (request.cookies.get(COUNTRY_COOKIE)?.value !== country) {
+      response.cookies.set(COUNTRY_COOKIE, country, { path: "/", maxAge: 86_400 });
+    }
 
-  // Deja constancia del idioma elegido para no volver a evaluarlo en cada
-  // navegación: si el visitante cambia a mano, esa decisión manda.
-  if (!request.cookies.has(LOCALE_COOKIE)) {
-    response.cookies.set(LOCALE_COOKIE, locale, { path: "/", maxAge: 31_536_000 });
+    // Deja constancia del idioma elegido para no volver a evaluarlo en cada
+    // navegación: si el visitante cambia a mano, esa decisión manda.
+    if (!request.cookies.has(LOCALE_COOKIE)) {
+      response.cookies.set(LOCALE_COOKIE, locale, { path: "/", maxAge: 31_536_000 });
+    }
   }
 
   return response;

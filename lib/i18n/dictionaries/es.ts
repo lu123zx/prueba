@@ -95,7 +95,7 @@ export const es = {
         description:
           "Para empezar a ordenar la informática, con lo indispensable cubierto.",
         features: [
-          "Mesa de ayuda en horario hábil, por teléfono y WhatsApp",
+          "Mesa de ayuda en horario hábil, por teléfono y correo",
           "Respuesta en menos de 4 horas hábiles",
           "Respaldo diario de tus archivos",
           "Revisión de seguridad una vez al mes",
@@ -117,7 +117,7 @@ export const es = {
         description: "Cuando la informática ya es parte del negocio y no puede fallar.",
         features: [
           "Todo lo del plan Negocio",
-          "Atención de emergencias fuera de horario, coordinada por WhatsApp",
+          "Atención de emergencias fuera de horario, por los canales acordados",
           "Mantención de tu sitio o tienda web incluida",
           "Revisión de ciberseguridad y prueba de respaldos cada trimestre",
           "Reunión mensual de revisión con tu encargado",
@@ -195,7 +195,7 @@ export const es = {
       {
         question: "¿Qué pasa si se cae algo un domingo?",
         answer:
-          "Los planes Negocio e Integral incluyen monitoreo automático que vigila tus sistemas también fuera de horario y avisa apenas algo falla. En el plan Integral atendemos emergencias el fin de semana, coordinadas por WhatsApp. En los otros planes el aviso queda registrado y se atiende a primera hora del día hábil siguiente: preferimos decírtelo así y cumplirlo, en vez de prometer una guardia de 24 horas que no tendrías cómo exigirnos.",
+          "Los planes Negocio e Integral incluyen monitoreo automático que vigila tus sistemas también fuera de horario y avisa apenas algo falla. En el plan Integral atendemos emergencias el fin de semana, por los canales que acordemos contigo. En los otros planes el aviso queda registrado y se atiende a primera hora del día hábil siguiente: preferimos decírtelo así y cumplirlo, en vez de prometer una guardia de 24 horas que no tendrías cómo exigirnos.",
       },
       {
         question: "Si trabajan a distancia, ¿cómo arreglan un computador?",
@@ -240,7 +240,7 @@ export const es = {
   contact: {
     eyebrow: "Contacto",
     title: "Cuéntanos qué está fallando.",
-    lead: "Completa el formulario y te contactamos dentro de un día hábil para coordinar tu diagnóstico gratuito por videollamada. Si prefieres ir directo al grano, escríbenos por WhatsApp.",
+    lead: "Completa el formulario y te contactamos dentro de un día hábil para coordinar tu diagnóstico gratuito por videollamada. Si prefieres ir directo al grano, escríbenos al correo.",
   },
 
   form: {

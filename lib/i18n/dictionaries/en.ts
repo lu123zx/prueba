@@ -104,7 +104,7 @@ export const en: Dictionary = {
         description:
           "For starting to get IT in order, with the essentials covered.",
         features: [
-          "Help desk during business hours, by phone and WhatsApp",
+          "Help desk during business hours, by phone and email",
           "Response within 4 business hours",
           "Daily backup of your files",
           "Security review once a month",
@@ -128,7 +128,7 @@ export const en: Dictionary = {
           "For when IT is already part of the business and can't go down.",
         features: [
           "Everything in the Negocio plan",
-          "Out-of-hours emergency cover, coordinated over WhatsApp",
+          "Out-of-hours emergency cover, through the agreed channels",
           "Maintenance of your website or online store included",
           "Cybersecurity review and backup restore test every quarter",
           "Monthly review meeting with your point of contact",
@@ -204,7 +204,7 @@ export const en: Dictionary = {
       {
         question: "What happens if something breaks on a Sunday?",
         answer:
-          "The Negocio and Integral plans include automatic monitoring that watches your systems outside business hours too, and alerts as soon as something fails. On the Integral plan we handle weekend emergencies, coordinated over WhatsApp. On the other plans the alert is logged and handled first thing the next business day: we'd rather tell you that and keep to it than promise 24-hour cover you'd have no way of holding us to.",
+          "The Negocio and Integral plans include automatic monitoring that watches your systems outside business hours too, and alerts as soon as something fails. On the Integral plan we handle weekend emergencies, through the channels we agree with you. On the other plans the alert is logged and handled first thing the next business day: we'd rather tell you that and keep to it than promise 24-hour cover you'd have no way of holding us to.",
       },
       {
         question: "If you work remotely, how do you fix a computer?",
@@ -249,7 +249,7 @@ export const en: Dictionary = {
   contact: {
     eyebrow: "Contact",
     title: "Tell us what's going wrong.",
-    lead: "Fill in the form and we'll get back to you within one business day to schedule your free assessment over video call. If you'd rather get straight to it, message us on WhatsApp.",
+    lead: "Fill in the form and we'll get back to you within one business day to schedule your free assessment over video call. If you'd rather get straight to it, email us directly.",
   },
 
   form: {

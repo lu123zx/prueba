@@ -74,8 +74,8 @@ export default function PrivacyPolicy() {
             What data we collect
           </h2>
           <p className="leading-relaxed">
-            When you fill in the contact form or write to us on WhatsApp or by
-            email, we receive your name, your company&rsquo;s name, phone
+            When you fill in the contact form or write to us by email, we
+            receive your name, your company&rsquo;s name, phone
             number, email address and the content of the message you send us.
             We do not collect browsing data for advertising purposes, nor do we
             share it with third parties for that purpose.
