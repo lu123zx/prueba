@@ -1,106 +1,125 @@
-import Link from "next/link";
 import {
-  ArrowRightIcon,
-  Code2Icon,
-  HeadsetIcon,
+  DatabaseBackupIcon,
+  GlobeIcon,
   NetworkIcon,
-  WorkflowIcon,
+  ServerIcon,
   type LucideIcon,
 } from "lucide-react";
 
-import { getServices, type ServiceId } from "@/lib/services-data";
-import { routePath, type Dictionary, type Locale } from "@/lib/i18n";
-
-/** Los textos viven en lib/services-data.ts, junto con los de cada página
- *  de servicio. Acá solo se elige el icono que le toca a cada servicio.
- *  Va por id y no por slug porque el slug cambia con el idioma. */
-const ICONS: Record<ServiceId, LucideIcon> = {
-  "it-support": HeadsetIcon,
-  "web-development": Code2Icon,
-  automation: WorkflowIcon,
-  "networks-security": NetworkIcon,
+type Servicio = {
+  n: string;
+  tag: string;
+  title: string;
+  body: string;
+  points: string[];
+  icon: LucideIcon;
 };
 
-export function Services({
-  dict,
-  locale,
-}: {
-  dict: Dictionary;
-  locale: Locale;
-}) {
-  const services = getServices(locale);
+const SERVICIOS: Servicio[] = [
+  {
+    n: "01",
+    tag: "SLA 99,9% · Monitoreo 24/7",
+    title: "Administración de servidores y cloud",
+    body: "Diseño, migración y operación de servidores dedicados, VPS e instancias en AWS o Azure. Alta disponibilidad y respaldo verificado cada noche.",
+    points: [
+      "Failover automático entre zonas",
+      "Backups con restauración probada cada mes",
+      "Alertas antes de que el usuario note algo",
+    ],
+    icon: ServerIcon,
+  },
+  {
+    n: "02",
+    tag: "LAN / WAN · VLAN · VPN",
+    title: "Redes corporativas",
+    body: "Cableado, segmentación y perímetro. Bajamos la latencia interna y cerramos las puertas que dejó abiertas la instalación anterior.",
+    points: [
+      "Firewall de hardware y VPN site-to-site",
+      "Auditoría de topología y documentación entregable",
+      "Wi-Fi empresarial con roaming",
+    ],
+    icon: NetworkIcon,
+  },
+  {
+    n: "03",
+    tag: "RAID · NAS · Discos dañados",
+    title: "Recuperación forense de datos",
+    body: "Laboratorio para arreglos RAID colapsados, daño lógico o físico y borrados accidentales. Evaluamos antes de tocar nada.",
+    points: [
+      "Diagnóstico sin costo en 24 horas",
+      "Cadena de custodia y confidencialidad",
+      "Turno de urgencia el fin de semana",
+    ],
+    icon: DatabaseBackupIcon,
+  },
+  {
+    n: "04",
+    tag: "Core Web Vitals",
+    title: "Desarrollo web de alto rendimiento",
+    body: "Sitios corporativos y catálogos B2B que cargan rápido y aparecen cuando alguien busca tu servicio en Santiago.",
+    points: [
+      "Hosting y despliegue incluidos",
+      "SEO técnico y ficha de Google Business",
+      "Medición mensual con números, no promesas",
+    ],
+    icon: GlobeIcon,
+  },
+];
 
+export function Services() {
   return (
     <section
       id="servicios"
       aria-labelledby="servicios-titulo"
-      className="py-24 lg:py-32"
+      className="border-t border-border px-6 py-16 lg:px-20 lg:py-24"
     >
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
-        <div className="mb-16 flex flex-col justify-between gap-6 lg:mb-20 lg:flex-row lg:items-end">
-          <div>
-            <p className="mb-4 text-[13px] font-medium uppercase tracking-[0.18em] text-accent">
-              {dict.services.eyebrow}
-            </p>
-            <h2
-              id="servicios-titulo"
-              className="max-w-xl font-display text-4xl leading-[0.95] sm:text-5xl"
-            >
-              {dict.services.title}
-            </h2>
-          </div>
-          <p className="max-w-sm text-muted-foreground">{dict.services.lead}</p>
-        </div>
+      <p className="text-[13px] font-semibold tracking-[0.2em] text-accent">
+        SERVICIOS
+      </p>
+      <h2
+        id="servicios-titulo"
+        className="mt-2.5 text-[clamp(1.9rem,4vw,2.4rem)] font-bold tracking-tight text-ink"
+      >
+        Lo que mantenemos de pie
+      </h2>
 
-        <div className="grid grid-cols-1 border-l border-t border-border sm:grid-cols-2">
-          {services.map((service) => {
-            const Icon = ICONS[service.id];
-            return (
-              <article
-                key={service.id}
-                className="group border-b border-r border-border transition-colors duration-200 hover:bg-graphite"
-              >
-                {/* Toda la tarjeta es el enlace: más área de clic y un solo
-                    destino por tarjeta, que es lo que espera un lector de
-                    pantalla y lo que Google lee como enlace interno. */}
-                <Link
-                  href={routePath(locale, "services", service.slug)}
-                  className="flex h-full flex-col p-8 lg:p-10"
-                >
-                  <Icon
-                    className="size-8 text-accent transition-colors duration-200 group-hover:text-accent-tint"
-                    strokeWidth={1.25}
-                    aria-hidden="true"
-                  />
-                  <h3 className="mt-8 font-display text-2xl transition-colors duration-200 group-hover:text-bone lg:text-[1.75rem]">
-                    {service.name}
-                  </h3>
-                  <ul className="mt-6 flex flex-1 flex-col gap-3">
-                    {service.bullets.map((bullet) => (
-                      <li
-                        key={bullet}
-                        className="flex gap-3 text-sm leading-relaxed text-muted-foreground transition-colors duration-200 group-hover:text-bone/75"
-                      >
-                        <span
-                          aria-hidden="true"
-                          className="mt-2 size-1 shrink-0 rounded-full bg-accent transition-colors duration-200 group-hover:bg-accent-tint"
-                        />
-                        {bullet}
-                      </li>
-                    ))}
-                  </ul>
-                  <span className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-accent transition-colors duration-200 group-hover:text-accent-tint">
-                    {dict.services.linkPrefix} {service.name.toLowerCase()}
-                    <ArrowRightIcon
-                      className="size-4 transition-transform duration-200 group-hover:translate-x-1"
+      <div className="mt-10 grid grid-cols-1 border border-border lg:grid-cols-2">
+        {SERVICIOS.map((s) => {
+          const Icon = s.icon;
+          return (
+            <article
+              key={s.n}
+              className="flex flex-col gap-4 border-b border-border p-8 last:border-b-0 lg:p-10 lg:[&:nth-child(-n+2)]:border-b lg:[&:nth-child(odd)]:border-r lg:[&:nth-child(3)]:border-b-0 lg:[&:nth-child(4)]:border-b-0"
+            >
+              <div className="flex items-center justify-between">
+                <span className="text-[15px] font-bold text-accent">{s.n}</span>
+                <Icon className="size-5 text-ink-soft" aria-hidden="true" strokeWidth={1.5} />
+              </div>
+
+              <p className="text-xs font-medium tracking-wide text-ink-soft">
+                {s.tag}
+              </p>
+
+              <h3 className="text-xl font-semibold tracking-tight text-ink sm:text-[1.4rem]">
+                {s.title}
+              </h3>
+
+              <p className="text-[15px] leading-relaxed text-ink-soft">{s.body}</p>
+
+              <ul className="mt-1.5 flex flex-col gap-2">
+                {s.points.map((p) => (
+                  <li key={p} className="flex items-start gap-2.5 text-sm text-ink">
+                    <span
                       aria-hidden="true"
+                      className="mt-[7px] size-1 shrink-0 rounded-full bg-accent"
                     />
-                  </span>
-                </Link>
-              </article>
-            );
-          })}
-        </div>
+                    <span>{p}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          );
+        })}
       </div>
     </section>
   );

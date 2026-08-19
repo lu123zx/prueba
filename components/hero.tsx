@@ -1,70 +1,37 @@
 import { Button } from "@/components/ui/button";
-import { NetworkCanvas } from "@/components/network-canvas";
-import type { Dictionary } from "@/lib/i18n";
 
-/**
- * PENDIENTE DE CONFIRMAR ANTES DE PUBLICAR.
- *
- * Las tres cifras del pie son afirmaciones objetivas y comprobables: si no
- * son ciertas, son publicidad engañosa (art. 28 Ley 19.496). Se reemplazaron
- * "120+ equipos gestionados" y "9 años" porque no hay operación previa que
- * los respalde. Las actuales describen cómo funciona el servicio, no un
- * historial, así que se sostienen desde el primer cliente.
- *
- * El texto vive en los diccionarios de idioma; cuando existan cifras reales
- * de clientes y trayectoria, se cambian allí en los dos idiomas.
- */
-export function Hero({ dict }: { dict: Dictionary }) {
+export function Hero() {
   return (
     <section
-      id="inicio"
-      aria-label={dict.hero.sectionLabel}
-      className="relative overflow-hidden pt-40 pb-24 lg:pt-56 lg:pb-32"
+      aria-labelledby="hero-titulo"
+      className="flex flex-col items-center gap-7 px-6 pb-20 pt-16 text-center sm:pt-24 lg:px-20 lg:pb-24 lg:pt-32"
     >
-      <NetworkCanvas />
+      <p className="inline-flex items-center rounded-full border border-border px-3.5 py-1.5 text-[13px] font-medium text-accent">
+        SLA 99,9% · Monitoreo 24/7
+      </p>
 
-      <div className="relative mx-auto max-w-[1400px] px-6 lg:px-12">
-        <p className="mb-6 text-[13px] font-medium uppercase tracking-[0.18em] text-accent">
-          {dict.hero.eyebrow}
-        </p>
+      <h1
+        id="hero-titulo"
+        className="max-w-4xl text-[clamp(2.6rem,7vw,4.75rem)] font-bold leading-[1.02] tracking-tight text-ink"
+      >
+        Infraestructura que
+        <br />
+        no falla.
+      </h1>
 
-        <h1 className="max-w-5xl text-balance font-display text-hero font-normal tracking-tight">
-          {dict.hero.h1}
-        </h1>
+      <p className="max-w-[38rem] text-balance text-lg leading-relaxed text-ink-soft">
+        Servidores, redes, recuperación de datos y desarrollo web para
+        empresas que no se pueden dar el lujo de que algo falle a mitad de
+        la operación.
+      </p>
 
-        <p className="mt-8 max-w-xl text-lg text-muted-foreground lg:text-xl">
-          {dict.hero.lead}
-        </p>
-
-        <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
-          <Button asChild size="lg">
-            <a href="#contacto">{dict.hero.ctaPrimary}</a>
-          </Button>
-          <Button asChild variant="outline" size="lg">
-            <a href="#planes">{dict.hero.ctaSecondary}</a>
-          </Button>
-        </div>
-      </div>
-
-      <div className="relative mt-24 border-y border-border bg-background lg:mt-32">
-        <dl className="mx-auto grid max-w-[1400px] grid-cols-1 divide-y divide-border px-6 sm:grid-cols-3 sm:divide-x sm:divide-y-0 lg:px-12">
-          {dict.hero.stats.map((stat) => (
-            <div key={stat.label} className="py-8 sm:px-8 sm:first:pl-0 lg:py-10">
-              <dt className="sr-only">{stat.label}</dt>
-              <dd>
-                <span className="block font-display text-4xl lg:text-5xl">
-                  {stat.value}
-                </span>
-                <span
-                  aria-hidden="true"
-                  className="mt-2 block max-w-[22ch] text-sm text-muted-foreground"
-                >
-                  {stat.label}
-                </span>
-              </dd>
-            </div>
-          ))}
-        </dl>
+      <div className="mt-3 flex flex-col gap-3 sm:flex-row">
+        <Button asChild size="default">
+          <a href="#contacto">Pedir diagnóstico</a>
+        </Button>
+        <Button asChild variant="outline" size="default">
+          <a href="#servicios">Ver servicios</a>
+        </Button>
       </div>
     </section>
   );
