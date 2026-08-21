@@ -1,9 +1,11 @@
 import Link from "next/link";
 import {
   ArrowRightIcon,
+  BotIcon,
   Code2Icon,
-  HeadsetIcon,
-  NetworkIcon,
+  DatabaseIcon,
+  LifeBuoyIcon,
+  SparklesIcon,
   WorkflowIcon,
   type LucideIcon,
 } from "lucide-react";
@@ -15,10 +17,12 @@ import { routePath, type Dictionary, type Locale } from "@/lib/i18n";
  *  de servicio. Acá solo se elige el icono que le toca a cada servicio.
  *  Va por id y no por slug porque el slug cambia con el idioma. */
 const ICONS: Record<ServiceId, LucideIcon> = {
-  "it-support": HeadsetIcon,
   "web-development": Code2Icon,
+  infrastructure: DatabaseIcon,
   automation: WorkflowIcon,
-  "networks-security": NetworkIcon,
+  "ai-solutions": SparklesIcon,
+  "ai-agents": BotIcon,
+  "support-plan": LifeBuoyIcon,
 };
 
 export function Services({
@@ -52,7 +56,7 @@ export function Services({
           <p className="max-w-sm text-muted-foreground">{dict.services.lead}</p>
         </div>
 
-        <div className="grid grid-cols-1 border-l border-t border-border sm:grid-cols-2">
+        <div className="grid grid-cols-1 border-l border-t border-border sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => {
             const Icon = ICONS[service.id];
             return (
