@@ -15,7 +15,7 @@
 
   // ── Parámetros de la simulación ──────────────────────────────
   const CONFIG = {
-    densidad: 13000,      // 1 partícula por cada N px² de pantalla
+    densidad: 11000,      // 1 partícula por cada N px² del lienzo
     maxParticulas: 130,
     distanciaEnlace: 132, // px máximos para unir dos partículas
     radioMouse: 190,      // radio de influencia del cursor
@@ -26,9 +26,9 @@
   // OSCURAS para verse. En dorado no se distinguen (1.99:1 contra el fondo),
   // así que el estado "encendido" usa el petróleo del acento.
   const COLOR = {
-    particula: [92, 104, 122],
-    enlace:    [120, 132, 150],
-    acento:    [14, 90, 86],
+    particula: [150, 148, 158],
+    enlace:    [120, 118, 128],
+    acento:    [255, 90, 95],
   };
 
   let particulas = [];
@@ -95,7 +95,7 @@
         p.color(COLOR.acento[0], COLOR.acento[1], COLOR.acento[2]),
         energia
       );
-      c.setAlpha(78 + energia * 90);
+      c.setAlpha(120 + energia * 90);
       p.noStroke();
       p.fill(c);
       p.circle(this.x, this.y, this.tam * 2);
@@ -116,9 +116,17 @@
 
   // ── El sketch, en modo instancia para no ensuciar el global ──
   const sketch = function (p) {
+    // El lienzo ya no ocupa la ventana: se mide contra su contenedor.
+    function medidas() {
+      const c = document.getElementById("fondo-p5");
+      const r = c.getBoundingClientRect();
+      return [Math.max(1, Math.round(r.width)), Math.max(1, Math.round(r.height))];
+    }
+
     p.setup = function () {
       const contenedor = document.getElementById("fondo-p5");
-      lienzo = p.createCanvas(p.windowWidth, p.windowHeight);
+      const [w, h] = medidas();
+      lienzo = p.createCanvas(w, h);
       lienzo.parent(contenedor);
       p.pixelDensity(Math.min(window.devicePixelRatio || 1, 2));
       crearParticulas(p);
@@ -156,7 +164,7 @@
             p.color(COLOR.acento[0], COLOR.acento[1], COLOR.acento[2]),
             energia
           );
-          c.setAlpha(cercania * (26 + energia * 62));
+          c.setAlpha(cercania * (46 + energia * 70));
           p.stroke(c);
           p.line(a.x, a.y, b.x, b.y);
         }
@@ -169,7 +177,8 @@
     };
 
     p.windowResized = function () {
-      p.resizeCanvas(p.windowWidth, p.windowHeight);
+      const [w, h] = medidas();
+      p.resizeCanvas(w, h);
       crearParticulas(p);
       if (prefiereMenosMovimiento.matches) p.redraw();
     };

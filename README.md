@@ -41,37 +41,43 @@ python3 -m http.server 8000
 
 ## Estilo visual
 
-Referencia: sitios editoriales tipo Youthology — serif de titulares, crema
-cálido y bloques alternados claro/oscuro.
+Referencia: sitios de agencia oscuros y densos, con acento rojo y sans en
+negrita.
 
-- **Instrument Serif** auto-alojada (SIL OFL, 43 KB las dos variantes) para
-  titulares de sección. Es la misma familia que usaba la versión Next.js
-  anterior del sitio.
-- **Dos niveles tipográficos a propósito:** serif en `h1`/`h2`, sans en `h3`.
-  La serif tiene un solo peso (400) y bajo ~1.6rem se ve endeble; a tamaño de
-  componente la sans manda mejor.
-- **Ritmo claro/oscuro:** hero y servicios en crema, "Cómo trabajamos" y footer
-  en bloque oscuro. Se logra con la clase `.bloque-oscuro`, que **redefine los
-  tokens** en lugar de escribir una regla por elemento — todo lo que está
-  dentro se invierte solo.
+- Base oscura (`#0d0d10`) con **un bloque claro** en "Cómo trabajamos", para
+  cortar la monotonía. Se logra con `.bloque-claro`, que **redefine los tokens**
+  en lugar de escribir una regla por elemento.
+- Titulares en sans 700 con tracking negativo. Radios amplios (24 px) y rótulos
+  de sección como píldora.
+- Las fotos van en duotono rojo sobre gris; al pasar el mouse recuperan color.
+- **Cinta de servicios** en movimiento continuo tras el hero. La pista lleva el
+  contenido dos veces y se desplaza `-50%`: al llegar a la mitad el fotograma es
+  idéntico al inicial, así que el bucle no tiene costura. La copia va
+  `aria-hidden` para que el lector de pantalla no lea los servicios dos veces.
+  Se detiene al pasar el mouse y con `prefers-reduced-motion`.
+- **Banda roja** a todo el ancho antes de contacto. Su botón se invierte a
+  blanco: el relleno rojo desaparecería sobre el rojo del fondo.
+
+**No se replicaron** las secciones de la referencia que exigen contenido que no
+existe: cifras del tipo "230+ proyectos", testimonios, casos de estudio,
+portafolio ni logos de clientes. Inventarlos sería publicar afirmaciones falsas
+sobre el negocio.
 
 ## Paleta
 
-Fondo hueso cálido (`#f7f6f3`), acento **petróleo** (`#0e5a56`) y el dorado
-(`#e0a800`) reservado para los botones.
+**Dos rojos, y no es capricho.** El rojo de la referencia (`#e8232a`) no sirve
+como botón: da 4.46:1 con texto blanco y 4.38:1 con negro — falla en ambos
+sentidos porque queda atrapado a media luminosidad.
 
-La regla que ordena todo: **el dorado nunca es texto.** Sobre este fondo da
-1.99:1 de contraste, muy por debajo del mínimo AA de 4.5:1. Funciona como
-relleno de botón con texto casi negro encima (8.5:1), pero como color de letra
-o de icono es ilegible. Por eso los rótulos, iconos y viñetas usan petróleo.
+| Token | Valor | Uso |
+| --- | --- | --- |
+| `--rojo` | `#d81a22` | Relleno de botón, texto blanco encima (5.1:1) |
+| `--acento` | `#ff5a5f` | Texto e iconos sobre oscuro (6.4:1) |
+| `--acento` en `.bloque-claro` | `#c0141c` | El coral no rinde sobre fondo claro |
 
-Todos los pares texto/fondo están verificados contra WCAG AA, incluida una
-auditoría sobre la página ya renderizada, no solo sobre la tabla de tokens.
-
-Las fotos llevan un duotono en clave alta: escala de grises con el contraste
-comprimido y un velo petróleo suave. Varias son casi negras de origen, y sin
-comprimir el contraste quedaban como bloques oscuros sobre un fondo claro. Al
-pasar el mouse recuperan color.
+Todos los pares están verificados con una auditoría sobre la página renderizada
+que **compone las capas translúcidas** — un fondo con alfa tratado como opaco da
+ratios falsos.
 
 ## SEO
 

@@ -9,7 +9,7 @@
 
 <link rel="canonical" href="https://www.techflowsoluciones.com/">
 <meta name="robots" content="index, follow, max-image-preview:large">
-<meta name="theme-color" content="#f7f6f3">
+<meta name="theme-color" content="#0d0d10">
 
 <!-- Open Graph: es lo que se ve al compartir el enlace por WhatsApp o LinkedIn. -->
 <meta property="og:type" content="website">
@@ -28,11 +28,8 @@
 <meta name="twitter:description" content="Desarrollo, infraestructura, automatización e inteligencia artificial para empresas que necesitan resolver.">
 <meta name="twitter:image" content="https://www.techflowsoluciones.com/assets/img/og-techflow.jpg">
 
-<!-- La serif de titulares se precarga: sin esto el h1 aparece en sans y
-     salta al cargar la fuente, que es lo más visible del arranque. -->
-<link rel="preload" href="assets/fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230e5a56'/%3E%3Cpath d='M7 11h18M16 11v13' stroke='%23e0a800' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230d0d10'/%3E%3Cpath d='M7 11h18M16 11v13' stroke='%23ff5a5f' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
 
 <!-- Datos estructurados: le dicen a Google y a los buscadores con IA qué es
      esto y qué servicios ofrece, en vez de dejar que lo deduzcan del texto. -->
@@ -67,9 +64,6 @@
 
 <a class="skip-link" href="#servicios">Saltar al contenido</a>
 
-<!-- Lienzo de p5.js: vive detrás de todo el documento. -->
-<div id="fondo-p5" aria-hidden="true"></div>
-
 <header class="site-header" id="inicio">
   <nav class="nav" aria-label="Navegación principal">
     <a class="marca" href="#inicio">
@@ -100,6 +94,8 @@
 
   <!-- ─────────────────────────── HERO ─────────────────────────── -->
   <section class="hero" aria-labelledby="hero-titulo">
+    <!-- Lienzo de p5.js: acotado al hero, no a toda la página. -->
+    <div id="fondo-p5" aria-hidden="true"></div>
     <div class="contenedor hero__inner">
       <p class="etiqueta">Servicios de tecnología</p>
       <h1 class="hero__titulo" id="hero-titulo">
@@ -118,6 +114,30 @@
       <span class="hero__scroll-linea"></span>
     </a>
   </section>
+
+  <!-- ─────────────────────── CINTA DE SERVICIOS ─────────────────── -->
+  <!-- Se duplica el contenido para que el bucle no tenga costura. La copia
+       va aria-hidden: el lector de pantalla leería los servicios dos veces. -->
+  <div class="cinta" aria-label="Servicios que ofrecemos">
+    <div class="cinta__pista">
+      <ul class="cinta__grupo">
+        <li>Desarrollo web y apps</li>
+        <li>Infraestructura y bases de datos</li>
+        <li>Automatización de procesos</li>
+        <li>Inteligencia artificial</li>
+        <li>Agentes autónomos</li>
+        <li>Soporte continuo</li>
+      </ul>
+      <ul class="cinta__grupo" aria-hidden="true">
+        <li>Desarrollo web y apps</li>
+        <li>Infraestructura y bases de datos</li>
+        <li>Automatización de procesos</li>
+        <li>Inteligencia artificial</li>
+        <li>Agentes autónomos</li>
+        <li>Soporte continuo</li>
+      </ul>
+    </div>
+  </div>
 
   <!-- ───────────────────────── SERVICIOS ───────────────────────── -->
   <section class="seccion" id="servicios" aria-labelledby="servicios-titulo">
@@ -287,7 +307,7 @@
   </section>
 
   <!-- ────────────────────────── PROCESO ────────────────────────── -->
-  <section class="seccion seccion--proceso bloque-oscuro" id="proceso" aria-labelledby="proceso-titulo">
+  <section class="seccion seccion--proceso bloque-claro" id="proceso" aria-labelledby="proceso-titulo">
     <div class="contenedor proceso">
       <div class="proceso__texto">
         <p class="etiqueta">Cómo trabajamos</p>
@@ -341,6 +361,22 @@
         <img src="assets/img/proceso-workspace.jpg" width="1600" height="1100" loading="lazy" decoding="async"
              alt="Escritorio de trabajo con un computador portátil y un monitor mostrando interfaces de diseño">
       </div>
+    </div>
+  </section>
+
+  <!-- ──────────────────────── BANDA ROJA ─────────────────────────── -->
+  <section class="banda" aria-labelledby="banda-titulo">
+    <div class="contenedor banda__inner">
+      <div>
+        <h2 class="banda__titulo" id="banda-titulo">
+          ¿Tienes algo trabado y no sabes por dónde empezar?
+        </h2>
+        <p class="banda__texto">
+          Cuéntanoslo y te decimos si tiene solución, cuánto toma y qué implica.
+          Sin compromiso y sin vocabulario que no se entienda.
+        </p>
+      </div>
+      <a class="boton boton--claro" href="#contacto">Hablemos de tu proyecto</a>
     </div>
   </section>
 
@@ -415,7 +451,7 @@
 
 </main>
 
-<footer class="site-footer bloque-oscuro">
+<footer class="site-footer">
   <div class="contenedor footer">
     <div class="footer__marca">
       <span class="marca__texto">TechFlow<span class="marca__acento"> Soluciones</span></span>

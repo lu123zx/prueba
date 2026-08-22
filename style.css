@@ -1,82 +1,55 @@
 /* ============================================================
-   Instrument Serif — auto-alojada (SIL Open Font License).
-   Es la serif de titulares: le da al sitio el aire editorial que
-   una sans no consigue por mucho que se ajuste el peso.
-   ============================================================ */
-@font-face {
-  font-family: "Instrument Serif";
-  src: url("assets/fonts/instrument-serif-latin-400-normal.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Instrument Serif";
-  src: url("assets/fonts/instrument-serif-latin-400-italic.woff2") format("woff2");
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-/* ============================================================
    TechFlow Soluciones — hoja de estilos única
    Paleta oscura con acento dorado. Sin dependencias externas.
    ============================================================ */
 
 :root {
-  /* ── Paleta clara ────────────────────────────────────────────
-     Fondo hueso cálido en vez de blanco puro: el blanco #fff a
-     pantalla completa cansa la vista y hace ver el texto más duro.
-     Acento petróleo para todo lo que sea texto o icono; el dorado
-     queda SOLO como relleno de botón, nunca como texto (sobre este
-     fondo da 1.99:1 de contraste, muy por debajo del mínimo 4.5).
+  /* ── Paleta oscura con acento rojo ───────────────────────────
+     Dos rojos, y no es capricho: el rojo de la referencia (#e8232a)
+     no sirve como botón — falla con texto blanco (4.46:1) y con
+     negro (4.38:1), queda atrapado en el medio. Así que:
+       --rojo   relleno de botón, texto blanco encima  (5.1:1)
+       --acento coral, para texto e iconos sobre oscuro (6.4:1)
      ──────────────────────────────────────────────────────────── */
 
-  /* Fondos, del más claro al más marcado */
-  --fondo:          #f4f1ea;
-  --fondo-alt:      #eceae1;
-  --superficie:     #fbfaf6;
-  --superficie-alt: #ffffff;
-  --borde:          #dcd7cb;
-  --borde-suave:    #e6e2d8;
+  --fondo:          #0d0d10;
+  --fondo-alt:      #121216;
+  --superficie:     #16161a;
+  --superficie-alt: #1d1d22;
+  --borde:          #26262c;
+  --borde-suave:    #1f1f24;
 
-  /* Bloques oscuros: el ritmo claro/oscuro es lo que da carácter. */
-  --oscuro:         #16181c;
-  --oscuro-tarjeta: #1e2126;
+  --texto:          #f5f4f2;  /* 17.7:1 */
+  --texto-medio:    #a8a7ad;  /*  8.1:1 */
+  --texto-tenue:    #8b8a91;  /*  5.7:1 */
 
-  /* Texto — todos verificados contra --fondo */
-  --texto:          #15181f;  /* 15.8:1 */
-  --texto-medio:    #535a67;  /*  6.2:1 */
-  --texto-tenue:    #5f6673;  /*  5.1:1 */
+  --acento:         #ff5a5f;  /*  6.4:1 — texto e iconos */
+  --acento-fuerte:  #ff8085;
+  --acento-hueco:   rgba(255, 90, 95, 0.12);
 
-  /* Acento principal: petróleo. Legible como texto e icono. */
-  --acento:         #0e5a56;  /*  7.4:1 */
-  --acento-fuerte:  #0a403d;  /* 10.7:1 — hover */
-  --acento-hueco:   rgba(14, 90, 86, 0.09);
+  --rojo:           #d81a22;  /* relleno de botón */
+  --rojo-claro:     #ee2a33;
+  --rojo-tinta:     #ffffff;  /*  5.1:1 sobre --rojo */
 
-  /* Dorado: solo relleno. El texto que va encima es --oro-tinta. */
-  --oro:            #e0a800;
-  --oro-claro:      #f2c443;
-  --oro-tinta:      #1a1400;  /*  8.5:1 sobre el dorado */
+  /* Bloque claro: la referencia mete una sección clara en medio
+     de lo oscuro para cortar la monotonía. */
+  --claro:          #f2f0ec;
+  --claro-tarjeta:  #ffffff;
 
-  /* Ritmo vertical y formas */
-  --radio:      20px;
-  --radio-sm:   12px;
-  --radio-lg:   26px;
+  --radio:      24px;
+  --radio-sm:   16px;
+  --radio-lg:   32px;
   --ancho-max:  1240px;
   --sec-y:      clamp(5rem, 11vw, 9.5rem);
 
   --fuente: "Inter", "Segoe UI Variable", "Segoe UI", system-ui, -apple-system,
             "Helvetica Neue", Arial, sans-serif;
-  /* Serif solo para titulares; el cuerpo se queda en sans por legibilidad. */
-  --fuente-display: "Instrument Serif", "Iowan Old Style", Georgia,
-                    "Times New Roman", serif;
 
   --transicion: 220ms cubic-bezier(0.4, 0, 0.2, 1);
 
-  --sombra-sm: 0 1px 2px rgba(21, 24, 31, 0.05);
-  --sombra-md: 0 10px 28px -14px rgba(21, 24, 31, 0.22);
-  --sombra-lg: 0 22px 48px -22px rgba(21, 24, 31, 0.28);
+  --sombra-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --sombra-md: 0 12px 32px -16px rgba(0, 0, 0, 0.7);
+  --sombra-lg: 0 26px 56px -26px rgba(0, 0, 0, 0.85);
 }
 
 /* ── Reset acotado ─────────────────────────────────────────── */
@@ -105,22 +78,12 @@ ul, ol { list-style: none; padding: 0; }
 a { color: inherit; text-decoration: none; }
 button, input, textarea { font: inherit; color: inherit; }
 
-h1, h2, h3 { color: var(--texto); text-wrap: balance; }
-
-/* Dos niveles tipográficos, a propósito:
-   serif para los titulares de sección, sans para los títulos de
-   componente. La serif es de un solo peso (400) y por debajo de
-   ~1.6rem se ve endeble; a esos tamaños la sans manda mejor. */
-h1, h2 {
-  font-family: var(--fuente-display);
-  font-weight: 400;   /* pedir 600 haría sintetizar negrita y se ve sucia */
-  line-height: 1.05;
-  letter-spacing: -0.015em;
-}
-h3 {
-  font-weight: 600;
-  line-height: 1.25;
-  letter-spacing: -0.015em;
+h1, h2, h3 {
+  color: var(--texto);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
 }
 
 p { text-wrap: pretty; }
@@ -137,8 +100,8 @@ p { text-wrap: pretty; }
   left: -9999px;
   z-index: 100;
   padding: 0.75rem 1.25rem;
-  background: var(--acento);
-  color: #ffffff;
+  background: var(--rojo);
+  color: var(--rojo-tinta);
   font-weight: 600;
   border-radius: 0 0 var(--radio-sm) 0;
 }
@@ -152,13 +115,21 @@ p { text-wrap: pretty; }
 }
 
 /* ── Lienzo p5.js ──────────────────────────────────────────── */
+/* El lienzo vive SOLO detrás del hero. Cubriendo toda la página, las
+   partículas se leían como polvo sobre cada sección y ensuciaban el
+   ritmo claro/oscuro. Acotado al hero funciona como textura de entrada
+   y el resto del sitio queda limpio. */
 #fondo-p5 {
-  position: fixed;
-  inset: 0;
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: clamp(600px, 88vh, 900px);
+  overflow: hidden;
   z-index: 0;
   pointer-events: none; /* la animación nunca roba clics */
+  -webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 62%, transparent 100%);
 }
-#fondo-p5 canvas { display: block; width: 100% !important; height: 100% !important; }
+#fondo-p5 canvas { display: block; width: 100%; height: 100%; }
 
 /* Todo el contenido va por encima del lienzo. */
 .site-header, main, .site-footer { position: relative; z-index: 1; }
@@ -167,6 +138,10 @@ p { text-wrap: pretty; }
 .etiqueta {
   display: inline-block;
   margin-bottom: 1.1rem;
+  padding: 0.42rem 0.95rem;
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  background: var(--acento-hueco);
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.2em;
@@ -187,10 +162,10 @@ p { text-wrap: pretty; }
   gap: 0.5rem;
   min-height: 48px;
   padding: 0.85rem 1.9rem;
-  border: 1px solid var(--oro);
+  border: 1px solid var(--rojo);
   border-radius: 999px;
-  background: var(--oro);
-  color: var(--oro-tinta);
+  background: var(--rojo);
+  color: var(--rojo-tinta);
   font-weight: 600;
   font-size: 0.95rem;
   letter-spacing: 0.01em;
@@ -200,10 +175,10 @@ p { text-wrap: pretty; }
               box-shadow var(--transicion);
 }
 .boton:hover {
-  background: var(--oro-claro);
-  border-color: var(--oro-claro);
+  background: var(--rojo-claro);
+  border-color: var(--rojo-claro);
   transform: translateY(-2px);
-  box-shadow: 0 10px 26px -10px rgba(224, 168, 0, 0.6);
+  box-shadow: 0 12px 30px -10px rgba(216, 26, 34, 0.65);
 }
 .boton:active { transform: translateY(0); }
 
@@ -233,7 +208,7 @@ p { text-wrap: pretty; }
 }
 /* La clase la pone main.js al hacer scroll. */
 .site-header.esta-fijo {
-  background: rgba(247, 246, 243, 0.88);
+  background: rgba(13, 13, 16, 0.9);
   backdrop-filter: blur(14px);
   border-bottom-color: var(--borde);
   box-shadow: var(--sombra-sm);
@@ -264,7 +239,7 @@ p { text-wrap: pretty; }
 .nav__menu { display: flex; align-items: center; gap: 2rem; }
 .nav__menu a { font-size: 0.9375rem; color: var(--texto-medio); transition: color var(--transicion); }
 .nav__menu a:hover { color: var(--texto); }
-.nav__menu a.boton { color: var(--oro-tinta); }
+.nav__menu a.boton { color: var(--rojo-tinta); }
 /* Sección visible actualmente — la marca main.js. */
 .nav__menu a.esta-activo { color: var(--acento); }
 
@@ -307,7 +282,7 @@ p { text-wrap: pretty; }
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(78% 68% at 20% 45%, rgba(247, 246, 243, 0.96) 0%, rgba(247, 246, 243, 0.6) 46%, transparent 78%),
+    radial-gradient(78% 68% at 20% 45%, rgba(13, 13, 16, 0.94) 0%, rgba(13, 13, 16, 0.55) 46%, transparent 78%),
     linear-gradient(to bottom, transparent 55%, var(--fondo) 100%);
   pointer-events: none;
 }
@@ -361,24 +336,24 @@ p { text-wrap: pretty; }
    elemento. El petróleo se aclara: sobre #16181c el original es
    ilegible.
    ──────────────────────────────────────────────────────────── */
-.bloque-oscuro {
-  --fondo:          var(--oscuro);
-  --fondo-alt:      var(--oscuro);
-  --superficie:     var(--oscuro-tarjeta);
-  --superficie-alt: #23262c;
-  --borde:          #2c3037;
-  --borde-suave:    #23262c;
-  --texto:          #f4f1ea;  /* 15.8:1 */
-  --texto-medio:    #a8a69e;  /*  7.3:1 */
-  --texto-tenue:    #8d8b84;  /*  5.2:1 */
-  --acento:         #6fc2b1;  /*  8.5:1 */
-  --acento-fuerte:  #8ad3c4;
-  --acento-hueco:   rgba(111, 194, 177, 0.12);
+.bloque-claro {
+  --fondo:          var(--claro);
+  --fondo-alt:      #e9e6e0;
+  --superficie:     var(--claro-tarjeta);
+  --superficie-alt: #faf9f7;
+  --borde:          #dbd7d0;
+  --borde-suave:    #e4e0d9;
+  --texto:          #131316;
+  --texto-medio:    #55535a;
+  --texto-tenue:    #63616a;
+  --acento:         #c0141c;  /* el coral no rinde sobre fondo claro */
+  --acento-fuerte:  #991016;
+  --acento-hueco:   rgba(192, 20, 28, 0.08);
 
-  background: var(--oscuro);
+  background: var(--claro);
   color: var(--texto-medio);
 }
-.bloque-oscuro .boton--fantasma { color: var(--texto); }
+.bloque-claro .boton--fantasma { color: var(--texto); }
 
 /* ── Secciones genéricas ───────────────────────────────────── */
 .seccion { padding-block: var(--sec-y); }
@@ -432,20 +407,20 @@ p { text-wrap: pretty; }
   height: 100%;
   object-fit: cover;
   /* Duotono: unifica fotos de orígenes distintos con la paleta del sitio. */
-  filter: grayscale(1) contrast(0.5) brightness(1.3);
+  filter: grayscale(1) contrast(1.05) brightness(0.78);
   transition: filter var(--transicion), transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .tarjeta__media::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(150deg, rgba(14, 90, 86, 0.3), rgba(14, 90, 86, 0.45) 62%);
+  background: linear-gradient(155deg, rgba(216, 26, 34, 0.26), rgba(13, 13, 16, 0.72) 70%);
   mix-blend-mode: multiply;
   transition: opacity var(--transicion);
 }
 .tarjeta:hover .tarjeta__media img,
 .tarjeta:focus-within .tarjeta__media img {
-  filter: grayscale(0) contrast(0.92) brightness(1.08);
+  filter: grayscale(0) contrast(1.02) brightness(0.98);
   transform: scale(1.05);
 }
 .tarjeta:hover .tarjeta__media::after,
@@ -505,10 +480,102 @@ p { text-wrap: pretty; }
   opacity: 0.7;
 }
 
+/* ── Cinta de servicios ─────────────────────────────────────────
+   Franja de píldoras en movimiento continuo, como la de la
+   referencia. El desplazamiento es de -50%: la pista lleva el
+   contenido dos veces, así que al llegar a la mitad el fotograma
+   es idéntico al inicial y el salto no se ve.
+   ──────────────────────────────────────────────────────────── */
+.cinta {
+  overflow: hidden;
+  padding-block: 1.15rem;
+  background: var(--fondo-alt);
+  border-block: 1px solid var(--borde);
+  /* Se desvanece en los bordes en vez de cortarse en seco. */
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+          mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+.cinta__pista {
+  display: flex;
+  width: max-content;
+  animation: desfile 38s linear infinite;
+}
+.cinta:hover .cinta__pista { animation-play-state: paused; }
+
+.cinta__grupo {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding-right: 0.85rem;
+}
+.cinta__grupo li {
+  flex-shrink: 0;
+  padding: 0.5rem 1.15rem;
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  background: var(--superficie);
+  color: var(--texto-medio);
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+/* Un punto rojo delante de cada píldora, como marca de lista. */
+.cinta__grupo li::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 0.6rem;
+  border-radius: 50%;
+  background: var(--acento);
+  vertical-align: middle;
+}
+
+@keyframes desfile {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Banda roja ─────────────────────────────────────────────────
+   El bloque a todo el ancho que corta la página en la referencia.
+   ──────────────────────────────────────────────────────────── */
+.banda {
+  padding-block: clamp(3rem, 7vw, 5rem);
+  background: var(--rojo);
+  color: rgba(255, 255, 255, 0.9);
+}
+.banda__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.banda__titulo {
+  max-width: 20ch;
+  margin-bottom: 0.9rem;
+  color: #fff;
+  font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+}
+.banda__texto { max-width: 48ch; }
+
+/* Botón invertido: sobre el rojo, el relleno rojo desaparecería. */
+.boton--claro {
+  flex-shrink: 0;
+  background: #fff;
+  border-color: #fff;
+  color: #14090a;   /* 18.6:1 sobre blanco */
+}
+.boton--claro:hover {
+  background: #14090a;
+  border-color: #14090a;
+  color: #fff;      /* 18.6:1 sobre casi negro */
+  box-shadow: none;
+}
+
 /* ── Proceso ───────────────────────────────────────────────── */
 .seccion--proceso { border-block: none; }
 .seccion--proceso .proceso__media img {
-  filter: grayscale(1) contrast(0.62) brightness(0.95);
+  filter: grayscale(0.45) contrast(1) brightness(1);
 }
 
 .proceso {
@@ -528,7 +595,7 @@ p { text-wrap: pretty; }
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
-  filter: grayscale(1) contrast(0.62) brightness(1.22);
+  filter: grayscale(1) contrast(1.02) brightness(0.82);
 }
 
 .pasos {
@@ -569,14 +636,14 @@ p { text-wrap: pretty; }
   position: absolute;
   inset: 0;
   background: url("assets/img/contacto-datacenter.jpg") center / cover no-repeat;
-  filter: grayscale(1) brightness(1.55) contrast(0.72);
-  opacity: 0.22;
+  filter: grayscale(1) brightness(0.5) contrast(1.1);
+  opacity: 0.45;
 }
 .seccion--contacto::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, var(--fondo), rgba(247, 246, 243, 0.82) 45%, var(--fondo));
+  background: linear-gradient(to bottom, var(--fondo), rgba(13, 13, 16, 0.85) 45%, var(--fondo));
 }
 .seccion--contacto > .contenedor { position: relative; z-index: 1; }
 
@@ -609,7 +676,7 @@ p { text-wrap: pretty; }
   flex-direction: column;
   gap: 1.15rem;
   padding: clamp(1.5rem, 3.5vw, 2.5rem);
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(22, 22, 26, 0.92);
   backdrop-filter: blur(10px);
   border: 1px solid var(--borde);
   border-radius: var(--radio);
@@ -632,7 +699,7 @@ p { text-wrap: pretty; }
   border: 1px solid var(--borde);
   border-radius: var(--radio-sm);
   color: var(--texto);
-  box-shadow: inset 0 1px 2px rgba(21, 24, 31, 0.04);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.35);
   font-size: 0.9375rem;
   transition: border-color var(--transicion), box-shadow var(--transicion);
   resize: vertical;
@@ -653,7 +720,8 @@ p { text-wrap: pretty; }
 /* ── Footer ────────────────────────────────────────────────── */
 .site-footer {
   padding-top: clamp(3.5rem, 7vw, 5.5rem);
-  border-top: none;
+  background: var(--fondo-alt);
+  border-top: 1px solid var(--borde);
 }
 
 .footer {
@@ -737,7 +805,7 @@ p { text-wrap: pretty; }
     align-items: stretch;
     gap: 0.25rem;
     padding: 1rem clamp(1.25rem, 5vw, 3rem) 1.75rem;
-    background: rgba(247, 246, 243, 0.98);
+    background: rgba(13, 13, 16, 0.98);
     backdrop-filter: blur(14px);
     box-shadow: var(--sombra-md);
     border-bottom: 1px solid var(--borde);
@@ -760,6 +828,7 @@ p { text-wrap: pretty; }
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .cinta__pista { animation: none; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
