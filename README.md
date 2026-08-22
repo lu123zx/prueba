@@ -39,6 +39,24 @@ python3 -m http.server 8000
 - **Duotono por CSS** sobre las fotos: vienen de autores distintos y el filtro
   las deja como un solo set coherente con la paleta.
 
+## Despliegue
+
+El sitio se publica en Vercel. Como no hay `package.json` ni build step, el
+`vercel.json` de la raíz desactiva explícitamente el framework y los comandos
+de build e instalación:
+
+```json
+{ "framework": null, "buildCommand": null, "installCommand": null, "outputDirectory": null }
+```
+
+Esto es necesario porque el proyecto en Vercel venía configurado con el preset
+de **Next.js**, de cuando el repo era una app Next. Al quedar sin
+`package.json`, ese preset hacía fallar el build. Lo que está en `vercel.json`
+tiene precedencia sobre la configuración del panel, así que el arreglo viaja
+con el repo y no depende de que alguien recuerde tocar los ajustes.
+
+Si algún día se agrega un build step, hay que actualizar este archivo.
+
 ## Imágenes
 
 Todas provienen de [Pexels](https://www.pexels.com/) (licencia libre, uso
