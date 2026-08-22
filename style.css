@@ -480,6 +480,98 @@ p { text-wrap: pretty; }
   opacity: 0.7;
 }
 
+/* ── Cinta de servicios ─────────────────────────────────────────
+   Franja de píldoras en movimiento continuo, como la de la
+   referencia. El desplazamiento es de -50%: la pista lleva el
+   contenido dos veces, así que al llegar a la mitad el fotograma
+   es idéntico al inicial y el salto no se ve.
+   ──────────────────────────────────────────────────────────── */
+.cinta {
+  overflow: hidden;
+  padding-block: 1.15rem;
+  background: var(--fondo-alt);
+  border-block: 1px solid var(--borde);
+  /* Se desvanece en los bordes en vez de cortarse en seco. */
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+          mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+.cinta__pista {
+  display: flex;
+  width: max-content;
+  animation: desfile 38s linear infinite;
+}
+.cinta:hover .cinta__pista { animation-play-state: paused; }
+
+.cinta__grupo {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding-right: 0.85rem;
+}
+.cinta__grupo li {
+  flex-shrink: 0;
+  padding: 0.5rem 1.15rem;
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  background: var(--superficie);
+  color: var(--texto-medio);
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+/* Un punto rojo delante de cada píldora, como marca de lista. */
+.cinta__grupo li::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 0.6rem;
+  border-radius: 50%;
+  background: var(--acento);
+  vertical-align: middle;
+}
+
+@keyframes desfile {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Banda roja ─────────────────────────────────────────────────
+   El bloque a todo el ancho que corta la página en la referencia.
+   ──────────────────────────────────────────────────────────── */
+.banda {
+  padding-block: clamp(3rem, 7vw, 5rem);
+  background: var(--rojo);
+  color: rgba(255, 255, 255, 0.9);
+}
+.banda__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.banda__titulo {
+  max-width: 20ch;
+  margin-bottom: 0.9rem;
+  color: #fff;
+  font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+}
+.banda__texto { max-width: 48ch; }
+
+/* Botón invertido: sobre el rojo, el relleno rojo desaparecería. */
+.boton--claro {
+  flex-shrink: 0;
+  background: #fff;
+  border-color: #fff;
+  color: #14090a;   /* 18.6:1 sobre blanco */
+}
+.boton--claro:hover {
+  background: #14090a;
+  border-color: #14090a;
+  color: #fff;      /* 18.6:1 sobre casi negro */
+  box-shadow: none;
+}
+
 /* ── Proceso ───────────────────────────────────────────────── */
 .seccion--proceso { border-block: none; }
 .seccion--proceso .proceso__media img {
@@ -736,6 +828,7 @@ p { text-wrap: pretty; }
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .cinta__pista { animation: none; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;

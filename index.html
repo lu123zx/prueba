@@ -115,6 +115,30 @@
     </a>
   </section>
 
+  <!-- ─────────────────────── CINTA DE SERVICIOS ─────────────────── -->
+  <!-- Se duplica el contenido para que el bucle no tenga costura. La copia
+       va aria-hidden: el lector de pantalla leería los servicios dos veces. -->
+  <div class="cinta" aria-label="Servicios que ofrecemos">
+    <div class="cinta__pista">
+      <ul class="cinta__grupo">
+        <li>Desarrollo web y apps</li>
+        <li>Infraestructura y bases de datos</li>
+        <li>Automatización de procesos</li>
+        <li>Inteligencia artificial</li>
+        <li>Agentes autónomos</li>
+        <li>Soporte continuo</li>
+      </ul>
+      <ul class="cinta__grupo" aria-hidden="true">
+        <li>Desarrollo web y apps</li>
+        <li>Infraestructura y bases de datos</li>
+        <li>Automatización de procesos</li>
+        <li>Inteligencia artificial</li>
+        <li>Agentes autónomos</li>
+        <li>Soporte continuo</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- ───────────────────────── SERVICIOS ───────────────────────── -->
   <section class="seccion" id="servicios" aria-labelledby="servicios-titulo">
     <div class="contenedor">
@@ -337,6 +361,22 @@
         <img src="assets/img/proceso-workspace.jpg" width="1600" height="1100" loading="lazy" decoding="async"
              alt="Escritorio de trabajo con un computador portátil y un monitor mostrando interfaces de diseño">
       </div>
+    </div>
+  </section>
+
+  <!-- ──────────────────────── BANDA ROJA ─────────────────────────── -->
+  <section class="banda" aria-labelledby="banda-titulo">
+    <div class="contenedor banda__inner">
+      <div>
+        <h2 class="banda__titulo" id="banda-titulo">
+          ¿Tienes algo trabado y no sabes por dónde empezar?
+        </h2>
+        <p class="banda__texto">
+          Cuéntanoslo y te decimos si tiene solución, cuánto toma y qué implica.
+          Sin compromiso y sin vocabulario que no se entienda.
+        </p>
+      </div>
+      <a class="boton boton--claro" href="#contacto">Hablemos de tu proyecto</a>
     </div>
   </section>
 

@@ -50,6 +50,18 @@ negrita.
 - Titulares en sans 700 con tracking negativo. Radios amplios (24 px) y rótulos
   de sección como píldora.
 - Las fotos van en duotono rojo sobre gris; al pasar el mouse recuperan color.
+- **Cinta de servicios** en movimiento continuo tras el hero. La pista lleva el
+  contenido dos veces y se desplaza `-50%`: al llegar a la mitad el fotograma es
+  idéntico al inicial, así que el bucle no tiene costura. La copia va
+  `aria-hidden` para que el lector de pantalla no lea los servicios dos veces.
+  Se detiene al pasar el mouse y con `prefers-reduced-motion`.
+- **Banda roja** a todo el ancho antes de contacto. Su botón se invierte a
+  blanco: el relleno rojo desaparecería sobre el rojo del fondo.
+
+**No se replicaron** las secciones de la referencia que exigen contenido que no
+existe: cifras del tipo "230+ proyectos", testimonios, casos de estudio,
+portafolio ni logos de clientes. Inventarlos sería publicar afirmaciones falsas
+sobre el negocio.
 
 ## Paleta
 
