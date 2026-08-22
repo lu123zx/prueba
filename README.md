@@ -41,40 +41,31 @@ python3 -m http.server 8000
 
 ## Estilo visual
 
-Referencia: sitios editoriales tipo Youthology — serif de titulares, crema
-cálido y bloques alternados claro/oscuro.
+Referencia: sitios de agencia oscuros y densos, con acento rojo y sans en
+negrita.
 
-- **Instrument Serif** auto-alojada (SIL OFL, 43 KB las dos variantes) para
-  titulares de sección. Es la misma familia que usaba la versión Next.js
-  anterior del sitio.
-- **Dos niveles tipográficos a propósito:** serif en `h1`/`h2`, sans en `h3`.
-  La serif tiene un solo peso (400) y bajo ~1.6rem se ve endeble; a tamaño de
-  componente la sans manda mejor.
-- **Ritmo claro/oscuro:** hero y servicios en crema, "Cómo trabajamos" y footer
-  en bloque oscuro. Se logra con la clase `.bloque-oscuro`, que **redefine los
-  tokens** en lugar de escribir una regla por elemento — todo lo que está
-  dentro se invierte solo.
+- Base oscura (`#0d0d10`) con **un bloque claro** en "Cómo trabajamos", para
+  cortar la monotonía. Se logra con `.bloque-claro`, que **redefine los tokens**
+  en lugar de escribir una regla por elemento.
+- Titulares en sans 700 con tracking negativo. Radios amplios (24 px) y rótulos
+  de sección como píldora.
+- Las fotos van en duotono rojo sobre gris; al pasar el mouse recuperan color.
 
 ## Paleta
 
-Fondo hueso cálido (`#f7f6f3`), acento **petróleo** (`#0e5a56`) y el dorado
-(`#e0a800`) reservado para los botones.
+**Dos rojos, y no es capricho.** El rojo de la referencia (`#e8232a`) no sirve
+como botón: da 4.46:1 con texto blanco y 4.38:1 con negro — falla en ambos
+sentidos porque queda atrapado a media luminosidad.
 
-La regla que ordena todo: **el dorado nunca es texto.** Sobre este fondo da
-1.99:1 de contraste, muy por debajo del mínimo AA de 4.5:1. Funciona como
-relleno de botón con texto casi negro encima (8.5:1), pero como color de letra
-o de icono es ilegible. Por eso los rótulos, iconos y viñetas usan petróleo.
+| Token | Valor | Uso |
+| --- | --- | --- |
+| `--rojo` | `#d81a22` | Relleno de botón, texto blanco encima (5.1:1) |
+| `--acento` | `#ff5a5f` | Texto e iconos sobre oscuro (6.4:1) |
+| `--acento` en `.bloque-claro` | `#c0141c` | El coral no rinde sobre fondo claro |
 
-Todos los pares texto/fondo están verificados contra WCAG AA, incluida una
-auditoría sobre la página ya renderizada, no solo sobre la tabla de tokens.
-
-Las fotos llevan un **duotono cálido**: escala de grises, sepia, contraste
-comprimido y un velo ámbar. Al pasar el mouse recuperan su color real.
-
-Se probó dejarlas en color natural y no funciona: vienen de autores distintos
-(engranajes multicolor, editor negro, cables verdes, sala azul) y juntas no
-forman un set. El duotono es lo que las unifica; lo que cambió es que ahora es
-cálido en vez de frío.
+Todos los pares están verificados con una auditoría sobre la página renderizada
+que **compone las capas translúcidas** — un fondo con alfa tratado como opaco da
+ratios falsos.
 
 ## SEO
 

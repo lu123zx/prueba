@@ -26,9 +26,9 @@
   // OSCURAS para verse. En dorado no se distinguen (1.99:1 contra el fondo),
   // así que el estado "encendido" usa el petróleo del acento.
   const COLOR = {
-    particula: [122, 106, 88],
-    enlace:    [150, 134, 114],
-    acento:    [168, 75, 30],
+    particula: [150, 148, 158],
+    enlace:    [120, 118, 128],
+    acento:    [255, 90, 95],
   };
 
   let particulas = [];
@@ -95,7 +95,7 @@
         p.color(COLOR.acento[0], COLOR.acento[1], COLOR.acento[2]),
         energia
       );
-      c.setAlpha(78 + energia * 90);
+      c.setAlpha(120 + energia * 90);
       p.noStroke();
       p.fill(c);
       p.circle(this.x, this.y, this.tam * 2);
@@ -164,7 +164,7 @@
             p.color(COLOR.acento[0], COLOR.acento[1], COLOR.acento[2]),
             energia
           );
-          c.setAlpha(cercania * (26 + energia * 62));
+          c.setAlpha(cercania * (46 + energia * 70));
           p.stroke(c);
           p.line(a.x, a.y, b.x, b.y);
         }
