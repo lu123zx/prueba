@@ -1,9 +1,66 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TechFlow Soluciones — Servicios de tecnología para tu negocio</title>
-<meta name="description" content="Desarrollo web y apps, infraestructura, automatización de procesos, inteligencia artificial, agentes autónomos y soporte continuo.">
+
+<title>TechFlow Soluciones | Desarrollo web, automatización e IA para empresas</title>
+<meta name="description" content="Desarrollo web y apps, infraestructura y bases de datos, automatización de procesos, inteligencia artificial, agentes autónomos y soporte continuo. Trabajo remoto desde Chile.">
+
+<link rel="canonical" href="https://www.techflowsoluciones.com/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#f7f6f3">
+
+<!-- Open Graph: es lo que se ve al compartir el enlace por WhatsApp o LinkedIn. -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CL">
+<meta property="og:site_name" content="TechFlow Soluciones">
+<meta property="og:url" content="https://www.techflowsoluciones.com/">
+<meta property="og:title" content="TechFlow Soluciones | Desarrollo web, automatización e IA">
+<meta property="og:description" content="Desarrollo, infraestructura, automatización e inteligencia artificial para empresas que necesitan resolver.">
+<meta property="og:image" content="https://www.techflowsoluciones.com/assets/img/og-techflow.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TechFlow Soluciones — Tecnología que trabaja para tu negocio">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TechFlow Soluciones | Desarrollo web, automatización e IA">
+<meta name="twitter:description" content="Desarrollo, infraestructura, automatización e inteligencia artificial para empresas que necesitan resolver.">
+<meta name="twitter:image" content="https://www.techflowsoluciones.com/assets/img/og-techflow.jpg">
+
 <link rel="stylesheet" href="style.css">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230c0f18'/%3E%3Cpath d='M7 11h18M16 11v13' stroke='%23e0a800' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230e5a56'/%3E%3Cpath d='M7 11h18M16 11v13' stroke='%23e0a800' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
+
+<!-- Datos estructurados: le dicen a Google y a los buscadores con IA qué es
+     esto y qué servicios ofrece, en vez de dejar que lo deduzcan del texto. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": "https://www.techflowsoluciones.com/#negocio",
+  "name": "TechFlow Soluciones",
+  "url": "https://www.techflowsoluciones.com/",
+  "image": "https://www.techflowsoluciones.com/assets/img/og-techflow.jpg",
+  "email": "contacto@techflowsoluciones.com",
+  "description": "Servicios de tecnología para empresas: desarrollo web y apps, infraestructura y bases de datos, automatización de procesos, inteligencia artificial, agentes autónomos y soporte continuo.",
+  "areaServed": { "@type": "Country", "name": "Chile" },
+  "availableLanguage": "es",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Servicios de tecnología",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Desarrollo web y apps", "description": "Sitios corporativos, aplicaciones web a medida, tiendas en línea y paneles de administración." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Infraestructura y bases de datos", "description": "Modelado de bases de datos, servidores y nube, respaldos, migraciones y monitoreo." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Automatización de procesos", "description": "Flujos de trabajo que conectan tus herramientas y eliminan tareas manuales repetidas." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Soluciones con inteligencia artificial", "description": "Asistentes entrenados con tu documentación, extracción de datos y búsqueda semántica." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Agentes de negocio autónomos", "description": "Agentes que ejecutan tareas completas conectados a tu correo, agenda y base de datos." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Soporte y mantenimiento continuo", "description": "Mesa de ayuda remota, actualizaciones, monitoreo preventivo y corrección de fallas." } }
+    ]
+  }
+}
+</script>
+</head>
+<body>
 
 <a class="skip-link" href="#servicios">Saltar al contenido</a>
 
@@ -400,8 +457,11 @@
   </div>
 </footer>
 
-<!-- p5.js auto-alojado: el sitio funciona sin depender de un CDN ajeno.
-     Alternativa CDN: https://cdn.jsdelivr.net/npm/p5@1.11.2/lib/p5.min.js -->
-<script src="assets/vendor/p5.min.js" defer></script>
+<!-- p5.js NO se carga aquí a propósito: son 245 KB comprimidos para un fondo
+     decorativo. sketch.js decide si vale la pena bajarlos y lo inyecta él mismo.
+     Auto-alojado; alternativa CDN: https://cdn.jsdelivr.net/npm/p5@1.11.2/lib/p5.min.js -->
 <script src="sketch.js" defer></script>
 <script src="main.js" defer></script>
+
+</body>
+</html>
