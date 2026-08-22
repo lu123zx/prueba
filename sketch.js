@@ -22,10 +22,13 @@
     velocidadBase: 0.22,
   };
 
+  // Calibrado para fondo claro: sobre #f7f6f3 las partículas tienen que ser
+  // OSCURAS para verse. En dorado no se distinguen (1.99:1 contra el fondo),
+  // así que el estado "encendido" usa el petróleo del acento.
   const COLOR = {
-    particula: [150, 165, 200],
-    enlace:    [110, 130, 175],
-    acento:    [224, 168, 0],
+    particula: [92, 104, 122],
+    enlace:    [120, 132, 150],
+    acento:    [14, 90, 86],
   };
 
   let particulas = [];
@@ -92,7 +95,7 @@
         p.color(COLOR.acento[0], COLOR.acento[1], COLOR.acento[2]),
         energia
       );
-      c.setAlpha(150 + energia * 70);
+      c.setAlpha(95 + energia * 85);
       p.noStroke();
       p.fill(c);
       p.circle(this.x, this.y, this.tam * 2);
@@ -153,7 +156,7 @@
             p.color(COLOR.acento[0], COLOR.acento[1], COLOR.acento[2]),
             energia
           );
-          c.setAlpha(cercania * (52 + energia * 65));
+          c.setAlpha(cercania * (38 + energia * 60));
           p.stroke(c);
           p.line(a.x, a.y, b.x, b.y);
         }

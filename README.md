@@ -39,6 +39,24 @@ python3 -m http.server 8000
 - **Duotono por CSS** sobre las fotos: vienen de autores distintos y el filtro
   las deja como un solo set coherente con la paleta.
 
+## Paleta
+
+Fondo hueso cálido (`#f7f6f3`), acento **petróleo** (`#0e5a56`) y el dorado
+(`#e0a800`) reservado para los botones.
+
+La regla que ordena todo: **el dorado nunca es texto.** Sobre este fondo da
+1.99:1 de contraste, muy por debajo del mínimo AA de 4.5:1. Funciona como
+relleno de botón con texto casi negro encima (8.5:1), pero como color de letra
+o de icono es ilegible. Por eso los rótulos, iconos y viñetas usan petróleo.
+
+Todos los pares texto/fondo están verificados contra WCAG AA, incluida una
+auditoría sobre la página ya renderizada, no solo sobre la tabla de tokens.
+
+Las fotos llevan un duotono en clave alta: escala de grises con el contraste
+comprimido y un velo petróleo suave. Varias son casi negras de origen, y sin
+comprimir el contraste quedaban como bloques oscuros sobre un fondo claro. Al
+pasar el mouse recuperan color.
+
 ## Despliegue
 
 El sitio se publica en Vercel. Como no hay `package.json` ni build step, el
