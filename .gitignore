@@ -1,36 +1,23 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Sitio estático: no hay build ni dependencias que ignorar.
+# Esto es solo ruido del sistema y de los editores.
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-.yarn/install-state.gz
-
-# testing
-/coverage
-
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
+# macOS / Windows
 .DS_Store
+Thumbs.db
+
+# Editores
+.vscode/
+.idea/
+*.swp
+
+# Logs y temporales
+*.log
+*.tmp
+
+# Certificados y variables locales
 *.pem
+.env
+.env.local
 
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# local env files
-.env*.local
-
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# Por si alguna herramienta suelta node_modules acá
+/node_modules

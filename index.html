@@ -1,0 +1,407 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TechFlow Soluciones — Servicios de tecnología para tu negocio</title>
+<meta name="description" content="Desarrollo web y apps, infraestructura, automatización de procesos, inteligencia artificial, agentes autónomos y soporte continuo.">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230c0f18'/%3E%3Cpath d='M7 11h18M16 11v13' stroke='%23e0a800' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
+
+<a class="skip-link" href="#servicios">Saltar al contenido</a>
+
+<!-- Lienzo de p5.js: vive detrás de todo el documento. -->
+<div id="fondo-p5" aria-hidden="true"></div>
+
+<header class="site-header" id="inicio">
+  <nav class="nav" aria-label="Navegación principal">
+    <a class="marca" href="#inicio">
+      <svg class="marca__logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <path d="M4 8h24M16 8v20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="16" cy="8" r="3.2" fill="none" stroke="currentColor" stroke-width="2.5"/>
+        <path d="M16 18c5 0 8-2.5 8-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      </svg>
+      <span class="marca__texto">TechFlow<span class="marca__acento"> Soluciones</span></span>
+    </a>
+
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú de navegación">
+      <span class="nav__toggle-barra"></span>
+      <span class="nav__toggle-barra"></span>
+      <span class="nav__toggle-barra"></span>
+    </button>
+
+    <ul class="nav__menu" id="nav-menu">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#proceso">Cómo trabajamos</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+      <li><a class="boton boton--pequeno" href="#contacto">Hablemos</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ─────────────────────────── HERO ─────────────────────────── -->
+  <section class="hero" aria-labelledby="hero-titulo">
+    <div class="contenedor hero__inner">
+      <p class="etiqueta">Servicios de tecnología</p>
+      <h1 class="hero__titulo" id="hero-titulo">
+        Tecnología que <em>trabaja</em><br>para tu negocio.
+      </h1>
+      <p class="hero__bajada">
+        Desarrollo, infraestructura, automatización e inteligencia artificial
+        para empresas que necesitan resolver, no una presentación más.
+      </p>
+      <div class="hero__acciones">
+        <a class="boton" href="#servicios">Ver servicios</a>
+        <a class="boton boton--fantasma" href="#contacto">Conversemos</a>
+      </div>
+    </div>
+    <a class="hero__scroll" href="#servicios" aria-label="Bajar a la sección de servicios">
+      <span class="hero__scroll-linea"></span>
+    </a>
+  </section>
+
+  <!-- ───────────────────────── SERVICIOS ───────────────────────── -->
+  <section class="seccion" id="servicios" aria-labelledby="servicios-titulo">
+    <div class="contenedor">
+
+      <div class="seccion__encabezado">
+        <div>
+          <p class="etiqueta">Servicios</p>
+          <h2 class="seccion__titulo" id="servicios-titulo">Seis frentes, un solo responsable.</h2>
+        </div>
+        <p class="seccion__bajada">
+          Puedes contratar uno o combinarlos. El alcance se define antes de empezar,
+          por escrito, para que sepas exactamente qué entra y qué no.
+        </p>
+      </div>
+
+      <div class="grid-servicios">
+
+        <!-- 1 -->
+        <article class="tarjeta" tabindex="0">
+          <div class="tarjeta__media">
+            <img src="assets/img/servicio-desarrollo-web.jpg" width="1200" height="800" loading="lazy" decoding="async"
+                 alt="Editor de código mostrando un componente de interfaz en desarrollo">
+          </div>
+          <div class="tarjeta__cuerpo">
+            <span class="tarjeta__num">01</span>
+            <svg class="tarjeta__icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 6l-5 6 5 6M16 6l5 6-5 6M14 4l-4 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h3 class="tarjeta__titulo">Desarrollo web y apps</h3>
+            <ul class="tarjeta__lista">
+              <li>Sitios corporativos y landing pages orientadas a conversión</li>
+              <li>Aplicaciones web a medida y paneles de administración</li>
+              <li>Tiendas en línea e integración de medios de pago</li>
+              <li>Diseño responsive y optimización de rendimiento</li>
+              <li>Publicación, dominio y certificado SSL</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 2 -->
+        <article class="tarjeta" tabindex="0">
+          <div class="tarjeta__media">
+            <img src="assets/img/servicio-infraestructura.jpg" width="1200" height="800" loading="lazy" decoding="async"
+                 alt="Panel de red con cables de fibra óptica conectados a un switch">
+          </div>
+          <div class="tarjeta__cuerpo">
+            <span class="tarjeta__num">02</span>
+            <svg class="tarjeta__icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <ellipse cx="12" cy="6" rx="8" ry="3" fill="none" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            </svg>
+            <h3 class="tarjeta__titulo">Infraestructura y bases de datos</h3>
+            <ul class="tarjeta__lista">
+              <li>Diseño y modelado de bases de datos relacionales</li>
+              <li>Servidores, hosting y despliegue en la nube</li>
+              <li>Respaldos automáticos y planes de recuperación</li>
+              <li>Migración de datos entre sistemas</li>
+              <li>Monitoreo, permisos y control de accesos</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 3 -->
+        <article class="tarjeta" tabindex="0">
+          <div class="tarjeta__media">
+            <img src="assets/img/servicio-automatizacion.jpg" width="1200" height="800" loading="lazy" decoding="async"
+                 alt="Conjunto de engranajes entrelazados representando procesos encadenados">
+          </div>
+          <div class="tarjeta__cuerpo">
+            <span class="tarjeta__num">03</span>
+            <svg class="tarjeta__icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M4 7h6M14 7h6M4 17h6M14 17h6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+              <circle cx="12" cy="7" r="2.4" fill="none" stroke="currentColor" stroke-width="1.6"/>
+              <circle cx="12" cy="17" r="2.4" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            </svg>
+            <h3 class="tarjeta__titulo">Automatización de procesos</h3>
+            <ul class="tarjeta__lista">
+              <li>Flujos de trabajo que conectan las herramientas que ya usas</li>
+              <li>Eliminación de tareas manuales y digitación repetida</li>
+              <li>Reportes e informes generados solos</li>
+              <li>Notificaciones y alertas según reglas de negocio</li>
+              <li>Integración vía API entre sistemas que no se hablan</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 4 -->
+        <article class="tarjeta" tabindex="0">
+          <div class="tarjeta__media">
+            <img src="assets/img/servicio-ia.jpg" width="1200" height="800" loading="lazy" decoding="async"
+                 alt="Mano tocando una red de nodos conectados sobre fondo azul">
+          </div>
+          <div class="tarjeta__cuerpo">
+            <span class="tarjeta__num">04</span>
+            <svg class="tarjeta__icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/>
+              <circle cx="5" cy="6" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+              <circle cx="19" cy="6" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+              <circle cx="5" cy="18" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+              <circle cx="19" cy="18" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M6.6 7.4l3 3M17.4 7.4l-3 3M6.6 16.6l3-3M17.4 16.6l-3-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            <h3 class="tarjeta__titulo">Soluciones con inteligencia artificial</h3>
+            <ul class="tarjeta__lista">
+              <li>Asistentes y chatbots entrenados con tu documentación</li>
+              <li>Clasificación y extracción de datos desde documentos</li>
+              <li>Generación y resumen de contenido a escala</li>
+              <li>Búsqueda semántica sobre tus propios archivos</li>
+              <li>Integración de modelos en los sistemas que ya tienes</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 5 -->
+        <article class="tarjeta" tabindex="0">
+          <div class="tarjeta__media">
+            <img src="assets/img/servicio-agentes.jpg" width="1200" height="800" loading="lazy" decoding="async"
+                 alt="Mano robótica blanca sobre un fondo de luces azules desenfocadas">
+          </div>
+          <div class="tarjeta__cuerpo">
+            <span class="tarjeta__num">05</span>
+            <svg class="tarjeta__icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <rect x="4" y="8" width="16" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M12 4v4M8 20v2M16 20v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+              <circle cx="9" cy="13.5" r="1.2" fill="currentColor"/>
+              <circle cx="15" cy="13.5" r="1.2" fill="currentColor"/>
+            </svg>
+            <h3 class="tarjeta__titulo">Agentes de negocio autónomos</h3>
+            <ul class="tarjeta__lista">
+              <li>Agentes que ejecutan tareas completas de principio a fin</li>
+              <li>Atención y calificación de consultas sin intervención humana</li>
+              <li>Seguimiento de clientes y respuestas de primer contacto</li>
+              <li>Operación conectada a tu correo, agenda y base de datos</li>
+              <li>Límites, reglas de escalamiento y registro de cada acción</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 6 -->
+        <article class="tarjeta" tabindex="0">
+          <div class="tarjeta__media">
+            <img src="assets/img/servicio-soporte.jpg" width="1200" height="800" loading="lazy" decoding="async"
+                 alt="Técnico trabajando frente a un equipo en una sala de servidores">
+          </div>
+          <div class="tarjeta__cuerpo">
+            <span class="tarjeta__num">06</span>
+            <svg class="tarjeta__icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M4 13v-1a8 8 0 0116 0v1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+              <rect x="2.5" y="13" width="4" height="6" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+              <rect x="17.5" y="13" width="4" height="6" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M19.5 19v.5a2.5 2.5 0 01-2.5 2.5h-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            <h3 class="tarjeta__titulo">Soporte y mantenimiento continuo</h3>
+            <ul class="tarjeta__lista">
+              <li>Mesa de ayuda remota para usuarios y equipos</li>
+              <li>Actualizaciones, parches y monitoreo preventivo</li>
+              <li>Corrección de fallas y tiempos de respuesta acordados</li>
+              <li>Mantención de los sistemas y sitios ya entregados</li>
+              <li>Documentación y traspaso de conocimiento a tu equipo</li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ────────────────────────── PROCESO ────────────────────────── -->
+  <section class="seccion seccion--proceso" id="proceso" aria-labelledby="proceso-titulo">
+    <div class="contenedor proceso">
+      <div class="proceso__texto">
+        <p class="etiqueta">Cómo trabajamos</p>
+        <h2 class="seccion__titulo" id="proceso-titulo">Primero entender, después construir.</h2>
+        <p>
+          Empezamos por mirar cómo funciona hoy tu operación y dónde se pierde el
+          tiempo. Recién con eso claro se define el alcance: qué se va a construir,
+          en qué plazo y con qué criterio se da por terminado. Nada arranca sin
+          esa conversación.
+        </p>
+        <p>
+          Trabajamos por entregas cortas, para que veas avances reales en vez de
+          esperar meses a una entrega única. Todo queda documentado y el código es
+          tuyo: si mañana decides seguir con otro equipo, no quedas amarrado a
+          nosotros.
+        </p>
+
+        <ol class="pasos">
+          <li class="pasos__item">
+            <span class="pasos__num">01</span>
+            <div>
+              <h3>Diagnóstico</h3>
+              <p>Revisamos tu operación actual y detectamos qué conviene resolver primero.</p>
+            </div>
+          </li>
+          <li class="pasos__item">
+            <span class="pasos__num">02</span>
+            <div>
+              <h3>Propuesta</h3>
+              <p>Alcance, plazos y entregables por escrito, antes de escribir la primera línea.</p>
+            </div>
+          </li>
+          <li class="pasos__item">
+            <span class="pasos__num">03</span>
+            <div>
+              <h3>Construcción</h3>
+              <p>Entregas parciales con revisión tuya en cada etapa, sin sorpresas al final.</p>
+            </div>
+          </li>
+          <li class="pasos__item">
+            <span class="pasos__num">04</span>
+            <div>
+              <h3>Acompañamiento</h3>
+              <p>Puesta en marcha, documentación y soporte para que el sistema siga funcionando.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="proceso__media">
+        <img src="assets/img/proceso-workspace.jpg" width="1600" height="1100" loading="lazy" decoding="async"
+             alt="Escritorio de trabajo con un computador portátil y un monitor mostrando interfaces de diseño">
+      </div>
+    </div>
+  </section>
+
+  <!-- ────────────────────────── CONTACTO ───────────────────────── -->
+  <section class="seccion seccion--contacto" id="contacto" aria-labelledby="contacto-titulo">
+    <div class="contenedor contacto">
+
+      <div class="contacto__intro">
+        <p class="etiqueta">Contacto</p>
+        <h2 class="seccion__titulo" id="contacto-titulo">Cuéntanos qué necesitas resolver.</h2>
+        <p class="contacto__bajada">
+          Escríbenos con el problema en tus palabras. No hace falta que sepas
+          qué servicio corresponde: de eso nos encargamos nosotros.
+        </p>
+
+        <ul class="datos">
+          <li class="datos__item">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M3.5 6.5l8.5 6 8.5-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            <div>
+              <span class="datos__rotulo">Email</span>
+              <a href="mailto:contacto@techflowsoluciones.com">contacto@techflowsoluciones.com</a>
+            </div>
+          </li>
+          <li class="datos__item">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M5 4h4l2 5-2.5 1.5a12 12 0 005 5L15 13l5 2v4a1 1 0 01-1.1 1A16 16 0 014 5.1 1 1 0 015 4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+            </svg>
+            <div>
+              <span class="datos__rotulo">Teléfono</span>
+              <span class="datos__pendiente">[+56 9 XXXX XXXX]</span>
+            </div>
+          </li>
+          <li class="datos__item">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M12 21s7-5.5 7-11a7 7 0 10-14 0c0 5.5 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+              <circle cx="12" cy="10" r="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            </svg>
+            <div>
+              <span class="datos__rotulo">Ubicación</span>
+              <span class="datos__pendiente">[ciudad, país] · Trabajo remoto</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Formulario decorativo: sin backend todavía (ver README). -->
+      <form class="formulario" novalidate>
+        <div class="campo">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" name="nombre" autocomplete="name" placeholder="Cómo te llamas" required>
+        </div>
+        <div class="campo">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" autocomplete="email" placeholder="tu@correo.com" required>
+        </div>
+        <div class="campo">
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" name="mensaje" rows="5" placeholder="Qué necesitas resolver" required></textarea>
+        </div>
+        <button class="boton boton--ancho" type="submit">Enviar mensaje</button>
+        <p class="formulario__nota" role="status" aria-live="polite" data-nota>
+          El formulario todavía no está conectado. Escríbenos directo a
+          <a href="mailto:contacto@techflowsoluciones.com">contacto@techflowsoluciones.com</a>.
+        </p>
+      </form>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="contenedor footer">
+    <div class="footer__marca">
+      <span class="marca__texto">TechFlow<span class="marca__acento"> Soluciones</span></span>
+      <p>Servicios de tecnología para empresas que necesitan resolver.</p>
+    </div>
+
+    <nav class="footer__col" aria-label="Servicios">
+      <h2 class="footer__titulo">Servicios</h2>
+      <ul>
+        <li><a href="#servicios">Desarrollo web y apps</a></li>
+        <li><a href="#servicios">Infraestructura y bases de datos</a></li>
+        <li><a href="#servicios">Automatización de procesos</a></li>
+        <li><a href="#servicios">Inteligencia artificial</a></li>
+        <li><a href="#servicios">Agentes autónomos</a></li>
+        <li><a href="#servicios">Soporte continuo</a></li>
+      </ul>
+    </nav>
+
+    <div class="footer__col">
+      <h2 class="footer__titulo">Síguenos</h2>
+      <ul class="redes">
+        <li><a href="#" aria-label="LinkedIn de TechFlow Soluciones (pendiente)">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.94 8.5H4.5V20h2.44V8.5zM5.72 4a1.44 1.44 0 100 2.88 1.44 1.44 0 000-2.88zM20 13.6c0-3.1-1.66-4.54-3.87-4.54-1.79 0-2.59 1-3.03 1.69V8.5H10.7c.03.72 0 11.5 0 11.5h2.4v-6.42c0-.35.02-.7.13-.95.28-.7.92-1.42 2-1.42 1.4 0 1.97 1.07 1.97 2.65V20H20v-6.4z" fill="currentColor"/></svg>
+        </a></li>
+        <li><a href="#" aria-label="Instagram de TechFlow Soluciones (pendiente)">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="4.5" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="3.6" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="16.9" cy="7.1" r="1.1" fill="currentColor"/></svg>
+        </a></li>
+        <li><a href="#" aria-label="GitHub de TechFlow Soluciones (pendiente)">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3a9 9 0 00-2.85 17.54c.45.08.61-.2.61-.43v-1.5c-2.5.55-3.03-1.2-3.03-1.2-.41-1.04-1-1.32-1-1.32-.82-.56.06-.55.06-.55.9.07 1.38.93 1.38.93.8 1.38 2.11.98 2.62.75.08-.58.31-.98.57-1.2-2-.23-4.1-1-4.1-4.45 0-.98.35-1.79.93-2.42-.1-.23-.4-1.15.09-2.4 0 0 .75-.24 2.47.92a8.6 8.6 0 014.5 0c1.72-1.16 2.47-.92 2.47-.92.49 1.25.18 2.17.09 2.4.58.63.93 1.44.93 2.42 0 3.46-2.11 4.22-4.12 4.44.32.28.61.83.61 1.68v2.5c0 .23.16.51.62.42A9 9 0 0012 3z" fill="currentColor"/></svg>
+        </a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="contenedor footer__legal">
+    <p>&copy; <span data-anio>2026</span> TechFlow Soluciones. Todos los derechos reservados.</p>
+    <ul>
+      <li><a href="#">Aviso legal</a></li>
+      <li><a href="#">Política de privacidad</a></li>
+      <li><a href="#">Términos de servicio</a></li>
+    </ul>
+  </div>
+</footer>
+
+<!-- p5.js auto-alojado: el sitio funciona sin depender de un CDN ajeno.
+     Alternativa CDN: https://cdn.jsdelivr.net/npm/p5@1.11.2/lib/p5.min.js -->
+<script src="assets/vendor/p5.min.js" defer></script>
+<script src="sketch.js" defer></script>
+<script src="main.js" defer></script>
