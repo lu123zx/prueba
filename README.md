@@ -57,6 +57,30 @@ comprimido y un velo petróleo suave. Varias son casi negras de origen, y sin
 comprimir el contraste quedaban como bloques oscuros sobre un fondo claro. Al
 pasar el mouse recuperan color.
 
+## SEO
+
+- `<html lang="es-CL">`, canonical, `robots.txt` y `sitemap.xml`.
+- Open Graph y Twitter Card con imagen propia (`assets/img/og-techflow.jpg`,
+  1200×630). Sin esto, compartir el enlace por WhatsApp mostraba solo texto
+  plano — y en Chile WhatsApp es el canal donde más se comparte.
+- JSON-LD `ProfessionalService` con los seis servicios en un `OfferCatalog`.
+  Sirve tanto para resultados enriquecidos como para que los buscadores con IA
+  puedan citar el sitio sin deducirlo del texto.
+
+**Límite conocido:** es una sola URL para seis servicios distintos. Sirve para
+posicionar por marca, pero no para competir por cada servicio por separado.
+Eso exige una página por servicio.
+
+## Rendimiento
+
+p5.js pesa 245 KB comprimidos y el fondo es decorativo, así que `sketch.js`
+decide si lo descarga. No lo hace cuando el sistema pide menos movimiento, con
+ahorro de datos o 2G activos, o bajo 640 px de ancho. En móvil eso son ~1,4 MB
+menos. La página se ve y funciona igual, solo sin partículas.
+
+Para reactivarlo en móvil, borra la línea del `matchMedia("(max-width: 640px)")`
+en `valeLaPena()`.
+
 ## Despliegue
 
 El sitio se publica en Vercel. Como no hay `package.json` ni build step, el

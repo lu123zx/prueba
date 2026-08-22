@@ -206,16 +206,42 @@
     });
   };
 
-  // Si p5 no cargó (CDN caído, red bloqueada, bloqueador de scripts), el sitio
-  // debe seguir funcionando: el fondo es decorativo, no un requisito.
-  if (typeof p5 === "undefined") {
+  /* ── Carga condicional de p5 ────────────────────────────────
+     p5 pesa 245 KB comprimidos y esto es un fondo decorativo. No se
+     descarga cuando no aporta o cuando cuesta caro:
+       - el sistema pide menos movimiento
+       - el usuario activó ahorro de datos, o va en 2G
+       - pantalla angosta: el fondo casi no se ve y el dato se paga
+     Sin p5 la página se ve y funciona igual, solo sin partículas.
+     ──────────────────────────────────────────────────────────── */
+
+  // Stub inerte para que main.js pueda llamar sin comprobar nada.
+  function fondoInerte() {
     window.FondoTechFlow = {
       setEnergia: function () {},
       pausar: function () {},
       reanudar: function () {},
     };
-    return;
   }
 
-  new p5(sketch);
+  function valeLaPena() {
+    if (prefiereMenosMovimiento.matches) return false;
+    const con = navigator.connection;
+    if (con && (con.saveData || /(^|-)2g$/.test(con.effectiveType || ""))) return false;
+    if (window.matchMedia("(max-width: 640px)").matches) return false;
+    return true;
+  }
+
+  fondoInerte();
+  if (!valeLaPena()) return;
+
+  const tag = document.createElement("script");
+  tag.src = "assets/vendor/p5.min.js";
+  tag.async = true;
+  // Al resolverse, el propio sketch reemplaza el stub por el control real.
+  tag.onload = function () {
+    if (typeof p5 !== "undefined") new p5(sketch);
+  };
+  tag.onerror = fondoInerte;
+  document.head.appendChild(tag);
 })();
