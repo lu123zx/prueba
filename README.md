@@ -68,10 +68,13 @@ o de icono es ilegible. Por eso los rótulos, iconos y viñetas usan petróleo.
 Todos los pares texto/fondo están verificados contra WCAG AA, incluida una
 auditoría sobre la página ya renderizada, no solo sobre la tabla de tokens.
 
-Las fotos llevan un duotono en clave alta: escala de grises con el contraste
-comprimido y un velo petróleo suave. Varias son casi negras de origen, y sin
-comprimir el contraste quedaban como bloques oscuros sobre un fondo claro. Al
-pasar el mouse recuperan color.
+Las fotos llevan un **duotono cálido**: escala de grises, sepia, contraste
+comprimido y un velo ámbar. Al pasar el mouse recuperan su color real.
+
+Se probó dejarlas en color natural y no funciona: vienen de autores distintos
+(engranajes multicolor, editor negro, cables verdes, sala azul) y juntas no
+forman un set. El duotono es lo que las unifica; lo que cambió es que ahora es
+cálido en vez de frío.
 
 ## SEO
 

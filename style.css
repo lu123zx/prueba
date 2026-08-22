@@ -49,10 +49,12 @@
   --texto-medio:    #535a67;  /*  6.2:1 */
   --texto-tenue:    #5f6673;  /*  5.1:1 */
 
-  /* Acento principal: petróleo. Legible como texto e icono. */
-  --acento:         #0e5a56;  /*  7.4:1 */
-  --acento-fuerte:  #0a403d;  /* 10.7:1 — hover */
-  --acento-hueco:   rgba(14, 90, 86, 0.09);
+  /* Acento principal: terracota. Es la versión legible del naranja de la
+     referencia — el original (#ff5c28) da 2.73:1 sobre este fondo y no
+     pasa el mínimo AA. Warm, para no dejar nada frío en la página. */
+  --acento:         #a84b1e;  /*  5.1:1 */
+  --acento-fuerte:  #7f3814;  /*  7.6:1 — hover */
+  --acento-hueco:   rgba(168, 75, 30, 0.08);
 
   /* Dorado: solo relleno. El texto que va encima es --oro-tinta. */
   --oro:            #e0a800;
@@ -152,13 +154,21 @@ p { text-wrap: pretty; }
 }
 
 /* ── Lienzo p5.js ──────────────────────────────────────────── */
+/* El lienzo vive SOLO detrás del hero. Cubriendo toda la página, las
+   partículas se leían como polvo sobre cada sección y ensuciaban el
+   ritmo claro/oscuro. Acotado al hero funciona como textura de entrada
+   y el resto del sitio queda limpio. */
 #fondo-p5 {
-  position: fixed;
-  inset: 0;
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: clamp(600px, 88vh, 900px);
+  overflow: hidden;
   z-index: 0;
   pointer-events: none; /* la animación nunca roba clics */
+  -webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 62%, transparent 100%);
 }
-#fondo-p5 canvas { display: block; width: 100% !important; height: 100% !important; }
+#fondo-p5 canvas { display: block; width: 100%; height: 100%; }
 
 /* Todo el contenido va por encima del lienzo. */
 .site-header, main, .site-footer { position: relative; z-index: 1; }
@@ -371,9 +381,9 @@ p { text-wrap: pretty; }
   --texto:          #f4f1ea;  /* 15.8:1 */
   --texto-medio:    #a8a69e;  /*  7.3:1 */
   --texto-tenue:    #8d8b84;  /*  5.2:1 */
-  --acento:         #6fc2b1;  /*  8.5:1 */
-  --acento-fuerte:  #8ad3c4;
-  --acento-hueco:   rgba(111, 194, 177, 0.12);
+  --acento:         #f0855a;  /*  7.0:1 */
+  --acento-fuerte:  #f6a685;
+  --acento-hueco:   rgba(240, 133, 90, 0.12);
 
   background: var(--oscuro);
   color: var(--texto-medio);
@@ -432,20 +442,20 @@ p { text-wrap: pretty; }
   height: 100%;
   object-fit: cover;
   /* Duotono: unifica fotos de orígenes distintos con la paleta del sitio. */
-  filter: grayscale(1) contrast(0.5) brightness(1.3);
+  filter: grayscale(1) sepia(0.72) contrast(0.62) brightness(1.24) saturate(1.3);
   transition: filter var(--transicion), transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .tarjeta__media::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(150deg, rgba(14, 90, 86, 0.3), rgba(14, 90, 86, 0.45) 62%);
+  background: linear-gradient(155deg, rgba(224, 168, 0, 0.16), rgba(120, 72, 30, 0.24));
   mix-blend-mode: multiply;
   transition: opacity var(--transicion);
 }
 .tarjeta:hover .tarjeta__media img,
 .tarjeta:focus-within .tarjeta__media img {
-  filter: grayscale(0) contrast(0.92) brightness(1.08);
+  filter: grayscale(0) sepia(0) contrast(1) brightness(1.04) saturate(1);
   transform: scale(1.05);
 }
 .tarjeta:hover .tarjeta__media::after,
@@ -508,7 +518,7 @@ p { text-wrap: pretty; }
 /* ── Proceso ───────────────────────────────────────────────── */
 .seccion--proceso { border-block: none; }
 .seccion--proceso .proceso__media img {
-  filter: grayscale(1) contrast(0.62) brightness(0.95);
+  filter: grayscale(1) sepia(0.6) contrast(0.7) brightness(0.85) saturate(1.2);
 }
 
 .proceso {
@@ -528,7 +538,7 @@ p { text-wrap: pretty; }
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
-  filter: grayscale(1) contrast(0.62) brightness(1.22);
+  filter: grayscale(1) sepia(0.72) contrast(0.62) brightness(1.2) saturate(1.3);
 }
 
 .pasos {
@@ -569,8 +579,8 @@ p { text-wrap: pretty; }
   position: absolute;
   inset: 0;
   background: url("assets/img/contacto-datacenter.jpg") center / cover no-repeat;
-  filter: grayscale(1) brightness(1.55) contrast(0.72);
-  opacity: 0.22;
+  filter: grayscale(1) sepia(0.7) brightness(1.4) contrast(0.7);
+  opacity: 0.2;
 }
 .seccion--contacto::after {
   content: "";
