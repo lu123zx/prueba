@@ -1,4 +1,24 @@
 /* ============================================================
+   Instrument Serif — auto-alojada (SIL Open Font License).
+   Es la serif de titulares: le da al sitio el aire editorial que
+   una sans no consigue por mucho que se ajuste el peso.
+   ============================================================ */
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("assets/fonts/instrument-serif-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("assets/fonts/instrument-serif-latin-400-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ============================================================
    TechFlow Soluciones — hoja de estilos única
    Paleta oscura con acento dorado. Sin dependencias externas.
    ============================================================ */
@@ -13,17 +33,21 @@
      ──────────────────────────────────────────────────────────── */
 
   /* Fondos, del más claro al más marcado */
-  --fondo:          #f7f6f3;
-  --fondo-alt:      #efedE8;
-  --superficie:     #ffffff;
-  --superficie-alt: #fbfaf8;
-  --borde:          #ddd9d1;
-  --borde-suave:    #e7e4dd;
+  --fondo:          #f4f1ea;
+  --fondo-alt:      #eceae1;
+  --superficie:     #fbfaf6;
+  --superficie-alt: #ffffff;
+  --borde:          #dcd7cb;
+  --borde-suave:    #e6e2d8;
+
+  /* Bloques oscuros: el ritmo claro/oscuro es lo que da carácter. */
+  --oscuro:         #16181c;
+  --oscuro-tarjeta: #1e2126;
 
   /* Texto — todos verificados contra --fondo */
-  --texto:          #15181f;  /* 16.4:1 */
-  --texto-medio:    #545c6b;  /*  6.2:1 */
-  --texto-tenue:    #616875;  /*  5.2:1 */
+  --texto:          #15181f;  /* 15.8:1 */
+  --texto-medio:    #535a67;  /*  6.2:1 */
+  --texto-tenue:    #5f6673;  /*  5.1:1 */
 
   /* Acento principal: petróleo. Legible como texto e icono. */
   --acento:         #0e5a56;  /*  7.4:1 */
@@ -36,13 +60,17 @@
   --oro-tinta:      #1a1400;  /*  8.5:1 sobre el dorado */
 
   /* Ritmo vertical y formas */
-  --radio:      14px;
-  --radio-sm:   9px;
+  --radio:      20px;
+  --radio-sm:   12px;
+  --radio-lg:   26px;
   --ancho-max:  1240px;
   --sec-y:      clamp(5rem, 11vw, 9.5rem);
 
   --fuente: "Inter", "Segoe UI Variable", "Segoe UI", system-ui, -apple-system,
             "Helvetica Neue", Arial, sans-serif;
+  /* Serif solo para titulares; el cuerpo se queda en sans por legibilidad. */
+  --fuente-display: "Instrument Serif", "Iowan Old Style", Georgia,
+                    "Times New Roman", serif;
 
   --transicion: 220ms cubic-bezier(0.4, 0, 0.2, 1);
 
@@ -77,12 +105,22 @@ ul, ol { list-style: none; padding: 0; }
 a { color: inherit; text-decoration: none; }
 button, input, textarea { font: inherit; color: inherit; }
 
-h1, h2, h3 {
-  color: var(--texto);
-  line-height: 1.1;
-  letter-spacing: -0.025em;
+h1, h2, h3 { color: var(--texto); text-wrap: balance; }
+
+/* Dos niveles tipográficos, a propósito:
+   serif para los titulares de sección, sans para los títulos de
+   componente. La serif es de un solo peso (400) y por debajo de
+   ~1.6rem se ve endeble; a esos tamaños la sans manda mejor. */
+h1, h2 {
+  font-family: var(--fuente-display);
+  font-weight: 400;   /* pedir 600 haría sintetizar negrita y se ve sucia */
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+h3 {
   font-weight: 600;
-  text-wrap: balance;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
 }
 
 p { text-wrap: pretty; }
@@ -137,8 +175,8 @@ p { text-wrap: pretty; }
 }
 
 .seccion__titulo {
-  font-size: clamp(2rem, 4.4vw, 3.25rem);
-  max-width: 16ch;
+  font-size: clamp(2.35rem, 5vw, 3.9rem);
+  max-width: 17ch;
 }
 
 /* ── Botones ───────────────────────────────────────────────── */
@@ -276,14 +314,13 @@ p { text-wrap: pretty; }
 .hero__inner { position: relative; }
 
 .hero__titulo {
-  font-size: clamp(2.6rem, 7.5vw, 5.25rem);
-  font-weight: 600;
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 400;
   max-width: 15ch;
   margin-bottom: 1.75rem;
 }
 .hero__titulo em {
   font-style: italic;
-  font-weight: 400;
   color: var(--acento);
 }
 
@@ -317,6 +354,31 @@ p { text-wrap: pretty; }
   0%, 100% { opacity: 0.25; transform: scaleY(0.6); transform-origin: top; }
   50%      { opacity: 1;    transform: scaleY(1);   transform-origin: top; }
 }
+
+/* ── Bloques oscuros ───────────────────────────────────────────
+   Redefinir los tokens dentro del bloque es lo que hace que todos
+   los descendientes se inviertan sin escribir una regla por cada
+   elemento. El petróleo se aclara: sobre #16181c el original es
+   ilegible.
+   ──────────────────────────────────────────────────────────── */
+.bloque-oscuro {
+  --fondo:          var(--oscuro);
+  --fondo-alt:      var(--oscuro);
+  --superficie:     var(--oscuro-tarjeta);
+  --superficie-alt: #23262c;
+  --borde:          #2c3037;
+  --borde-suave:    #23262c;
+  --texto:          #f4f1ea;  /* 15.8:1 */
+  --texto-medio:    #a8a69e;  /*  7.3:1 */
+  --texto-tenue:    #8d8b84;  /*  5.2:1 */
+  --acento:         #6fc2b1;  /*  8.5:1 */
+  --acento-fuerte:  #8ad3c4;
+  --acento-hueco:   rgba(111, 194, 177, 0.12);
+
+  background: var(--oscuro);
+  color: var(--texto-medio);
+}
+.bloque-oscuro .boton--fantasma { color: var(--texto); }
 
 /* ── Secciones genéricas ───────────────────────────────────── */
 .seccion { padding-block: var(--sec-y); }
@@ -361,6 +423,8 @@ p { text-wrap: pretty; }
   position: relative;
   aspect-ratio: 3 / 2;
   overflow: hidden;
+  margin: 8px 8px 0;
+  border-radius: var(--radio-sm);
   background: var(--fondo-alt);
 }
 .tarjeta__media img {
@@ -392,7 +456,7 @@ p { text-wrap: pretty; }
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding: 1.85rem 1.65rem 2rem;
+  padding: 1.6rem 1.65rem 2rem;
 }
 
 .tarjeta__num {
@@ -416,7 +480,7 @@ p { text-wrap: pretty; }
 }
 
 .tarjeta__titulo {
-  font-size: 1.3125rem;
+  font-size: 1.1875rem;
   margin-bottom: 1.15rem;
   max-width: 20ch;
 }
@@ -442,9 +506,9 @@ p { text-wrap: pretty; }
 }
 
 /* ── Proceso ───────────────────────────────────────────────── */
-.seccion--proceso {
-  background: var(--fondo-alt);
-  border-block: 1px solid var(--borde-suave);
+.seccion--proceso { border-block: none; }
+.seccion--proceso .proceso__media img {
+  filter: grayscale(1) contrast(0.62) brightness(0.95);
 }
 
 .proceso {
@@ -470,16 +534,19 @@ p { text-wrap: pretty; }
 .pasos {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 0.7rem;
   margin-top: 2.75rem;
-  border-top: 1px solid var(--borde);
 }
 .pasos__item {
   display: flex;
   gap: 1.35rem;
-  padding-block: 1.35rem;
-  border-bottom: 1px solid var(--borde);
+  padding: 1.4rem 1.5rem;
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-sm);
+  transition: border-color var(--transicion), background var(--transicion);
 }
+.pasos__item:hover { border-color: var(--acento); background: var(--superficie-alt); }
 .pasos__num {
   flex-shrink: 0;
   font-size: 0.8125rem;
@@ -586,8 +653,7 @@ p { text-wrap: pretty; }
 /* ── Footer ────────────────────────────────────────────────── */
 .site-footer {
   padding-top: clamp(3.5rem, 7vw, 5.5rem);
-  background: var(--fondo-alt);
-  border-top: 1px solid var(--borde-suave);
+  border-top: none;
 }
 
 .footer {

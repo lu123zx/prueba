@@ -95,7 +95,7 @@
         p.color(COLOR.acento[0], COLOR.acento[1], COLOR.acento[2]),
         energia
       );
-      c.setAlpha(95 + energia * 85);
+      c.setAlpha(78 + energia * 90);
       p.noStroke();
       p.fill(c);
       p.circle(this.x, this.y, this.tam * 2);
@@ -156,7 +156,7 @@
             p.color(COLOR.acento[0], COLOR.acento[1], COLOR.acento[2]),
             energia
           );
-          c.setAlpha(cercania * (38 + energia * 60));
+          c.setAlpha(cercania * (26 + energia * 62));
           p.stroke(c);
           p.line(a.x, a.y, b.x, b.y);
         }

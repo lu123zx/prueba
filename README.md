@@ -39,6 +39,22 @@ python3 -m http.server 8000
 - **Duotono por CSS** sobre las fotos: vienen de autores distintos y el filtro
   las deja como un solo set coherente con la paleta.
 
+## Estilo visual
+
+Referencia: sitios editoriales tipo Youthology — serif de titulares, crema
+cálido y bloques alternados claro/oscuro.
+
+- **Instrument Serif** auto-alojada (SIL OFL, 43 KB las dos variantes) para
+  titulares de sección. Es la misma familia que usaba la versión Next.js
+  anterior del sitio.
+- **Dos niveles tipográficos a propósito:** serif en `h1`/`h2`, sans en `h3`.
+  La serif tiene un solo peso (400) y bajo ~1.6rem se ve endeble; a tamaño de
+  componente la sans manda mejor.
+- **Ritmo claro/oscuro:** hero y servicios en crema, "Cómo trabajamos" y footer
+  en bloque oscuro. Se logra con la clase `.bloque-oscuro`, que **redefine los
+  tokens** en lugar de escribir una regla por elemento — todo lo que está
+  dentro se invierte solo.
+
 ## Paleta
 
 Fondo hueso cálido (`#f7f6f3`), acento **petróleo** (`#0e5a56`) y el dorado

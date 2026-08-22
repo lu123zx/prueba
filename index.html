@@ -28,6 +28,9 @@
 <meta name="twitter:description" content="Desarrollo, infraestructura, automatización e inteligencia artificial para empresas que necesitan resolver.">
 <meta name="twitter:image" content="https://www.techflowsoluciones.com/assets/img/og-techflow.jpg">
 
+<!-- La serif de titulares se precarga: sin esto el h1 aparece en sans y
+     salta al cargar la fuente, que es lo más visible del arranque. -->
+<link rel="preload" href="assets/fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230e5a56'/%3E%3Cpath d='M7 11h18M16 11v13' stroke='%23e0a800' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
 
@@ -284,7 +287,7 @@
   </section>
 
   <!-- ────────────────────────── PROCESO ────────────────────────── -->
-  <section class="seccion seccion--proceso" id="proceso" aria-labelledby="proceso-titulo">
+  <section class="seccion seccion--proceso bloque-oscuro" id="proceso" aria-labelledby="proceso-titulo">
     <div class="contenedor proceso">
       <div class="proceso__texto">
         <p class="etiqueta">Cómo trabajamos</p>
@@ -412,7 +415,7 @@
 
 </main>
 
-<footer class="site-footer">
+<footer class="site-footer bloque-oscuro">
   <div class="contenedor footer">
     <div class="footer__marca">
       <span class="marca__texto">TechFlow<span class="marca__acento"> Soluciones</span></span>
