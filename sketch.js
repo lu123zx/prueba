@@ -22,13 +22,14 @@
     velocidadBase: 0.22,
   };
 
-  // Calibrado para fondo BLANCO: las partículas tienen que ser oscuras
-  // para verse (grises medios), y el estado "encendido" usa el rojo de
-  // marca. Sobre blanco el rojo se lee bien tanto de fondo como de acento.
+  // Rojo de marca, calibrado para fondo BLANCO. Los nodos van en el rojo
+  // pleno y los enlaces en un rojo más claro: con ambos al mismo tono la
+  // malla se empasta y tapa el titular del hero. El estado "encendido"
+  // (hover sobre una tarjeta) oscurece hacia el rojo fuerte.
   const COLOR = {
-    particula: [150, 148, 152],
-    enlace:    [190, 188, 192],
-    acento:    [192, 20, 28],
+    particula: [192, 20, 28],   // --rojo
+    enlace:    [222, 130, 134], // rojo claro, para que la malla respire
+    acento:    [150, 16, 22],   // --rojo-fuerte
   };
 
   let particulas = [];
@@ -95,7 +96,7 @@
         p.color(COLOR.acento[0], COLOR.acento[1], COLOR.acento[2]),
         energia
       );
-      c.setAlpha(130 + energia * 100);
+      c.setAlpha(105 + energia * 95);
       p.noStroke();
       p.fill(c);
       p.circle(this.x, this.y, this.tam * 2);
@@ -164,7 +165,7 @@
             p.color(COLOR.acento[0], COLOR.acento[1], COLOR.acento[2]),
             energia
           );
-          c.setAlpha(cercania * (55 + energia * 90));
+          c.setAlpha(cercania * (48 + energia * 80));
           p.stroke(c);
           p.line(a.x, a.y, b.x, b.y);
         }

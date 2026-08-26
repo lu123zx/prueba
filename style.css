@@ -511,6 +511,76 @@ p { text-wrap: pretty; }
 }
 .servicio__pie strong { color: var(--texto-medio); font-weight: 600; }
 
+/* ── Creación de páginas web ────────────────────────────────────
+   Rejilla de tarjetas, distinta a las filas alternadas de la
+   sección de servicios: son ítems cortos de un mismo servicio,
+   no seis servicios independientes.
+   ──────────────────────────────────────────────────────────── */
+.seccion--web { background: var(--fondo-alt); }
+
+.web-gancho {
+  max-width: 46ch;
+  margin-bottom: 1rem;
+  font-size: clamp(1.125rem, 2vw, 1.375rem);
+  font-weight: 600;
+  color: var(--rojo-fuerte);
+}
+.web-desc { max-width: 62ch; margin-bottom: clamp(2.5rem, 5vw, 3.5rem); }
+
+.web-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.web-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra-sm);
+  transition: transform var(--transicion), border-color var(--transicion),
+              box-shadow var(--transicion);
+}
+.web-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--rojo);
+  box-shadow: var(--sombra-lg);
+}
+
+.web-card__media { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: var(--fondo-alt); }
+.web-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.55) contrast(1.04) brightness(1.02);
+  transition: filter 420ms ease, transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.web-card:hover .web-card__media img { filter: grayscale(0.1) contrast(1.02); transform: scale(1.04); }
+.web-card__media::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(160deg, rgba(192, 20, 28, 0.14), rgba(17, 17, 20, 0.06));
+  mix-blend-mode: multiply;
+}
+
+.web-card__cuerpo { padding: 1.4rem 1.5rem 1.6rem; }
+.web-card__cuerpo h3 { font-size: 1.0625rem; margin-bottom: 0.5rem; }
+.web-card__cuerpo p { font-size: 0.9125rem; }
+
+.web-cierre {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding: clamp(1.6rem, 3vw, 2.5rem);
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+}
+
 /* ── Proceso ("Cómo trabajamos") ───────────────────────────── */
 .seccion--proceso { background: var(--fondo-alt); }
 
@@ -710,6 +780,8 @@ p { text-wrap: pretty; }
    ============================================================ */
 @media (min-width: 640px) {
   .footer { grid-template-columns: 1.5fr 1fr 1fr; }
+  .web-grid { grid-template-columns: repeat(2, 1fr); }
+  .web-cierre { grid-template-columns: 1fr 1fr; }
   .pasos-grid { grid-template-columns: repeat(2, 1fr); }
   .porque-grid { grid-template-columns: repeat(2, 1fr); }
 }
@@ -722,6 +794,7 @@ p { text-wrap: pretty; }
 
 @media (min-width: 960px) {
   .contacto { grid-template-columns: 1fr 1fr; }
+  .web-grid { grid-template-columns: repeat(3, 1fr); }
   .footer { grid-template-columns: 2fr 1fr 1fr; gap: 4rem; }
   .pasos-grid { grid-template-columns: repeat(4, 1fr); }
 }
