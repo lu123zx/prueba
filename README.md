@@ -77,9 +77,15 @@ enganchar, y los más técnicos después:
 5. Modernización de sistemas antiguos
 6. Optimización de costos en la nube
 
-Los títulos de servicio nunca nombran la tecnología de fondo (Terraform,
-Docker, n8n): esas herramientas aparecen solo en el cuerpo, como respaldo
-técnico. El cliente PyME compra el resultado, no el nombre del software.
+Más una sección aparte, **Creación de páginas web**, con su propia rejilla de
+seis ítems (sitios corporativos, tiendas en línea, portales con login, paneles
+de administración, formularios y diseño móvil).
+
+Los títulos de servicio nunca nombran la tecnología de fondo: ni las de
+infraestructura (Terraform, Docker) ni las del stack con que se construyen los
+sitios web. El cliente PyME compra el resultado, no el nombre del software —
+y saber con qué herramienta se hace el trabajo no le aporta nada a su decisión
+de compra.
 
 ## Imágenes
 
@@ -100,8 +106,23 @@ Unsplash, corresponde hotlink.
 | Modernización de sistemas | Computador retro Commodore Amiga | Unsplash |
 | Optimización de costos | Monedas doradas apiladas | Ibrahim Rifath (@ripey__) |
 
+Y las seis de la sección de páginas web:
+
+| Ítem | Foto | Autor |
+| --- | --- | --- |
+| Sitios corporativos | Escritorio con portátil y monitor | Domenico Loia (@domenicoloia) |
+| Tiendas en línea | Tarjeta bancaria frente a un portátil | rupixen (@rupixen) |
+| Portales con login | Huella digital sobre lector | George Prentzas (@georgeprentzas) |
+| Paneles de administración | Gráficos de panel en un portátil | Luke Chesser (@lukechesser) |
+| Formularios y reservas | Calendario con chinches rojas | Towfiqu barbhuiya (@towfiqu999999) |
+| Diseño móvil | Persona sosteniendo un teléfono | NordWood Themes (@nordwood) |
+
 Licencia: [Unsplash License](https://unsplash.com/license) — uso comercial
-libre, atribución no obligatoria pero apreciada (por eso la tabla de arriba).
+libre, atribución no obligatoria pero apreciada (por eso las tablas de arriba).
+
+**Descartada a propósito:** la mejor coincidencia para "portales con login" era
+una captura de la pantalla de acceso de Facebook. Marca ajena en el sitio de un
+cliente, así que se usó una huella digital genérica en su lugar.
 
 **Consecuencia práctica:** estas imágenes no se pueden verificar visualmente
 desde este entorno de desarrollo (su proxy de red bloquea `images.unsplash.com`
@@ -135,6 +156,11 @@ partículas.
 
 El lienzo además vive **solo detrás del hero**, no en toda la página — evita
 que la animación se lea como ruido sobre las demás secciones.
+
+Las partículas van en el **rojo de marca**. Los nodos usan el rojo pleno
+(`#c0141c`) y los enlaces un rojo más claro: con ambos al mismo tono la malla
+se empasta y compite con el titular del hero. Las opacidades se bajaron
+respecto de la versión en gris, porque el rojo pleno pesa visualmente más.
 
 ## Despliegue
 
