@@ -140,26 +140,92 @@
       tarjeta.addEventListener("focusout", function () { energia(false); });
     });
 
-    /* ── Formulario de contacto (aún sin backend) ──────────── */
+    /* ── Formulario de contacto ────────────────────────────── */
+    /* El envío va a /api/contacto, una función serverless de Vercel que
+       llama a Resend. La API key nunca llega al navegador. */
     const formulario = document.querySelector(".formulario");
     const nota = document.querySelector("[data-nota]");
+    const botonEnviar = document.querySelector("[data-enviar]");
+
+    const CORREO = "contacto@techflowsoluciones.com";
+    const NOTA_INICIAL = nota ? nota.innerHTML : "";
+
+    function mostrarNota(html, estado) {
+      if (!nota) return;
+      nota.innerHTML = html;
+      nota.classList.toggle("formulario__nota--error", estado === "error");
+      nota.classList.toggle("formulario__nota--ok", estado === "ok");
+    }
 
     if (formulario) {
-      formulario.addEventListener("submit", function (e) {
+      formulario.addEventListener("submit", async function (e) {
         e.preventDefault();
 
-        // Validación nativa: sin librerías y con mensajes del navegador.
+        // Validación nativa: sin librerías y con los mensajes del navegador.
         if (!formulario.checkValidity()) {
           formulario.reportValidity();
           return;
         }
 
-        if (nota) {
-          nota.innerHTML =
-            'Gracias por escribir. El envío todavía no está conectado a un ' +
-            'servidor, así que escríbenos directo a ' +
-            '<a href="mailto:contacto@techflowsoluciones.com">' +
-            "contacto@techflowsoluciones.com</a>.";
+        const datos = Object.fromEntries(new FormData(formulario).entries());
+
+        if (botonEnviar) {
+          botonEnviar.disabled = true;
+          botonEnviar.textContent = "Enviando…";
+        }
+        mostrarNota("Enviando tu mensaje…", null);
+
+        try {
+          const r = await fetch("/api/contacto", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(datos),
+          });
+
+          // Si el endpoint no existe todavía (sitio servido como estático sin
+          // funciones), la respuesta es un HTML de 404 y no JSON. Se detecta
+          // antes de intentar parsearlo, para no morir con un error críptico.
+          const tipo = r.headers.get("content-type") || "";
+          const cuerpo = tipo.includes("application/json") ? await r.json() : null;
+
+          if (r.ok && cuerpo && cuerpo.ok) {
+            formulario.reset();
+            mostrarNota(
+              "Listo, recibimos tu mensaje. Te respondemos al correo que dejaste.",
+              "ok"
+            );
+          } else {
+            const detalle =
+              (cuerpo && cuerpo.error) ||
+              "No pudimos enviar el mensaje. Escríbenos a " + CORREO + ".";
+            mostrarNota(
+              detalle.replace(
+                CORREO,
+                '<a href="mailto:' + CORREO + '">' + CORREO + "</a>"
+              ),
+              "error"
+            );
+          }
+        } catch {
+          // Sin conexión, o la petición nunca llegó a salir.
+          mostrarNota(
+            'Se cayó la conexión al enviar. Escríbenos a ' +
+              '<a href="mailto:' + CORREO + '">' + CORREO + "</a>.",
+            "error"
+          );
+        } finally {
+          if (botonEnviar) {
+            botonEnviar.disabled = false;
+            botonEnviar.textContent = "Agendar diagnóstico";
+          }
+        }
+      });
+
+      // Al volver a escribir, se limpia el aviso anterior: dejar un error rojo
+      // mientras el usuario corrige es ruido.
+      formulario.addEventListener("input", function () {
+        if (nota && nota.className.includes("--")) {
+          mostrarNota(NOTA_INICIAL, null);
         }
       });
     }
