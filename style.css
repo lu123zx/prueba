@@ -718,7 +718,24 @@ p { text-wrap: pretty; }
   border-color: var(--rojo);
   box-shadow: 0 0 0 3px var(--rojo-hueco);
 }
+/* Honeypot: fuera de la vista pero SIN display:none — algunos bots
+   ignoran los campos con display:none, y otros lectores de pantalla
+   los saltan. Así queda invisible y de todos modos rellenable por un bot. */
+.trampa {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 .formulario__nota { font-size: 0.8125rem; color: var(--texto-tenue); text-align: center; }
+.formulario__nota--error { color: var(--rojo); font-weight: 600; }
+.formulario__nota--ok { color: var(--texto); font-weight: 600; }
+
+/* El botón deshabilitado mientras se envía: sin esto un doble clic manda
+   dos correos. */
+.boton[disabled] { opacity: 0.6; cursor: progress; transform: none; box-shadow: none; }
 .formulario__nota a { color: var(--rojo); text-decoration: underline; text-underline-offset: 3px; }
 
 /* ── Footer ────────────────────────────────────────────────── */

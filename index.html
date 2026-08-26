@@ -719,9 +719,16 @@
           <label for="mensaje">Mensaje</label>
           <textarea id="mensaje" name="mensaje" rows="5" placeholder="Qué necesitas resolver" required></textarea>
         </div>
-        <button class="boton boton--ancho" type="submit">Agendar diagnóstico</button>
+        <!-- Honeypot: oculto por CSS y fuera del recorrido de teclado. Una
+             persona nunca lo ve ni lo llena; un bot que rellena todo, sí. -->
+        <div class="trampa" aria-hidden="true">
+          <label for="sitio_web">No completar este campo</label>
+          <input type="text" id="sitio_web" name="sitio_web" tabindex="-1" autocomplete="off">
+        </div>
+
+        <button class="boton boton--ancho" type="submit" data-enviar>Agendar diagnóstico</button>
         <p class="formulario__nota" role="status" aria-live="polite" data-nota>
-          El formulario todavía no está conectado. Escríbenos directo a
+          Te respondemos al correo que dejes. También puedes escribirnos directo a
           <a href="mailto:contacto@techflowsoluciones.com">contacto@techflowsoluciones.com</a>.
         </p>
       </form>

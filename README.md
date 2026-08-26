@@ -11,6 +11,7 @@ index.html              markup completo de la página
 style.css               estilos (fondo blanco + acento rojo)
 sketch.js               animación de fondo con p5.js (solo en el hero)
 main.js                 menú, scroll, header y formulario
+api/contacto.js         función serverless: recibe el formulario y envía con Resend
 assets/vendor/p5.min.js p5.js auto-alojado (v1.11.2)
 assets/img/             imagen de Open Graph
 ```
@@ -162,6 +163,69 @@ Las partículas van en el **rojo de marca**. Los nodos usan el rojo pleno
 se empasta y compite con el titular del hero. Las opacidades se bajaron
 respecto de la versión en gris, porque el rojo pleno pesa visualmente más.
 
+## Formulario de contacto
+
+El formulario envía a `/api/contacto`, una **función serverless de Vercel** que
+llama a la API de Resend.
+
+### Por qué hay un backend en un sitio estático
+
+Porque la API key de Resend **no puede estar en el navegador**. Si el `fetch` a
+Resend se hiciera desde `main.js`, la key viajaría al cliente y cualquiera
+podría abrir el inspector, copiarla y enviar correos firmados como
+`techflowsoluciones.com`. La key solo se lee en el servidor, desde
+`process.env.RESEND_API_KEY`.
+
+### Sin dependencias
+
+`api/contacto.js` usa `fetch` contra la API REST de Resend en vez del SDK
+oficial. Instalar el SDK obligaría a agregar `package.json` y un paso de
+instalación — justo lo que este proyecto evita — y sería traer una dependencia
+entera para hacer un `POST`.
+
+### Configuración (una sola vez)
+
+1. En [resend.com/api-keys](https://resend.com/api-keys) crea una API key con
+   permiso de **envío**.
+2. En Vercel: **Project → Settings → Environment Variables**
+   - Nombre: `RESEND_API_KEY`
+   - Valor: la key
+   - Entornos: Production, Preview y Development
+3. **Redespliega.** Las variables de entorno no se aplican solas a los deploys
+   que ya existen.
+
+> La key nunca se escribe en el repo ni se pega en un chat. Si alguna vez se
+> expone, se rota en el panel de Resend.
+
+El dominio `techflowsoluciones.com` ya está **verificado** en Resend (región
+`sa-east-1`), así que se puede enviar desde cualquier dirección de ese dominio.
+
+### Cómo funciona el correo
+
+- **De:** `formulario@techflowsoluciones.com` — una dirección del dominio
+  verificado, no la del visitante. Poner al visitante en el `from` haría fallar
+  SPF y DKIM, y el correo terminaría en spam.
+- **Para:** `contacto@techflowsoluciones.com`
+- **Responder a:** el correo del visitante. Así, al apretar Responder, la
+  respuesta le llega a él y no al propio buzón del formulario.
+
+### Anti-spam
+
+Un campo honeypot (`sitio_web`) oculto fuera de pantalla y fuera del recorrido
+de teclado. Una persona no lo ve; un bot que rellena todo, sí. Cuando viene con
+contenido, la función responde **200 sin enviar nada**: si devolviera un error,
+el bot sabría que fue detectado y probaría otra vía.
+
+No hay límite de frecuencia por IP. Si empieza a llegar spam pese al honeypot,
+ese es el siguiente paso.
+
+### Si el endpoint no existe
+
+`main.js` revisa el `content-type` de la respuesta antes de parsearla. Si el
+sitio se sirve como estático puro sin funciones, el 404 devuelve HTML y no
+JSON; en vez de reventar con un error críptico, muestra el aviso con el correo
+directo como enlace. Probado.
+
 ## Despliegue
 
 El sitio se publica en Vercel. Como no hay `package.json` ni build step, el
@@ -182,9 +246,8 @@ con el repo y no depende de que alguien recuerde tocar los ajustes.
 
 - [ ] **Teléfono**: en `index.html` está como `[+56 9 XXXX XXXX]`, en cursiva
       gris para que no se publique por descuido.
-- [ ] **Formulario de contacto**: hoy solo valida en el navegador y muestra un
-      aviso. No envía nada. Falta conectarlo a un endpoint o a un servicio tipo
-      Formspree.
+- [ ] **Formulario de contacto**: el código está listo, pero no envía hasta que
+      `RESEND_API_KEY` esté configurada en Vercel (ver arriba).
 - [ ] **Redes sociales**: los tres enlaces del footer apuntan a `#`.
 - [ ] **Páginas legales**: aviso legal, política de privacidad y términos de
       servicio son placeholders.
