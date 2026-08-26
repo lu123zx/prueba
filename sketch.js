@@ -22,13 +22,13 @@
     velocidadBase: 0.22,
   };
 
-  // Calibrado para fondo claro: sobre #f7f6f3 las partículas tienen que ser
-  // OSCURAS para verse. En dorado no se distinguen (1.99:1 contra el fondo),
-  // así que el estado "encendido" usa el petróleo del acento.
+  // Calibrado para fondo BLANCO: las partículas tienen que ser oscuras
+  // para verse (grises medios), y el estado "encendido" usa el rojo de
+  // marca. Sobre blanco el rojo se lee bien tanto de fondo como de acento.
   const COLOR = {
-    particula: [150, 148, 158],
-    enlace:    [120, 118, 128],
-    acento:    [255, 90, 95],
+    particula: [150, 148, 152],
+    enlace:    [190, 188, 192],
+    acento:    [192, 20, 28],
   };
 
   let particulas = [];
@@ -95,7 +95,7 @@
         p.color(COLOR.acento[0], COLOR.acento[1], COLOR.acento[2]),
         energia
       );
-      c.setAlpha(120 + energia * 90);
+      c.setAlpha(130 + energia * 100);
       p.noStroke();
       p.fill(c);
       p.circle(this.x, this.y, this.tam * 2);
@@ -164,7 +164,7 @@
             p.color(COLOR.acento[0], COLOR.acento[1], COLOR.acento[2]),
             energia
           );
-          c.setAlpha(cercania * (46 + energia * 70));
+          c.setAlpha(cercania * (55 + energia * 90));
           p.stroke(c);
           p.line(a.x, a.y, b.x, b.y);
         }

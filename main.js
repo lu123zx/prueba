@@ -127,7 +127,7 @@
     /* ── Puente con la animación p5 ────────────────────────── */
     /* Al entrar el cursor (o el foco) a una tarjeta, el campo de
        partículas cambia a dorado y acelera un poco. */
-    const tarjetas = document.querySelectorAll(".tarjeta");
+    const tarjetas = document.querySelectorAll(".servicio");
 
     function energia(valor) {
       if (window.FondoTechFlow) window.FondoTechFlow.setEnergia(valor);
