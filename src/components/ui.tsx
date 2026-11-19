@@ -1,8 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { useAuth } from "@/lib/auth";
 import { fmt } from "@/lib/supabase";
 
@@ -132,17 +131,19 @@ export function Shell({
   hideNav?: boolean;
 }) {
   const { session, profile, loading } = useAuth();
-  const router = useRouter();
   const path = usePathname();
-
-  useEffect(() => {
-    if (!loading && !session) router.replace("/login");
-  }, [loading, session, router]);
 
   if (loading || !session) {
     return (
-      <div className="grid min-h-dvh place-items-center">
-        <Crown size={64} />
+      <div className="grid min-h-dvh place-items-center text-center">
+        <div className="flex flex-col items-center gap-4">
+          <Crown size={64} />
+          {!loading && (
+            <p className="text-sm text-muted">
+              No pudimos conectarte. Recarga la página.
+            </p>
+          )}
+        </div>
       </div>
     );
   }

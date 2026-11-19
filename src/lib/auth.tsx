@@ -21,15 +21,52 @@ type Ctx = {
 
 const AuthCtx = createContext<Ctx | null>(null);
 
+const KEY = "rv_guest";
+
+/** Inicia sesión con el jugador guardado en este dispositivo, o crea uno nuevo. */
+async function ensureGuest() {
+  let saved: { email: string; password: string } | null = null;
+  try {
+    saved = JSON.parse(localStorage.getItem(KEY) || "null");
+  } catch {}
+  if (saved) {
+    const { error } = await supabase.auth.signInWithPassword(saved);
+    if (!error) return;
+  }
+  const password = crypto.randomUUID() + crypto.randomUUID();
+  const { data: email, error } = await supabase.rpc("create_guest", {
+    p_password: password,
+  });
+  if (error) throw error;
+  try {
+    localStorage.setItem(KEY, JSON.stringify({ email, password }));
+  } catch {}
+  const { error: e2 } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
+  if (e2) throw e2;
+}
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
-      setSession(data.session);
-      setLoading(false);
+    supabase.auth.getSession().then(async ({ data }) => {
+      if (data.session) {
+        setSession(data.session);
+        setLoading(false);
+        return;
+      }
+      // Sin login: cada dispositivo recibe automáticamente su propio jugador.
+      try {
+        await ensureGuest();
+      } catch (e) {
+        console.error("No se pudo crear el jugador", e);
+        setLoading(false);
+      }
     });
     const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => {
       setSession(s);

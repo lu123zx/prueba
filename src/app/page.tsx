@@ -7,7 +7,7 @@ import { Crown } from "@/components/ui";
 
 // Splash VIP: anima la barra y redirige según haya sesión.
 export default function Splash() {
-  const { session, loading } = useAuth();
+  const { loading } = useAuth();
   const router = useRouter();
   const [p, setP] = useState(0);
 
@@ -17,8 +17,8 @@ export default function Splash() {
   }, []);
 
   useEffect(() => {
-    if (p >= 100 && !loading) router.replace(session ? "/lobby" : "/login");
-  }, [p, loading, session, router]);
+    if (p >= 100 && !loading) router.replace("/lobby");
+  }, [p, loading, router]);
 
   return (
     <div className="stars relative flex min-h-dvh flex-col items-center justify-between px-8 py-12">

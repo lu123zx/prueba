@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Avatar, Icon, Shell, Toast } from "@/components/ui";
 import { GameCard } from "@/components/GameCard";
+import { LiveFeed } from "@/components/LiveFeed";
 import { GAMES } from "@/lib/games";
 import { useAuth } from "@/lib/auth";
 import { supabase, fmt, errMsg, type Profile } from "@/lib/supabase";
@@ -123,6 +124,8 @@ export default function Lobby() {
           {top.length ? "EN JUEGO" : "…"}
         </div>
       </section>
+
+      <LiveFeed />
 
       {/* Juegos */}
       <div className="mt-6 flex items-center justify-between">

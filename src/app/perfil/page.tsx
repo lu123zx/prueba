@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { Avatar, Icon, Shell, Toast } from "@/components/ui";
 import { useAuth } from "@/lib/auth";
 import { supabase, fmt, errMsg } from "@/lib/supabase";
@@ -27,8 +26,7 @@ const ICON: Record<string, string> = {
 };
 
 export default function Perfil() {
-  const { profile, session, refresh, signOut } = useAuth();
-  const router = useRouter();
+  const { profile, session, refresh } = useAuth();
   const [txs, setTxs] = useState<Tx[]>([]);
   const [editing, setEditing] = useState(false);
   const [name, setName] = useState("");
@@ -53,11 +51,6 @@ export default function Perfil() {
     }
     setEditing(false);
     refresh();
-  }
-
-  async function logout() {
-    await signOut();
-    router.replace("/login");
   }
 
   return (
@@ -93,7 +86,7 @@ export default function Perfil() {
             <Icon name="edit" className="text-base text-muted" />
           </button>
         )}
-        <p className="text-xs text-muted">{session?.user.email}</p>
+
         <span className="mt-2 rounded-full bg-gold/15 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-gold-2">
           Miembro VIP
         </span>
@@ -162,12 +155,10 @@ export default function Perfil() {
         real y no se pueden comprar ni canjear por dinero.
       </div>
 
-      <button
-        onClick={logout}
-        className="mt-4 flex h-12 w-full items-center justify-center gap-2 rounded-2xl border border-red-500/40 text-sm font-bold text-red-400"
-      >
-        <Icon name="logout" /> Cerrar sesión
-      </button>
+      <p className="mt-4 text-center text-[11px] text-muted">
+        Tu jugador queda guardado en este dispositivo. Si borras los datos del
+        navegador, se crea uno nuevo.
+      </p>
     </Shell>
   );
 }
