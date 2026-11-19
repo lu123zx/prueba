@@ -1,26 +1,166 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-ink: #0b0b14;
+  --color-ink-2: #12101c;
+  --color-card: #1a1626;
+  --color-line: #2a2340;
+  --color-gold: #d4af37;
+  --color-gold-2: #f5d77a;
+  --color-violet: #8b5cf6;
+  --color-violet-2: #6d28d9;
+  --color-muted: #9b93b5;
+  --font-display: "Montserrat", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  background: var(--color-ink);
+  color: #f4f1ff;
+  font-family: var(--font-sans);
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-image:
+    radial-gradient(
+      ellipse at 50% -10%,
+      rgba(139, 92, 246, 0.22),
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse at 50% 110%,
+      rgba(212, 175, 55, 0.08),
+      transparent 50%
+    );
+  background-attachment: fixed;
+  min-height: 100dvh;
+}
+
+.material-symbols-rounded {
+  font-variation-settings:
+    "FILL" 1,
+    "wght" 500,
+    "GRAD" 0,
+    "opsz" 24;
+  line-height: 1;
+}
+
+.text-gold-grad {
+  background: linear-gradient(
+    180deg,
+    #fff3c4 0%,
+    #f5d77a 40%,
+    #d4af37 75%,
+    #a67c1a 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.glass {
+  background: linear-gradient(
+    180deg,
+    rgba(36, 29, 56, 0.75),
+    rgba(22, 18, 34, 0.75)
+  );
+  border: 1px solid rgba(139, 92, 246, 0.18);
+  backdrop-filter: blur(12px);
+}
+
+.gold-border {
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  box-shadow: 0 0 24px rgba(212, 175, 55, 0.12) inset;
+}
+
+.btn-violet {
+  background: linear-gradient(180deg, #9b6cff, #6d28d9);
+  box-shadow:
+    0 8px 24px rgba(124, 58, 237, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.btn-gold {
+  background: linear-gradient(180deg, #f8e08e, #d4af37 60%, #b08a20);
+  color: #1b1405;
+  box-shadow:
+    0 8px 24px rgba(212, 175, 55, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.stars {
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, #fff8, transparent),
+    radial-gradient(1px 1px at 70% 20%, #fff6, transparent),
+    radial-gradient(1.5px 1.5px at 40% 70%, #f5d77a99, transparent),
+    radial-gradient(1px 1px at 85% 60%, #fff7, transparent),
+    radial-gradient(1px 1px at 10% 85%, #fff5, transparent),
+    radial-gradient(1.5px 1.5px at 60% 90%, #f5d77a88, transparent);
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 48px rgba(212, 175, 55, 0.7);
+  }
+}
+.animate-glow {
+  animation: glow 2.4s ease-in-out infinite;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.animate-pop {
+  animation: pop 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+
+@keyframes blur-spin {
+  0% {
+    transform: translateY(-6px);
+    filter: blur(2px);
+  }
+  100% {
+    transform: translateY(6px);
+    filter: blur(2px);
+  }
+}
+.reel-spin {
+  animation: blur-spin 0.08s linear infinite alternate;
+}
+
+@keyframes deal {
+  from {
+    transform: translateY(-40px) rotate(-8deg);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+.animate-deal {
+  animation: deal 0.35s ease-out both;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
 }
