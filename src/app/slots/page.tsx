@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { BetPicker, Icon, Shell, Toast } from "@/components/ui";
 import { useAuth } from "@/lib/auth";
+import { useT } from "@/lib/i18n";
 import { supabase, fmt, errMsg } from "@/lib/supabase";
 
 const SYM: Record<string, string> = {
@@ -49,6 +50,7 @@ function Symbol({ s }: { s: string }) {
 
 export default function Slots() {
   const { profile, setBalance } = useAuth();
+  const { t } = useT();
   const [bet, setBet] = useState(1000);
   const [grid, setGrid] = useState<string[]>([
     "crown",
@@ -95,7 +97,7 @@ export default function Slots() {
     if (error) {
       if (timer.current) clearInterval(timer.current);
       setSpinningCols([false, false, false]);
-      setErr(errMsg(error));
+      setErr(t(errMsg(error)));
       setAuto(false);
       setTimeout(() => setErr(null), 2500);
       return;
@@ -143,7 +145,7 @@ export default function Slots() {
             ROYAL 777
           </div>
           <div className="text-[10px] tracking-[0.3em] text-muted">
-            3 LÍNEAS · HASTA x50
+            {t("slots_sub")}
           </div>
         </div>
 
@@ -178,7 +180,7 @@ export default function Slots() {
           {last && last.payout > 0 && (
             <div className="animate-pop">
               <div className="text-[10px] uppercase tracking-widest text-gold">
-                ¡Ganaste!
+                {t("you_won")}
               </div>
               <div className="font-display text-2xl font-black text-gold-grad">
                 +{fmt(last.payout)}
@@ -186,9 +188,7 @@ export default function Slots() {
             </div>
           )}
           {last && last.payout === 0 && (
-            <div className="pt-3 text-sm text-muted">
-              Sin premio esta vez… ¡otra!
-            </div>
+            <div className="pt-3 text-sm text-muted">{t("no_win_again")}</div>
           )}
         </div>
       </div>
@@ -208,7 +208,7 @@ export default function Slots() {
           >
             <Icon name={auto ? "stop" : "autorenew"} />
             <span className="text-[9px] font-bold">
-              {auto ? "PARAR" : "AUTO"}
+              {auto ? t("stop") : t("auto")}
             </span>
           </button>
           <button
@@ -216,14 +216,14 @@ export default function Slots() {
             disabled={spinning || auto || bet > max}
             className="btn-violet flex h-16 flex-1 items-center justify-center gap-2 rounded-2xl font-display text-lg font-black tracking-widest disabled:opacity-50"
           >
-            <Icon name="refresh" /> {spinning ? "GIRANDO…" : "GIRAR"}
+            <Icon name="refresh" /> {spinning ? t("spinning") : t("spin")}
           </button>
         </div>
       </div>
 
       <div className="mt-5 rounded-2xl glass p-4">
         <div className="mb-2 text-xs font-bold uppercase tracking-widest text-muted">
-          Tabla de pagos (3 iguales en línea)
+          {t("paytable")}
         </div>
         <div className="grid grid-cols-3 gap-2">
           {PAYTABLE.map(([s, m]) => (
@@ -244,10 +244,7 @@ export default function Slots() {
             </div>
           ))}
         </div>
-        <p className="mt-2 text-[11px] text-muted">
-          🍒🍒 al inicio de una línea devuelve la apuesta de esa línea. La
-          apuesta se reparte entre las 3 líneas.
-        </p>
+        <p className="mt-2 text-[11px] text-muted">{t("pay_note")}</p>
       </div>
     </Shell>
   );

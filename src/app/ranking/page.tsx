@@ -3,10 +3,12 @@
 import { useEffect, useState } from "react";
 import { Avatar, Shell } from "@/components/ui";
 import { useAuth } from "@/lib/auth";
+import { useT } from "@/lib/i18n";
 import { supabase, fmt, type Profile } from "@/lib/supabase";
 
 export default function Ranking() {
   const { profile } = useAuth();
+  const { t } = useT();
   const [rows, setRows] = useState<Profile[] | null>(null);
   const [by, setBy] = useState<"balance" | "biggest_win">("balance");
 
@@ -23,12 +25,12 @@ export default function Ranking() {
 
   return (
     <Shell>
-      <h1 className="font-display text-2xl font-black">Ranking del club</h1>
+      <h1 className="font-display text-2xl font-black">{t("ranking_title")}</h1>
       <div className="mt-3 grid grid-cols-2 gap-2 rounded-2xl glass p-1">
         {(
           [
-            ["balance", "Más fichas"],
-            ["biggest_win", "Mayor premio"],
+            ["balance", "most_chips"],
+            ["biggest_win", "biggest_win"],
           ] as const
         ).map(([k, l]) => (
           <button
@@ -36,7 +38,7 @@ export default function Ranking() {
             onClick={() => setBy(k)}
             className={`h-10 rounded-xl text-xs font-bold ${by === k ? "btn-violet" : "text-muted"}`}
           >
-            {l}
+            {t(l)}
           </button>
         ))}
       </div>
@@ -83,11 +85,11 @@ export default function Ranking() {
               <div className="truncate text-sm font-semibold">
                 {p.username}{" "}
                 {p.id === profile?.id && (
-                  <span className="text-[10px] text-gold">(tú)</span>
+                  <span className="text-[10px] text-gold">{t("you_tag")}</span>
                 )}
               </div>
               <div className="text-[10px] text-muted">
-                {p.games_played} jugadas
+                {t("plays_n", { n: p.games_played })}
               </div>
             </div>
             <span className="font-display text-sm font-bold text-gold-2">
@@ -96,7 +98,7 @@ export default function Ranking() {
           </div>
         ))}
         {rows === null && (
-          <p className="py-10 text-center text-sm text-muted">Cargando…</p>
+          <p className="py-10 text-center text-sm text-muted">{t("loading")}</p>
         )}
       </div>
     </Shell>

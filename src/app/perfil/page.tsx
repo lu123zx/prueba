@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Avatar, Icon, Shell, Toast } from "@/components/ui";
 import { useAuth } from "@/lib/auth";
+import { LangSwitch, useT } from "@/lib/i18n";
 import { supabase, fmt, errMsg } from "@/lib/supabase";
 
 type Tx = {
@@ -11,12 +12,6 @@ type Tx = {
   bet: number;
   payout: number;
   created_at: string;
-};
-const LABEL: Record<string, string> = {
-  slots: "Royal 777",
-  ruleta: "Ruleta Imperial",
-  blackjack: "Blackjack VIP",
-  bono: "Bono diario",
 };
 const ICON: Record<string, string> = {
   slots: "casino",
@@ -27,6 +22,7 @@ const ICON: Record<string, string> = {
 
 export default function Perfil() {
   const { profile, session, refresh } = useAuth();
+  const { t: tr } = useT();
   const [txs, setTxs] = useState<Tx[]>([]);
   const [editing, setEditing] = useState(false);
   const [name, setName] = useState("");
@@ -45,7 +41,7 @@ export default function Perfil() {
   async function saveName() {
     const { error } = await supabase.rpc("set_username", { p_name: name });
     if (error) {
-      setMsg(errMsg(error));
+      setMsg(tr(errMsg(error)));
       setTimeout(() => setMsg(null), 2500);
       return;
     }
@@ -69,7 +65,7 @@ export default function Perfil() {
             <button
               onClick={saveName}
               className="btn-gold grid h-11 w-11 place-items-center rounded-xl"
-              aria-label="Guardar"
+              aria-label={tr("save")}
             >
               <Icon name="check" />
             </button>
@@ -88,26 +84,35 @@ export default function Perfil() {
         )}
 
         <span className="mt-2 rounded-full bg-gold/15 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-gold-2">
-          Miembro VIP
+          {tr("vip_member")}
         </span>
 
         <div className="mt-5 grid w-full grid-cols-3 gap-2">
           {[
-            ["Fichas", fmt(profile?.balance ?? 0)],
-            ["Jugadas", fmt(profile?.games_played ?? 0)],
-            ["Mayor premio", fmt(profile?.biggest_win ?? 0)],
+            ["stat_chips", fmt(profile?.balance ?? 0)],
+            ["stat_plays", fmt(profile?.games_played ?? 0)],
+            ["biggest_win", fmt(profile?.biggest_win ?? 0)],
           ].map(([l, v]) => (
             <div key={l} className="rounded-2xl bg-black/30 px-2 py-3">
               <div className="font-display text-sm font-black text-gold-2">
                 {v}
               </div>
-              <div className="text-[10px] text-muted">{l}</div>
+              <div className="text-[10px] text-muted">{tr(l)}</div>
             </div>
           ))}
         </div>
       </section>
 
-      <h2 className="mt-6 font-display text-lg font-extrabold">Historial</h2>
+      <h2 className="mt-6 font-display text-lg font-extrabold">
+        {tr("language")}
+      </h2>
+      <div className="mt-3">
+        <LangSwitch full />
+      </div>
+
+      <h2 className="mt-6 font-display text-lg font-extrabold">
+        {tr("history")}
+      </h2>
       <div className="mt-3 flex flex-col gap-2">
         {txs.map((t) => {
           const net = t.payout - t.bet;
@@ -121,14 +126,14 @@ export default function Perfil() {
               </div>
               <div className="min-w-0 flex-1">
                 <div className="text-sm font-semibold">
-                  {LABEL[t.game] ?? t.game}
+                  {tr(`gn_${t.game}`)}
                 </div>
                 <div className="text-[10px] text-muted">
                   {new Date(t.created_at).toLocaleString("es-CL", {
                     dateStyle: "short",
                     timeStyle: "short",
                   })}
-                  {t.bet > 0 && ` · apuesta ${fmt(t.bet)}`}
+                  {t.bet > 0 && ` · ${tr("bet_n", { n: fmt(t.bet) })}`}
                 </div>
               </div>
               <span
@@ -142,22 +147,21 @@ export default function Perfil() {
         })}
         {!txs.length && (
           <p className="py-6 text-center text-sm text-muted">
-            Aún no has jugado. ¡A la mesa!
+            {tr("no_history")}
           </p>
         )}
       </div>
 
       <div className="mt-6 rounded-2xl glass p-4 text-xs text-muted">
         <div className="mb-1 flex items-center gap-1 font-bold text-white">
-          <Icon name="info" className="text-base text-gold" /> Juego responsable
+          <Icon name="info" className="text-base text-gold" />{" "}
+          {tr("responsible")}
         </div>
-        Royal Vega es un club privado entre amigos. Las fichas no tienen valor
-        real y no se pueden comprar ni canjear por dinero.
+        {tr("responsible_text")}
       </div>
 
       <p className="mt-4 text-center text-[11px] text-muted">
-        Tu jugador queda guardado en este dispositivo. Si borras los datos del
-        navegador, se crea uno nuevo.
+        {tr("device_note")}
       </p>
     </Shell>
   );

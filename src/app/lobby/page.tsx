@@ -7,6 +7,7 @@ import { GameCard } from "@/components/GameCard";
 import { LiveFeed } from "@/components/LiveFeed";
 import { GAMES } from "@/lib/games";
 import { useAuth } from "@/lib/auth";
+import { useT } from "@/lib/i18n";
 import { supabase, fmt, errMsg, type Profile } from "@/lib/supabase";
 
 function useCountdown(target: number | null) {
@@ -31,6 +32,7 @@ function useCountdown(target: number | null) {
 
 export default function Lobby() {
   const { profile, setBalance, refresh } = useAuth();
+  const { t } = useT();
   const [top, setTop] = useState<Profile[]>([]);
   const [pot, setPot] = useState(0);
   const [msg, setMsg] = useState<{ t: string; k: "ok" | "error" } | null>(null);
@@ -57,16 +59,16 @@ export default function Lobby() {
     setBusy(true);
     const { data, error } = await supabase.rpc("claim_daily_bonus");
     setBusy(false);
-    if (error) return flash(errMsg(error), "error");
+    if (error) return flash(t(errMsg(error)), "error");
     if (data.ok) {
       setBalance(data.balance);
       await refresh();
-      flash(`¡+${fmt(data.amount)} fichas!`, "ok");
-    } else flash("Ya reclamaste tu bono de hoy", "error");
+      flash(t("bonus_ok", { n: fmt(data.amount) }), "ok");
+    } else flash(t("bonus_already"), "error");
   }
 
-  function flash(t: string, k: "ok" | "error") {
-    setMsg({ t, k });
+  function flash(text: string, k: "ok" | "error") {
+    setMsg({ t: text, k });
     setTimeout(() => setMsg(null), 2500);
   }
 
@@ -80,13 +82,14 @@ export default function Lobby() {
           🎰
         </div>
         <span className="rounded-full bg-gold/20 px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest text-gold-2">
-          ⭐ VIP Exclusivo
+          {t("vip_excl")}
         </span>
         <p className="mt-3 text-xs font-semibold uppercase tracking-wider text-gold">
-          Bono diario Royal Vega
+          {t("daily_bonus")}
         </p>
         <h2 className="font-display text-3xl font-black">
-          +25.000 <span className="text-base font-bold text-muted">fichas</span>
+          +25.000{" "}
+          <span className="text-base font-bold text-muted">{t("chips")}</span>
         </h2>
         <div className="mt-4 flex items-center gap-3">
           <button
@@ -94,15 +97,15 @@ export default function Lobby() {
             disabled={busy || !!countdown}
             className="btn-violet flex h-12 flex-1 items-center justify-center gap-2 rounded-2xl font-display text-sm font-extrabold tracking-wide disabled:opacity-50"
           >
-            {countdown ? "RECLAMADO" : busy ? "…" : "RECLAMAR AHORA"}
+            {countdown ? t("claimed") : busy ? "…" : t("claim_now")}
             <Icon name="arrow_forward" />
           </button>
           <div className="rounded-2xl bg-black/40 px-3 py-2 text-center">
             <div className="text-[9px] uppercase tracking-widest text-muted">
-              {countdown ? "Próximo en" : "Disponible"}
+              {countdown ? t("next_in") : t("available")}
             </div>
             <div className="font-display text-sm font-bold text-gold-2">
-              {countdown ?? "¡Ya!"}
+              {countdown ?? t("now")}
             </div>
           </div>
         </div>
@@ -112,8 +115,8 @@ export default function Lobby() {
       <section className="mt-4 flex items-center justify-between rounded-2xl glass px-4 py-3">
         <div>
           <div className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-muted">
-            <span className="h-1.5 w-1.5 rounded-full bg-gold" /> Fichas en la
-            mesa
+            <span className="h-1.5 w-1.5 rounded-full bg-gold" />{" "}
+            {t("chips_table")}
           </div>
           <div className="font-display text-2xl font-black text-gold-grad">
             $ {fmt(pot)}
@@ -121,7 +124,7 @@ export default function Lobby() {
         </div>
         <div className="flex items-center gap-1 rounded-full bg-emerald-500/15 px-2 py-1 text-[10px] font-bold text-emerald-300">
           <Icon name="trending_up" className="text-sm" />{" "}
-          {top.length ? "EN JUEGO" : "…"}
+          {top.length ? t("in_play") : "…"}
         </div>
       </section>
 
@@ -130,13 +133,13 @@ export default function Lobby() {
       {/* Juegos */}
       <div className="mt-6 flex items-center justify-between">
         <h3 className="font-display text-lg font-extrabold">
-          Juegos populares{" "}
+          {t("popular")}{" "}
           <span className="ml-1 rounded bg-red-500 px-1.5 py-0.5 align-middle text-[9px] font-black">
             HOT
           </span>
         </h3>
         <Link href="/juegos" className="text-xs font-semibold text-gold">
-          Ver todos ›
+          {t("see_all")}
         </Link>
       </div>
       <div className="mt-3 grid grid-cols-2 gap-3">
@@ -147,9 +150,9 @@ export default function Lobby() {
 
       {/* Top 3 */}
       <div className="mt-6 flex items-center justify-between">
-        <h3 className="font-display text-lg font-extrabold">Top del club</h3>
+        <h3 className="font-display text-lg font-extrabold">{t("club_top")}</h3>
         <Link href="/ranking" className="text-xs font-semibold text-gold">
-          Ranking ›
+          {t("ranking_link")}
         </Link>
       </div>
       <div className="mt-3 flex flex-col gap-2">
@@ -170,11 +173,7 @@ export default function Lobby() {
             </span>
           </div>
         ))}
-        {!top.length && (
-          <p className="text-sm text-muted">
-            Invita a tus amigos para armar el ranking.
-          </p>
-        )}
+        {!top.length && <p className="text-sm text-muted">{t("invite")}</p>}
       </div>
     </Shell>
   );

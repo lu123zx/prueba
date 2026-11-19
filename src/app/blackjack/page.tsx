@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { BetPicker, Icon, Shell, Toast } from "@/components/ui";
 import { useAuth } from "@/lib/auth";
+import { useT } from "@/lib/i18n";
 import { supabase, fmt, errMsg } from "@/lib/supabase";
 
 type Game = {
@@ -67,14 +68,15 @@ function Card({ c, hidden, i }: { c?: number; hidden?: boolean; i: number }) {
 }
 
 const RESULT: Record<string, { t: string; c: string }> = {
-  win: { t: "¡GANASTE!", c: "text-gold-grad" },
-  blackjack: { t: "¡BLACKJACK!", c: "text-gold-grad" },
-  push: { t: "EMPATE", c: "text-white" },
-  lose: { t: "GANA LA CASA", c: "text-red-400" },
+  win: { t: "r_win", c: "text-gold-grad" },
+  blackjack: { t: "r_blackjack", c: "text-gold-grad" },
+  push: { t: "r_push", c: "text-white" },
+  lose: { t: "r_lose", c: "text-red-400" },
 };
 
 export default function Blackjack() {
   const { profile, setBalance } = useAuth();
+  const { t } = useT();
   const [bet, setBet] = useState(1000);
   const [game, setGame] = useState<Game | null>(null);
   const [busy, setBusy] = useState(false);
@@ -92,7 +94,7 @@ export default function Blackjack() {
     const { data, error } = await supabase.rpc(fn, args);
     setBusy(false);
     if (error) {
-      setErr(errMsg(error));
+      setErr(t(errMsg(error)));
       setTimeout(() => setErr(null), 2500);
       return null;
     }
@@ -123,13 +125,13 @@ export default function Blackjack() {
       <Toast msg={err} />
       <div className="relative overflow-hidden rounded-[2rem] gold-border bg-[radial-gradient(ellipse_at_center,#0f5e45_0%,#063a2b_60%,#03241a_100%)] px-4 py-5">
         <div className="text-center text-[10px] font-bold tracking-[0.3em] text-gold/80">
-          BLACKJACK PAGA 3 A 2 · CRUPIER SE PLANTA EN 17
+          {t("bj_rules")}
         </div>
 
         {/* Crupier */}
         <div className="mt-4">
           <div className="mb-2 flex items-center justify-center gap-2 text-xs font-bold text-white/80">
-            CRUPIER{" "}
+            {t("dealer")}{" "}
             {game && (
               <span className="rounded-full bg-black/40 px-2 py-0.5 text-gold-2">
                 {game.dealer_value}
@@ -146,7 +148,7 @@ export default function Blackjack() {
               </>
             ) : (
               <div className="grid h-28 place-items-center text-sm text-white/40">
-                Haz tu apuesta
+                {t("place_bet")}
               </div>
             )}
           </div>
@@ -159,11 +161,11 @@ export default function Blackjack() {
               <div
                 className={`font-display text-2xl font-black ${RESULT[game.status].c}`}
               >
-                {RESULT[game.status].t}
+                {t(RESULT[game.status].t)}
               </div>
               {!!game.payout && (
                 <div className="text-sm font-bold text-gold-2">
-                  +{fmt(game.payout)} fichas
+                  {t("plus_chips", { n: fmt(game.payout) })}
                 </div>
               )}
             </div>
@@ -178,7 +180,7 @@ export default function Blackjack() {
             ))}
           </div>
           <div className="mt-2 flex items-center justify-center gap-2 text-xs font-bold text-white/80">
-            {profile?.username?.toUpperCase() ?? "TÚ"}{" "}
+            {profile?.username?.toUpperCase() ?? t("you")}{" "}
             {game && (
               <span className="rounded-full bg-black/40 px-2 py-0.5 text-gold-2">
                 {game.player_value}
@@ -196,14 +198,14 @@ export default function Blackjack() {
               onClick={() => act("hit")}
               className="btn-violet flex h-16 flex-col items-center justify-center rounded-2xl font-display text-sm font-black disabled:opacity-50"
             >
-              <Icon name="add_circle" /> PEDIR
+              <Icon name="add_circle" /> {t("hit")}
             </button>
             <button
               disabled={busy}
               onClick={() => act("stand")}
               className="btn-gold flex h-16 flex-col items-center justify-center rounded-2xl font-display text-sm font-black disabled:opacity-50"
             >
-              <Icon name="pan_tool" /> PLANTARSE
+              <Icon name="pan_tool" /> {t("stand")}
             </button>
             <button
               disabled={
@@ -212,7 +214,7 @@ export default function Blackjack() {
               onClick={() => act("double")}
               className="flex h-16 flex-col items-center justify-center rounded-2xl glass font-display text-sm font-black disabled:opacity-40"
             >
-              <Icon name="exposure_plus_2" /> DOBLAR
+              <Icon name="exposure_plus_2" /> {t("double")}
             </button>
           </div>
         ) : (
@@ -228,7 +230,7 @@ export default function Blackjack() {
               onClick={deal}
               className="btn-violet flex h-16 items-center justify-center gap-2 rounded-2xl font-display text-lg font-black tracking-widest disabled:opacity-50"
             >
-              <Icon name="style" /> {done ? "OTRA MANO" : "REPARTIR"}
+              <Icon name="style" /> {done ? t("new_hand") : t("deal")}
             </button>
           </div>
         )}

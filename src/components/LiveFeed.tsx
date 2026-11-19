@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { supabase, fmt } from "@/lib/supabase";
 import { Icon } from "@/components/ui";
+import { useT } from "@/lib/i18n";
 
 type Tx = {
   id: number;
@@ -12,18 +13,14 @@ type Tx = {
   payout: number;
   created_at: string;
 };
-const GAME: Record<string, string> = {
-  slots: "Royal 777",
-  ruleta: "la Ruleta",
-  blackjack: "Blackjack",
-  bono: "el bono diario",
-};
 
 /** Actividad del club en tiempo real: muestra lo que están jugando todos ahora. */
 export function LiveFeed() {
   const [items, setItems] = useState<Tx[]>([]);
   const [names, setNames] = useState<Record<string, string>>({});
   const [online, setOnline] = useState(1);
+  const { t: tr } = useT();
+  const gname = (g: string) => tr(`gn_${g}`);
   const namesRef = useRef(names);
   useEffect(() => {
     namesRef.current = names;
@@ -83,17 +80,17 @@ export function LiveFeed() {
     <section className="mt-4 rounded-2xl glass p-4">
       <div className="mb-3 flex items-center justify-between">
         <h3 className="font-display text-sm font-extrabold">
-          Actividad del club
+          {tr("activity")}
         </h3>
         <span className="flex items-center gap-1.5 rounded-full bg-emerald-500/15 px-2 py-1 text-[10px] font-bold text-emerald-300">
           <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
-          {online} {online === 1 ? "jugando" : "jugando ahora"}
+          {online} {online === 1 ? tr("playing_one") : tr("playing_many")}
         </span>
       </div>
       <ul className="flex flex-col gap-2">
         {items.map((t) => {
           const net = t.payout - t.bet;
-          const who = names[t.user_id] ?? "Alguien";
+          const who = names[t.user_id] ?? tr("someone");
           return (
             <li
               key={t.id}
@@ -106,11 +103,11 @@ export function LiveFeed() {
               <span className="flex-1 truncate">
                 <b>{who}</b>{" "}
                 {t.game === "bono" ? (
-                  <>reclamó {GAME.bono}</>
+                  <>{tr("claimed_bonus")}</>
                 ) : net > 0 ? (
-                  <>ganó en {GAME[t.game] ?? t.game}</>
+                  <>{tr("won_in", { g: gname(t.game) })}</>
                 ) : (
-                  <>jugó {GAME[t.game] ?? t.game}</>
+                  <>{tr("played", { g: gname(t.game) })}</>
                 )}
               </span>
               {net !== 0 && (
@@ -125,9 +122,7 @@ export function LiveFeed() {
           );
         })}
         {!items.length && (
-          <li className="text-xs text-muted">
-            Todavía no hay jugadas. ¡Sé el primero!
-          </li>
+          <li className="text-xs text-muted">{tr("no_activity")}</li>
         )}
       </ul>
     </section>

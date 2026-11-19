@@ -1,7 +1,11 @@
+"use client";
+
 import Link from "next/link";
+import { useT } from "@/lib/i18n";
 import type { Game } from "@/lib/games";
 
 export function GameCard({ g, wide = false }: { g: Game; wide?: boolean }) {
+  const { t } = useT();
   const inner = (
     <div
       className={`relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br ${g.gradient} p-4 transition active:scale-[.98] ${wide ? "h-36" : "h-44"} ${g.ready ? "" : "opacity-60"}`}
@@ -10,15 +14,15 @@ export function GameCard({ g, wide = false }: { g: Game; wide?: boolean }) {
         {g.emoji}
       </div>
       <span className="relative rounded-full bg-black/50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-gold-2">
-        {g.tag}
+        {t(`gt_${g.slug}`)}
       </span>
       <div className="absolute inset-x-4 bottom-4">
         <div className="font-display text-base font-extrabold leading-tight">
-          {g.name}
+          {t(`gn_${g.slug}`)}
         </div>
         {wide && (
           <div className="mt-1 line-clamp-2 text-xs text-white/70">
-            {g.desc}
+            {t(`gd_${g.slug}`)}
           </div>
         )}
       </div>

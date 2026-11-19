@@ -3,6 +3,7 @@
 import { createContext, useContext, useState } from "react";
 import { Icon, Shell, Toast } from "@/components/ui";
 import { useAuth } from "@/lib/auth";
+import { useT } from "@/lib/i18n";
 import { supabase, fmt, errMsg } from "@/lib/supabase";
 
 const ORDER = [
@@ -120,6 +121,7 @@ function Cell({
 }
 
 export default function Ruleta() {
+  const { t } = useT();
   const { profile, setBalance } = useAuth();
   const [chip, setChip] = useState(500);
   const [bets, setBets] = useState<Record<string, Bet>>({});
@@ -138,7 +140,7 @@ export default function Ruleta() {
 
   function place(type: string, value?: number) {
     if (spinning) return;
-    if (total + chip > balance) return flash("Saldo insuficiente");
+    if (total + chip > balance) return flash(t("Saldo insuficiente"));
     const k = keyOf(type, value);
     setResult(null);
     setBets((b) => ({
@@ -166,7 +168,7 @@ export default function Ruleta() {
     });
     if (error) {
       setSpinning(false);
-      return flash(errMsg(error));
+      return flash(t(errMsg(error)));
     }
     setBalance(balance - total);
     const idx = ORDER.indexOf(data.number);
@@ -182,7 +184,7 @@ export default function Ruleta() {
   }
 
   return (
-    <Shell back="/juegos" title="Ruleta Imperial">
+    <Shell back="/juegos" title={t("gn_ruleta")}>
       <Toast msg={err} />
       <div className="no-scrollbar mb-3 flex gap-1.5 overflow-x-auto">
         {history.map((n, i) => (
@@ -195,9 +197,7 @@ export default function Ruleta() {
           </span>
         ))}
         {!history.length && (
-          <span className="text-xs text-muted">
-            Últimos números aparecerán aquí
-          </span>
+          <span className="text-xs text-muted">{t("history_empty")}</span>
         )}
       </div>
 
@@ -215,7 +215,7 @@ export default function Ruleta() {
               <div
                 className={`mt-1 font-display text-lg font-black ${result.payout > 0 ? "text-gold-grad" : "text-muted"}`}
               >
-                {result.payout > 0 ? `+${fmt(result.payout)}` : "Sin premio"}
+                {result.payout > 0 ? `+${fmt(result.payout)}` : t("no_win")}
               </div>
             </div>
           </div>
@@ -249,30 +249,30 @@ export default function Ruleta() {
             <Cell
               type="dozen"
               value={1}
-              label="1ª 12"
+              label={t("d1")}
               className="bg-black/30"
             />
             <Cell
               type="dozen"
               value={2}
-              label="2ª 12"
+              label={t("d2")}
               className="bg-black/30"
             />
             <Cell
               type="dozen"
               value={3}
-              label="3ª 12"
+              label={t("d3")}
               className="bg-black/30"
             />
           </div>
           <div className="mt-1 grid grid-cols-6 gap-1">
             <Cell type="low" label="1-18" className="bg-black/30" />
-            <Cell type="even" label="PAR" className="bg-black/30" />
+            <Cell type="even" label={t("even")} className="bg-black/30" />
             <Cell type="red" label="" style={{ background: "#b91c1c" }} />
             <Cell type="black" label="" style={{ background: "#111014" }} />
             <Cell
               type="odd"
-              label="IMPAR"
+              label={t("odd")}
               className="bg-black/30 text-[10px]"
             />
             <Cell type="high" label="19-36" className="bg-black/30" />
@@ -298,7 +298,7 @@ export default function Ruleta() {
         <button
           onClick={() => !spinning && setBets({})}
           className="grid h-12 w-12 place-items-center rounded-full glass"
-          aria-label="Limpiar apuestas"
+          aria-label={t("clear_bets")}
         >
           <Icon name="delete" />
         </button>
@@ -307,7 +307,7 @@ export default function Ruleta() {
       <div className="mt-4 flex items-center gap-3">
         <div className="rounded-2xl glass px-4 py-2">
           <div className="text-[10px] uppercase tracking-widest text-muted">
-            En mesa
+            {t("on_table")}
           </div>
           <div className="font-display text-lg font-black text-gold-2">
             {fmt(total)}
@@ -318,11 +318,12 @@ export default function Ruleta() {
           disabled={!total || spinning}
           className="btn-violet flex h-14 flex-1 items-center justify-center gap-2 rounded-2xl font-display text-lg font-black tracking-widest disabled:opacity-50"
         >
-          <Icon name="motion_photos_on" /> {spinning ? "GIRANDO…" : "GIRAR"}
+          <Icon name="motion_photos_on" />{" "}
+          {spinning ? t("spinning") : t("spin")}
         </button>
       </div>
       <p className="mt-3 text-center text-[11px] text-muted">
-        Pleno 35:1 · Docena 2:1 · Rojo/Negro, Par/Impar, 1-18/19-36 1:1
+        {t("roulette_rules")}
       </p>
     </Shell>
   );

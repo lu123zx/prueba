@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { AuthProvider } from "@/lib/auth";
+import { LangProvider } from "@/lib/i18n";
 
 export const metadata: Metadata = {
   title: "Royal Vega · Club & Casino Privé",
@@ -42,9 +43,11 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
-        <AuthProvider>
-          <div className="mx-auto min-h-dvh w-full max-w-md">{children}</div>
-        </AuthProvider>
+        <LangProvider>
+          <AuthProvider>
+            <div className="mx-auto min-h-dvh w-full max-w-md">{children}</div>
+          </AuthProvider>
+        </LangProvider>
       </body>
     </html>
   );

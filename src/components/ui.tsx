@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/lib/auth";
 import { fmt } from "@/lib/supabase";
+import { LangSwitch, useT } from "@/lib/i18n";
 
 export function Icon({
   name,
@@ -112,10 +113,10 @@ export function Avatar({
 }
 
 const NAV = [
-  { href: "/lobby", icon: "home", label: "Inicio" },
-  { href: "/juegos", icon: "casino", label: "Juegos" },
-  { href: "/ranking", icon: "emoji_events", label: "Ranking" },
-  { href: "/perfil", icon: "person", label: "Perfil" },
+  { href: "/lobby", icon: "home", label: "nav_home" },
+  { href: "/juegos", icon: "casino", label: "nav_games" },
+  { href: "/ranking", icon: "emoji_events", label: "nav_ranking" },
+  { href: "/perfil", icon: "person", label: "nav_profile" },
 ];
 
 /** Envuelve las pantallas privadas: exige sesión, muestra cabecera con saldo y barra inferior. */
@@ -131,6 +132,7 @@ export function Shell({
   hideNav?: boolean;
 }) {
   const { session, profile, loading } = useAuth();
+  const { t } = useT();
   const path = usePathname();
 
   if (loading || !session) {
@@ -139,9 +141,7 @@ export function Shell({
         <div className="flex flex-col items-center gap-4">
           <Crown size={64} />
           {!loading && (
-            <p className="text-sm text-muted">
-              No pudimos conectarte. Recarga la página.
-            </p>
+            <p className="text-sm text-muted">{t("connect_fail")}</p>
           )}
         </div>
       </div>
@@ -156,7 +156,7 @@ export function Shell({
             <Link
               href={back}
               className="grid h-9 w-9 place-items-center rounded-full glass"
-              aria-label="Volver"
+              aria-label={t("back")}
             >
               <Icon name="arrow_back" />
             </Link>
@@ -168,6 +168,7 @@ export function Shell({
           <Logo small />
         )}
         <div className="flex items-center gap-2">
+          <LangSwitch />
           <Chip value={profile?.balance ?? 0} />
           <Link href="/perfil">
             <Avatar
@@ -205,7 +206,7 @@ export function Shell({
                           : ""
                       }
                     />
-                    {n.label}
+                    {t(n.label)}
                   </Link>
                 </li>
               );
@@ -245,6 +246,7 @@ export function BetPicker({
   max: number;
   disabled?: boolean;
 }) {
+  const { t } = useT();
   const steps = [100, 500, 1000, 5000, 10000, 50000];
   const i = Math.max(0, steps.indexOf(value));
   return (
@@ -253,13 +255,13 @@ export function BetPicker({
         disabled={disabled || i === 0}
         onClick={() => onChange(steps[i - 1])}
         className="grid h-10 w-10 place-items-center rounded-full bg-white/5 disabled:opacity-30"
-        aria-label="Bajar apuesta"
+        aria-label={t("bet_down")}
       >
         <Icon name="remove" />
       </button>
       <div className="text-center">
         <div className="text-[10px] uppercase tracking-widest text-muted">
-          Apuesta
+          {t("bet")}
         </div>
         <div className="font-display text-xl font-black text-gold-2">
           {fmt(value)}
@@ -269,7 +271,7 @@ export function BetPicker({
         disabled={disabled || i === steps.length - 1 || steps[i + 1] > max}
         onClick={() => onChange(steps[i + 1])}
         className="grid h-10 w-10 place-items-center rounded-full bg-white/5 disabled:opacity-30"
-        aria-label="Subir apuesta"
+        aria-label={t("bet_up")}
       >
         <Icon name="add" />
       </button>
